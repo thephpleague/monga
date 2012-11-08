@@ -96,4 +96,55 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 		$result = $this->collection->getCollection()->insert(array('name' => 'Frank'));
 		$this->assertEquals(1, $result);
 	}
+
+	public function testDrop()
+	{
+		$result = $this->collection->drop();
+		$this->assertFalse($result);
+		$this->collection->insert(array('name' => 'Frank'));
+		$result = $this->collection->drop();
+		$this->assertTrue($result);
+	}
+
+	public function testTruncate()
+	{
+		$result = $this->collection->truncate();
+		$this->assertTrue($result);
+	}
+
+	public function testRemove()
+	{
+		$result = $this->collection->remove(array());
+		$this->assertTrue($result);
+	}
+
+	public function testRemoveWhere()
+	{
+		$this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$this->assertEquals(1, $this->collection->count());
+		$result = $this->collection->remove(array('name' => 'Bert'));
+		$this->assertTrue($result);
+		$this->assertEquals(1, $this->collection->count());
+		$result = $this->collection->remove(array('name' => 'Frank'));
+		$this->assertTrue($result);
+		$this->assertEquals(0, $this->collection->count());
+	}
+
+	public function testRemoveWhereClosure()
+	{
+		$closure = function($query){
+			$query->where('name' ,'Frank');
+		};
+		$closure2 = function($query){
+			$query->where('name' ,'Bert');
+		};
+		$this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$this->assertEquals(1, $this->collection->count());
+		$result = $this->collection->remove($closure2);
+		$this->assertTrue($result);
+		$this->assertEquals(1, $this->collection->count());
+		$result = $this->collection->remove($closure);
+		$this->assertTrue($result);
+		$this->assertEquals(0, $this->collection->count());
+	}
 }

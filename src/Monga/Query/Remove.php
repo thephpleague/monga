@@ -59,6 +59,6 @@ class Remove extends Where
 		// Append remove specific options
 		$conditions['justOne'] = $this->justOne;
 
-		return $this;
+		return $conditions;
 	}
 }

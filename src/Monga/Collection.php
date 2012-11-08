@@ -65,7 +65,7 @@ class Collection
 	{
 		$result = $this->collection->drop();
 
-		return (bool) $result['ok'];
+		return $result === true or (bool) $result['ok'];
 	}
 
 	/**
@@ -101,9 +101,9 @@ class Collection
 	 */
 	public function truncate()
 	{
-		$result = $this->collection->remove();
+		$result = $this->collection->remove(array());
 
-		return (bool) $result['ok'];
+		return $result === true or (bool) $result['ok'];
 	}
 
 	/**
@@ -115,12 +115,23 @@ class Collection
 	 */
 	public function remove($criteria, $options = array())
 	{
-
 		if ($criteria instanceof Closure)
 		{
-			$query = new Query\Where($criteria);
+			// Create new Remove query
+			$query = new Query\Remove();
 
+			// Set the given options
+			$query->setOptions($options);
+
+			// Execute the callback
+			$criteria($query);
+
+			// Retrieve the where filter
 			$criteria = $query->getWhere();
+
+			// Retrieve the options, these might
+			// have been altered in the closure.
+			$options = $query->getOptions();
 		}
 
 		if ( ! is_array($criteria))
