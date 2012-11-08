@@ -244,6 +244,13 @@ class Collection
 		}
 
 		$result = $this->collection->insert($data, $options);
+
+		if ($result === false or ! $result['ok'])
+		{
+			return false;
+		}
+
+		return $data['_id'];
 	}
 
 	/**
