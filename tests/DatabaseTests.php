@@ -206,4 +206,13 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('array', $result);
 		$this->assertEquals(1, $result['retval']);
 	}
+
+	public function testCommand()
+	{
+		$this->database->collection('demo')->insert(array('this' => 'that'));
+		$result = $this->database->command(array('count' => 'demo'));
+		$this->assertInternalType('array', $result);
+		$this->assertEquals(1, $result['ok']);
+		$this->assertEquals(1, $result['n']);
+	}
 }
