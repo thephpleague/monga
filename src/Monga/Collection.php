@@ -172,7 +172,7 @@ class Collection
 		// Wrap the find function so it is callable
 		$function = array(
 			$this->getCollection(),
-			($findOne and ! isset($postFind)) ? 'findOne' : 'find',
+			($findOne and ! $postFind) ? 'findOne' : 'find',
 		);
 
 		$result = call_user_func_array($function, $arguments);
@@ -251,6 +251,28 @@ class Collection
 		}
 
 		return $data['_id'];
+	}
+
+	public function update($query = array(), $options = array())
+	{
+		if ($query instanceof CLosure)
+		{
+			$update = new Query\Update();
+			$update->setOptions($options);
+			$query($update);
+
+			$query = $update->getUpdate();
+			$options = $update->getOptions();
+		}
+
+		if ( ! is_array($query) or ! is_array($options))
+		{
+			throw \InvalidArgumentException('Update params $query and $options must be arrays.');
+		}
+
+		$result = $this->collection->update($query, $options);
+
+		return $result === true or !! $result['ok'];
 	}
 
 	/**

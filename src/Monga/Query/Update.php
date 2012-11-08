@@ -66,6 +66,7 @@ class Update extends Where
 	 */
 	protected function _update($type, $field, $value)
 	{
+		var_dump($field);
 		$this->update[$field] = array($type, $value);
 
 		return $this;
@@ -87,7 +88,7 @@ class Update extends Where
 
 		foreach ($field as $f => $v)
 		{
-			$this->_update('$set', $field, $value);
+			$this->_update('$set', $f, $value);
 		}
 
 		return $this;
@@ -99,13 +100,13 @@ class Update extends Where
 	 * @param   string  $field  field to remove
 	 * @return  object  $this
 	 */
-	public function unset($field)
+	public function remove($field)
 	{
 		$field = func_get_args();
 
-		foreach ($field)
+		foreach ($field as $f)
 		{
-			$this->_update('$unset', $field, 1);
+			$this->_update('$unset', $f, 1);
 		}
 
 		return $this;
@@ -229,7 +230,7 @@ class Update extends Where
 
 		foreach ($this->update as $field => $data)
 		{
-			list($type, $value);
+			list($type, $value) = $data;
 
 			if ( ! isset($update[$type]))
 			{
