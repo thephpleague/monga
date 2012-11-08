@@ -18,21 +18,27 @@ use MongoCursor;
 
 abstract class Builder
 {
-	protected $collection;
-
+	/**
+	 * @var  boolean  $safe  safe option
+	 */
 	protected $safe = false;
 
-	public function __construct($collection = null, $commands = null)
-	{
-		if ($collection instanceof Closure)
-		{
-			$commands = $collection;
-			$collection = null;
-		}
+	/**
+	 * @var  integer  $timeout  query timeout
+	 */
+	protected $timeout;
 
-		$collection and $this->setCollection($collection);
-	}
+	/**
+	 * @var  boolean  $fsync  fsync option
+	 */
+	protected $fsync = false;
 
+	/**
+	 * Set the safe option
+	 *
+	 * @param   boolean  $safe  safe mode
+	 * @return  object   $this
+	 */
 	public function safe($safe = true)
 	{
 		$this->safe = $safe;
@@ -40,6 +46,12 @@ abstract class Builder
 		return this;
 	}
 
+	/**
+	 * Set the timeout option
+	 *
+	 * @param   boolean  $timeout  query timeout
+	 * @return  object   $this
+	 */
 	public function timeout($timeout)
 	{
 		$this->timeout = $timeout;
@@ -47,6 +59,12 @@ abstract class Builder
 		return $this;
 	}
 
+	/**
+	 * Set the fsync option
+	 *
+	 * @param   boolean  $fsync  fsync option
+	 * @return  object   $this
+	 */
 	public function fsync($fsync)
 	{
 		$this->fsync = $fsync;
@@ -54,43 +72,11 @@ abstract class Builder
 		return $this;
 	}
 
-	public function setCollection(Collection $collection)
-	{
-		$this->collection = $collection;
-
-		return $this;
-	}
-
-	public function getCollection()
-	{
-		return $this->collection;
-	}
-
-	public function execute($collection = null)
-	{
-		$collection and $this->setCollection($collection);
-
-		if ( ! $this->collection)
-		{
-			throw new Exception('A query must contain a Collection object to be executed.');
-		}
-
-		$actions = $this->compile();
-		$result = $this->collection->getCollection();
-
-		foreach ($actions as $arguments)
-		{
-			// Retrieve the method name, this
-			// will leave us the method params.
-			$method = array_shift($arguments);
-
-			//
-			$result = call_user_func_array(array($result, $method), $arguments);
-		}
-
-		return $result;
-	}
-
+	/**
+	 * Retrieve the query options
+	 *
+	 * @return  array  query options
+	 */
 	public function getOptions()
 	{
 		return array(
@@ -100,7 +86,13 @@ abstract class Builder
 		);
 	}
 
-	public function setOptions($options)
+	/**
+	 * Inject query options
+	 *
+	 * @param   array   $options  query options
+	 * @return  object  $this
+	 */
+	public function setOptions(array $options)
 	{
 		foreach ($options as $option => $value)
 		{
