@@ -10,6 +10,7 @@ php:
 before_script:
   - pecl install mongo-beta
   - echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - mongo admin --eval 'db.addUser("travis", "test");'
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
