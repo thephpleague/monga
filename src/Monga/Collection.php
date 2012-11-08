@@ -57,35 +57,6 @@ class Collection
 	}
 
 	/**
-	 * Excecute javascript on the database
-	 *
-	 * @param   mixed  $core       MongoCode or javascript string
-	 * @param   array  $arguments  function arguments
-	 * @return  mixed  result
-	 */
-	public function executeCode($code, array $arguments = array())
-	{
-		if ( ! ($code instanceof MongoCode))
-		{
-			$code = new MongoCode($code);
-		}
-
-		return $this->collection->execute($code, $arguments);
-	}
-
-	/**
-	 * Execute a command
-	 *
-	 * @param  array  $command  command array
-	 * @param  array  $options  command options
-	 * @param  array  result
-	 */
-	public function command(array $command, array $options = array())
-	{
-		return $this->collection->command($command, $options);
-	}
-
-	/**
 	 * Drops the current collection.
 	 *
 	 * @return  boolean  success boolean
@@ -272,7 +243,7 @@ class Collection
 			return $result;
 		}
 
-		$result = $this->collection->insert($data, $optinons);
+		$result = $this->collection->insert($data, $options);
 	}
 
 	/**

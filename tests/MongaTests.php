@@ -65,7 +65,6 @@ class MongaTests extends PHPUnit_Framework_TestCase
 	public function testMongaConnection()
 	{
 		$connection = Monga::connection();
-
 		$this->assertInstanceOf('Monga\\Connection', $connection);
 	}
 }

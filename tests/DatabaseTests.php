@@ -175,11 +175,35 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$item = array('something' => 'something');
 
 		$collection = $this->database->getDatabase()->{'demo'};
-		$item = $collection->insert($item);
-		$item = $collection->findOne();
+		$collection->insert($item);
 		$ref = MongoDBRef::create('demo', $item['_id']);
 
 		$fetched = $this->database->getRef($ref);
 		$this->assertEquals($item, $fetched);
+	}
+
+	public function testExecuteCode()
+	{
+		$result = $this->database->executeCode('function(){ return 1;}');
+
+		$this->assertInternalType('array', $result);
+		$this->assertEquals(1, $result['retval']);
+	}
+
+	public function testExecuteParams()
+	{
+		$name = 'Frank';
+		$result = $this->database->executeCode('function(name){ return name;}', array($name));
+
+		$this->assertInternalType('array', $result);
+		$this->assertEquals($name, $result['retval']);
+	}
+
+	public function testExecuteMongoCode()
+	{
+		$result = $this->database->executeCode(new MongoCode('function(){ return 1;}'));
+
+		$this->assertInternalType('array', $result);
+		$this->assertEquals(1, $result['retval']);
 	}
 }

@@ -14,6 +14,7 @@ namespace Monga;
 
 use Mongo;
 use MongoDB;
+use MongoCode;
 use MongoDBRef;
 
 class Database
@@ -184,5 +185,34 @@ class Database
 		$reference);
 
 		return $array ? $result : reset($result);
+	}
+
+	/**
+	 * Excecute javascript on the database
+	 *
+	 * @param   mixed  $core       MongoCode or javascript string
+	 * @param   array  $arguments  function arguments
+	 * @return  mixed  result
+	 */
+	public function executeCode($code, array $arguments = array())
+	{
+		if ( ! ($code instanceof MongoCode))
+		{
+			$code = new MongoCode($code);
+		}
+
+		return $this->database->execute($code, $arguments);
+	}
+
+	/**
+	 * Execute a command
+	 *
+	 * @param  array  $command  command array
+	 * @param  array  $options  command options
+	 * @param  array  result
+	 */
+	public function command(array $command, array $options = array())
+	{
+		return $this->database->command($command, $options);
 	}
 }
