@@ -1,0 +1,64 @@
+<?php
+/**
+ * Monga is a swift MongoDB Abstraction for PHP 5.3+
+ *
+ * @package    Monga
+ * @version    1.0
+ * @author     Frank de Jonge
+ * @license    MIT License
+ * @copyright  2011 - 2012 Frank de Jonge
+ * @link       http://github.com/FrenkyNet/Monga
+ */
+
+namespace Monga\Query;
+
+use Closure;
+
+class Remove extends Where
+{
+	/**
+	 * Wether to remove just one or multiple records.
+	 */
+	protected $justOne = false;
+
+	/**
+	 * Set the justOne option.
+	 *
+	 * @param   boolean  $single  justOne option
+	 * @return  object   $this
+	 */
+	public function single($single = true)
+	{
+		$this->justOne = (bool) $single;
+
+		return $this;
+	}
+
+	/**
+	 * Set the justOne option, reversed.
+	 *
+	 * @param   boolean  $single  reversed justOne option
+	 * @return  object   $this
+	 */
+	public function multiple($multiple = true)
+	{
+		$this->justOne = ! $multiple;
+
+		return $this;
+	}
+
+	/**
+	 * Retrieve query options.
+	 *
+	 * @return  array  query options.
+	 */
+	public function getOptions()
+	{
+		$conditions = parent::getOptions();
+
+		// Append remove specific options
+		$conditions['justOne'] = $this->justOne;
+
+		return $this;
+	}
+}

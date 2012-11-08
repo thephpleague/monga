@@ -1,0 +1,9 @@
+{
+    "name": "monga/monga",
+    "type": "library",
+    "description": "MongoDB Abstraction.",
+    "autoload": {
+		"psr-0": { "Monga": "src/" },
+		"files": ["src/Monga.php"]
+	}
+}
