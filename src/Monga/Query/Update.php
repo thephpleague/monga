@@ -66,7 +66,6 @@ class Update extends Where
 	 */
 	protected function _update($type, $field, $value)
 	{
-		var_dump($field);
 		$this->update[$field] = array($type, $value);
 
 		return $this;
