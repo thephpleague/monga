@@ -147,4 +147,154 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 		$this->assertTrue($result);
 		$this->assertEquals(0, $this->collection->count());
 	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidRemove()
+	{
+		$this->collection->remove(false);
+	}
+
+	public function testFind()
+	{
+		$result = $this->collection->find();
+		$this->assertInstanceOf('Monga\Cursor', $result);
+	}
+
+	public function testFindOneEmpty()
+	{
+		$result = $this->collection->findOne();
+		$this->assertNull($result);
+	}
+
+	public function testFindOneNotEmpty()
+	{
+		$this->collection->insert(array('some' => 'value'));
+		$result = $this->collection->findOne();
+		$this->assertInternalType('array', $result);
+		$this->assertEquals('value', $result['some']);
+	}
+
+	public function testFindOneWithPostFindAction()
+	{
+		$result = $this->collection->findOne(function($query){
+			$query->where('some', 'value')
+				->orderBy('some', 'asc')
+				->skip(0)
+				->limit(1);
+		});
+
+		$this->assertNull($result);
+	}
+
+	public function testFindOneWithPostFindActionWithResult()
+	{
+		$this->collection->insert(array('some' => 'value'));
+
+		$result = $this->collection->findOne(function($query){
+			$query->where('some', 'value')
+				->orderBy('some', 'asc')
+				->skip(0)
+				->limit(1);
+		});
+
+		$this->assertInternalType('array', $result);
+		$this->assertEquals('value', $result['some']);
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidFind()
+	{
+		$this->collection->find(false);
+	}
+
+	public function testInsertOne()
+	{
+		$result = $this->collection->insert(array('new' => 'entry'));
+
+		$this->assertInstanceOf('MongoId', $result);
+	}
+
+	public function testInsertMultiple()
+	{
+		$result = $this->collection->insert(array(
+			array('number' => 'one'),
+			array('number' => 'two'),
+		));
+
+		$this->assertCount(2, $result);
+		$this->assertContainsOnlyInstancesOf('MongoId', $result);
+	}
+
+	public function testInvalidInsert()
+	{
+		$collection = $this->getMockBuilder('MongoCollection')
+                       ->disableOriginalConstructor()
+                       ->setMethods(array('insert'))
+                       ->getMock();
+		$collection->expects($this->once())
+			->method('insert')
+			->with($this->equalTo(array('invalid')))
+			->will($this->returnValue(false));
+
+		$this->collection->setCollection($collection);
+		$result = $this->collection->insert(array('invalid'));
+		$this->assertFalse($result);
+	}
+
+	public function testInsertMultipleInvalid()
+	{
+		$input = array(
+			array(false), array(false),
+		);
+		$collection = $this->getMockBuilder('MongoCollection')
+                       ->disableOriginalConstructor()
+                       ->setMethods(array('batchInsert'))
+                       ->getMock();
+		$collection->expects($this->once())
+			->method('batchInsert')
+			->with($this->equalTo($input))
+			->will($this->returnValue(false));
+
+		$this->collection->setCollection($collection);
+		$result = $this->collection->insert(array(
+			array(false), array(false),
+		));
+
+		$this->assertFalse($result);
+	}
+
+	public function testSave()
+	{
+		$item = array('name' => 'Frank');
+		$result = $this->collection->save($item);
+		$this->assertTrue($result);
+	}
+
+	public function testUpdate()
+	{
+		$result = $this->collection->update(array('name' => 'changed'));
+		$this->assertTrue($result);
+	}
+
+	public function testUpdateClosure()
+	{
+		$result = $this->collection->update(function($query){
+			$query->set('name', 'changed')
+				->increment('viewcount', 2);
+		});
+
+		$this->assertTrue($result);
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidUpdate()
+	{
+		$result = $this->collection->update(false);
+	}
 }

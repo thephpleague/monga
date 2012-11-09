@@ -172,7 +172,7 @@ class Collection
 
 		if ( ! is_array($query) or ! is_array($fields))
 		{
-			throw \InvalidArgumentException('Find params $query and $fields must be arrays.');
+			throw new \InvalidArgumentException('Find params $query and $fields must be arrays.');
 		}
 
 		// Prepare the find arguments
@@ -191,9 +191,9 @@ class Collection
 		// Trigger any post find actions.
 		if ($postFind)
 		{
-			foreach ($postFind as $action)
+			foreach ($postFind as $arguments)
 			{
-				list($method, $arguments) = $action;
+				$method = array_shift($arguments);
 
 				$result = call_user_func_array(array($result, $method), $arguments);
 			}
@@ -235,9 +235,9 @@ class Collection
 		if (isset($data[0]) and is_array($data[0]))
 		{
 			// Insert using batchInsert
-			$result = $this->getCollection()->batchInsert($data, $options);
+			$result = $this->collection->batchInsert($data, $options);
 
-			if ($result === false or ! $result['ok'])
+			if ( ! $result or ! ($result === true or (bool) $result['ok']))
 			{
 				return false;
 			}
@@ -247,7 +247,7 @@ class Collection
 			foreach($data as $r)
 			{
 				// Collect all the id's for the return value
-				$result['_id'] = $r['_id'];
+				$result[] = $r['_id'];
 			}
 
 			// Return all inserted id's.
@@ -256,14 +256,21 @@ class Collection
 
 		$result = $this->collection->insert($data, $options);
 
-		if ($result === false or ! $result['ok'])
+		if ($result === true or (bool) $result['ok'])
 		{
-			return false;
+			return $data['_id'];
 		}
 
-		return $data['_id'];
+		return false;
 	}
 
+	/**
+	 * Updates a collection
+	 *
+	 * @param   mixed    $query    update array or callback
+	 * @param   array    $options  update query options
+	 * @return  boolean            query success
+	 */
 	public function update($query = array(), $options = array())
 	{
 		if ($query instanceof CLosure)
@@ -278,7 +285,7 @@ class Collection
 
 		if ( ! is_array($query) or ! is_array($options))
 		{
-			throw \InvalidArgumentException('Update params $query and $options must be arrays.');
+			throw new \InvalidArgumentException('Update params $query and $options must be arrays.');
 		}
 
 		$result = $this->collection->update($query, $options);

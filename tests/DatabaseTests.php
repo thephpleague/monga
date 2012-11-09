@@ -194,7 +194,6 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 	{
 		$name = 'Frank';
 		$result = $this->database->executeCode('function(name){ return name;}', array($name));
-
 		$this->assertInternalType('array', $result);
 		$this->assertEquals($name, $result['retval']);
 	}
@@ -202,7 +201,6 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 	public function testExecuteMongoCode()
 	{
 		$result = $this->database->executeCode(new MongoCode('function(){ return 1;}'));
-
 		$this->assertInternalType('array', $result);
 		$this->assertEquals(1, $result['retval']);
 	}
