@@ -207,7 +207,7 @@ class Collection
 			$result = $result->getNext();
 		}
 
-		return $findOne ? $result : new Cursor($result);
+		return $findOne ? $result : new Cursor($result, $this);
 	}
 
 	/**

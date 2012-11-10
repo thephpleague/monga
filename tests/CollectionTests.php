@@ -251,9 +251,9 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 			array(false), array(false),
 		);
 		$collection = $this->getMockBuilder('MongoCollection')
-                       ->disableOriginalConstructor()
-                       ->setMethods(array('batchInsert'))
-                       ->getMock();
+			->disableOriginalConstructor()
+			->setMethods(array('batchInsert'))
+			->getMock();
 		$collection->expects($this->once())
 			->method('batchInsert')
 			->with($this->equalTo($input))

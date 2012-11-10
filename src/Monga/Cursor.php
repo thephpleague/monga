@@ -15,7 +15,7 @@ namespace Monga;
 use MongoCursor;
 use MongoDBRef;
 
-class Cursor implements \Countable, \Iterator
+class Cursor implements \Countable, \IteratorAggregate
 {
 	protected $cursor;
 
@@ -24,11 +24,12 @@ class Cursor implements \Countable, \Iterator
 	public function __construct(MongoCursor $cursor, Collection $collection = null)
 	{
 		$this->cursor = $cursor;
+
 		$collection and $this->collection = $collection;
 	}
 
 	/**
-	 * Rettrieve the associated collection.
+	 * Retrieve the associated collection.
 	 *
 	 * @return  object  associated Collection instance
 	 */
@@ -38,63 +39,33 @@ class Cursor implements \Countable, \Iterator
 	}
 
 	/**
-	 * COuntable implementation
+	 * Retrieve the MongoCursor instance
+	 *
+	 * @return  object  MongoCursor
+	 */
+	public function getCursor()
+	{
+		return $this->cursor;
+	}
+
+	/**
+	 * Implemeting IteratorAggregate
+	 *
+	 * @return  object  MongoCursor
+	 */
+	public function getIterator()
+	{
+		return $this->cursor;
+	}
+
+	/**
+	 * Countable implementation
 	 *
 	 * @return  int  number of documents
 	 */
 	public function count()
 	{
-		return $this->cursor->count();
-	}
-
-	/**
-	 * Iterator implementation: current
-	 *
-	 * @return  array  current cursor item
-	 */
-	public function current()
-	{
-		return current($this->cursor);
-	}
-
-	/**
-	 * Iterator implementation: key
-	 *
-	 * @return  mixed  current cursor key
-	 */
-	public function key()
-	{
-		return key($this->cursor);
-	}
-
-	/**
-	 * Iterator implementation: next
-	 *
-	 * @return  void
-	 */
-	public function next()
-	{
-		next($this->cursor);
-	}
-
-	/**
-	 * Iterator implementation: rewind
-	 *
-	 * @return  void
-	 */
-	public function rewind()
-	{
-		rewind($this->cursor);
-	}
-
-	/**
-	 * Iterator implementation: valid
-	 *
-	 * @return  void
-	 */
-	public function valid()
-	{
-		return valid($this->cursor);
+		return $this->cursor->count(true);
 	}
 
 	/**
@@ -115,10 +86,10 @@ class Cursor implements \Countable, \Iterator
 	public function toRefArray()
 	{
 		// Retrieve the actual objects.
-		$documents = $this->asArray();
+		$documents = $this->toArray();
 
 		// Get the collection idenfitief
-		$collection = (string) $this->collection;
+		$collection = (string) $this->collection->getCollection();
 
 		foreach ($documents as &$document)
 		{
