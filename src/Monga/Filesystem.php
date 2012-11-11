@@ -77,7 +77,7 @@ class Filesystem extends Collection
 	 */
 	public function storeUpload($name, $metadata = array())
 	{
-		return $this->collection->storeBytes($name, $metadata);
+		return $this->collection->storeUpload($name, $metadata);
 	}
 
 	/**
@@ -98,9 +98,8 @@ class Filesystem extends Collection
 			return false;
 		}
 
-		$this->collection->remove(array('_id' => $file->file['_id']));
+		return (bool) $this->collection->remove(array('_id' => $file->file['_id']));
 
-		return true;
 	}
 
 	/**
