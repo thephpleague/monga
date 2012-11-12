@@ -43,7 +43,7 @@ abstract class Builder
 	{
 		$this->safe = $safe;
 
-		return this;
+		return $this;
 	}
 
 	/**
@@ -65,7 +65,7 @@ abstract class Builder
 	 * @param   boolean  $fsync  fsync option
 	 * @return  object   $this
 	 */
-	public function fsync($fsync)
+	public function fsync($fsync = true)
 	{
 		$this->fsync = $fsync;
 
