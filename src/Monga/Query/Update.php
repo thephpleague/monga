@@ -16,11 +16,35 @@ use Closure;
 
 class Update extends Where
 {
+	/**
+	 * @var  bool  $upsert  wether to allow upserts
+	 */
 	protected $upsert = false;
 
+	/**
+	 * @var  bool  $multiple  wether to update multiple or only one
+	 */
 	protected $multiple = true;
 
+	/**
+	 * @var  array  @update  update query
+	 */
 	protected $update = array();
+
+	/**
+	 * Returns the query options
+	 *
+	 * @return  array  query options
+	 */
+	public function getOptions()
+	{
+		$options = parent::getOptions();
+
+		$options['upsert'] = $this->upsert;
+		$options['multiple'] = $this->multiple;
+
+		return $options;
+	}
 
 	/**
 	 * Set the multiple option negatively.
@@ -239,6 +263,6 @@ class Update extends Where
 			$update[$type][$field] = $value;
 		}
 
-		return $update;;
+		return $update;
 	}
 }

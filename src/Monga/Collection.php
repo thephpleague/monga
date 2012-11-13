@@ -268,28 +268,38 @@ class Collection
 	/**
 	 * Updates a collection
 	 *
-	 * @param   mixed    $query    update array or callback
-	 * @param   array    $options  update query options
+	 * @param   mixed    $values   update array or callback
+	 * @param   mixed    $query    update filter
+	 * @param   array    $options  update options
 	 * @return  boolean            query success
 	 */
-	public function update($query = array(), $options = array())
+	public function update($values = array(), $query = null, $options = array())
 	{
-		if ($query instanceof CLosure)
+		if ($values instanceof CLosure)
 		{
-			$update = new Query\Update();
-			$update->setOptions($options);
-			$query($update);
+			$query = new Query\Update();
+			$query->setOptions($options);
+			$values($query);
 
-			$query = $update->getUpdate();
-			$options = $update->getOptions();
+			$options = $query->getOptions();
+			$values = $query->getUpdate();
+			$query = $query->getWhere();
 		}
 
-		if ( ! is_array($query) or ! is_array($options))
+		if ( ! is_array($values) or ! is_array($options))
 		{
-			throw new \InvalidArgumentException('Update params $query and $options must be arrays.');
+			throw new \InvalidArgumentException('Update params $update and $options must be arrays.');
 		}
 
-		$result = $this->collection->update($query, $options);
+		isset($query) or $query = array();
+
+		var_dump($query);
+		var_dump($values);
+		var_dump($options);
+
+		$result = $this->collection->update($query, $values, $options);
+
+		var_dump($result);
 
 		return $result === true or !! $result['ok'];
 	}
