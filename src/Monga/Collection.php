@@ -293,13 +293,7 @@ class Collection
 
 		isset($query) or $query = array();
 
-		var_dump($query);
-		var_dump($values);
-		var_dump($options);
-
 		$result = $this->collection->update($query, $values, $options);
-
-		var_dump($result);
 
 		return $result === true or !! $result['ok'];
 	}
