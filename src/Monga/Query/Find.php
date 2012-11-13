@@ -116,7 +116,7 @@ class Find extends Where
 	 */
 	public function getFields()
 	{
-		return empty($this->fields) ? null : $this->fields;
+		return empty($this->fields) ? array() : $this->fields;
 	}
 
 	/**
