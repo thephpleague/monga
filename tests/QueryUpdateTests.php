@@ -98,6 +98,18 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
 		$this->getProperty('update'));
 	}
 
+	public function testPullQuery()
+	{
+		$this->update->pull('field', function($query){
+			$query->whereLt('field', 1);
+		});
+
+		$this->assertEquals(array(
+			'field' => array('$pull', array('field' => array('$lt' => 1))),
+		),
+		$this->getProperty('update'));
+	}
+
 	public function testPullAll()
 	{
 		$this->update->pullAll('field', array('value', 'other'));

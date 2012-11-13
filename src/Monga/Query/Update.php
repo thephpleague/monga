@@ -171,11 +171,12 @@ class Update extends Where
 	{
 		if ($value instanceof Closure)
 		{
-			$where = new Query\Where();
+			$where = new Where();
 			$value($where);
+			$value = $where;
 		}
 
-		if ($value instanceof Query\Where)
+		if ($value instanceof Where)
 		{
 			$value = $value->getWhere();
 		}
