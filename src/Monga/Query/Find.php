@@ -40,6 +40,32 @@ class Find extends Where
 	protected $fields = array();
 
 	/**
+	 * Set the result limit
+	 *
+	 * @param   integer  $amount  limit
+	 * @return  object   $this
+	 */
+	public function limit($amount)
+	{
+		$this->limit = $amount;
+
+		return $this;
+	}
+
+	/**
+	 * Set the amount to skip in the result.
+	 *
+	 * @param   integer  $amount  skip
+	 * @return  object   $this
+	 */
+	public function skip($amount)
+	{
+		$this->skip = $amount;
+
+		return $this;
+	}
+
+	/**
 	 *  Orders a collection
 	 *
 	 *  @param  string field       field to order by

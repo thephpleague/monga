@@ -105,7 +105,6 @@ class Where extends Builder
 			$isNested = true;
 		}
 
-		// This is the result of an empty closure.
 		if (empty($statement))
 		{
 			return $this;
