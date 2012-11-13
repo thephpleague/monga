@@ -17,7 +17,7 @@ class Find extends Where
 	/**
 	 *  @var  array  $orderBy  collection ordering
 	 */
-	protected $orderBy;
+	protected $orderBy = array();
 
 	/**
 	 *  @var  int  $skip  query offset
@@ -32,24 +32,28 @@ class Find extends Where
 	/**
 	 * @var  bool  $findOne  wether to find one, or more
 	 */
-	protected $findOne;
+	protected $findOne = false;
 
 	/**
-	 * @var  array  $select  fields include exclude array
+	 * @var  array  $fields  fields include exclude array
 	 */
-	protected $select = array();
+	protected $fields = array();
 
 	/**
 	 *  Orders a collection
 	 *
-	 *  @param  string field     field to order by
-	 *  @param  string $direction asc/desc
-	 *
-	 *  @return object            current instance
+	 *  @param  string field       field to order by
+	 *  @param  string $direction  asc/desc/1/-1
+	 *  @return object             current instance
 	 */
-	public function orderBy($field, $direction = 'asc')
+	public function orderBy($field, $direction = 1)
 	{
-		$this->orderBy[$field] = $direction === 'asc' ? 1 : -1;
+		if (is_string($direction))
+		{
+			$direction = $direction === 'asc' ? 1 : -1;
+		}
+
+		$this->orderBy[$field] = $direction;
 
 		return $this;
 	}
@@ -67,7 +71,7 @@ class Find extends Where
 
 		foreach ((array) $fields as $field)
 		{
-			$this->select[$field] = 1;
+			$this->fields[$field] = 1;
 		}
 	}
 
@@ -84,7 +88,7 @@ class Find extends Where
 
 		foreach ($fields as $field)
 		{
-			$this->select[$field] = -1;
+			$this->fields[$field] = -1;
 		}
 	}
 
@@ -95,7 +99,12 @@ class Find extends Where
 	 */
 	public function fields(array $fields)
 	{
-		$this->select = array_merge($this->select, $fields);
+		foreach ($fields as $field => &$value)
+		{
+			$value = $value ? 1 : -1;
+		}
+
+		$this->fields = array_merge($this->fields, $fields);
 
 		return $this;
 	}
@@ -105,9 +114,9 @@ class Find extends Where
 	 *
 	 *  @return array|null array of fields to select or exlude
 	 */
-	public function getSelect()
+	public function getFields()
 	{
-		return empty($this->select) ? null : $this->select;
+		return empty($this->fields) ? null : $this->fields;
 	}
 
 	/**
@@ -124,6 +133,19 @@ class Find extends Where
 	}
 
 	/**
+	 * Set the find type, one or many
+	 *
+	 * @param   bool   $multiple  false for one, true for many
+	 * @return  object            current instance
+	 */
+	public function multiple($multiple = true)
+	{
+		$this->findOne = ! $multiple;
+
+		return $this;
+	}
+
+	/**
 	 *  Get the post-find actions.
 	 *
 	 *  @return  array  post-find actions
@@ -132,9 +154,9 @@ class Find extends Where
 	{
 		$actions = array();
 
-		$this->orderBy and $actions[] = array('sort', $this->orderBy);
-		$this->skip and $actions[] = array('skip', $this->skip);
-		$this->limit and $actions[] = array('limit', $this->limit);
+		empty($this->orderBy) or $actions[] = array('sort', $this->orderBy);
+		$this->skip === null or $actions[] = array('skip', $this->skip);
+		$this->limit === null or $actions[] = array('limit', $this->limit);
 
 		return $actions;
 	}

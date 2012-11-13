@@ -164,8 +164,9 @@ class Collection
 			$find->fields($fields);
 			$find->one($findOne);
 			$query($find);
-			$findOne = $find->getFindOne();
 
+			$findOne = $find->getFindOne();
+			$fields = $find->getFields();
 			$query = $find->getWhere();
 			$postFind = $find->getPostFindActions();
 		}
