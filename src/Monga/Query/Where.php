@@ -26,32 +26,6 @@ class Where extends Builder
 	protected $where;
 
 	/**
-	 * Set the result limit
-	 *
-	 * @param   integer  $amount  limit
-	 * @return  object   $this
-	 */
-	public function limit($amount)
-	{
-		$this->limit = $amount;
-
-		return $this;
-	}
-
-	/**
-	 * Set the amount to skip in the result.
-	 *
-	 * @param   integer  $amount  skip
-	 * @return  object   $this
-	 */
-	public function skip($amount)
-	{
-		$this->skip = $amount;
-
-		return $this;
-	}
-
-	/**
 	 * Replaces the where statement. The statement
 	 * will be reformatted to match allow further
 	 * chaining by Monga.
@@ -131,6 +105,7 @@ class Where extends Builder
 			$isNested = true;
 		}
 
+		// This is the result of an empty closure.
 		if (empty($statement))
 		{
 			return $this;
