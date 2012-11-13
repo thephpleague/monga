@@ -163,22 +163,16 @@ class Update extends Where
 	/**
 	 * Removes all matched instances from a field array
 	 *
-	 * @param   string   $field  field to unshift
-	 * @param   string   $value  values to remove
+	 * @param   string   $field     field to unshift
+	 * @param   string   $value     values to remove
+	 * @param   string   $operator  condition operator
 	 * @return  object   $this
 	 */
-	public function pull($field, $value, $all = false)
+	public function pull($field, $value, $operator = null,  $all = false)
 	{
-		if ($value instanceof Closure)
+		if ($operator)
 		{
-			$where = new Where();
-			$value($where);
-			$value = $where;
-		}
-
-		if ($value instanceof Where)
-		{
-			$value = $value->getWhere();
+			$value = array($operator => $value);
 		}
 
 		return $this->_update($all ? '$pullAll' : '$pull', $field, $value);
@@ -191,9 +185,9 @@ class Update extends Where
 	 * @param   string   $value  values to remove
 	 * @return  object   $this
 	 */
-	public function pullAll($field, $value)
+	public function pullAll($field, $value, $operator = null)
 	{
-		return $this->pull($field, $value, true);
+		return $this->pull($field, $value, $operator, true);
 	}
 
 	/**
