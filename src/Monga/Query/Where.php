@@ -142,7 +142,7 @@ class Where extends Builder
 		if ($isNested)
 		{
 			// Re-append the last $and clause
-			$lastOrClause['$and'][] = $lastAndClause;
+			empty($lastAndClause) or $lastOrClause['$and'][] = $lastAndClause;
 
 			// The nested query has a base key (either $and or $or)
 			// So following queries will always begon in a new clause
@@ -176,7 +176,7 @@ class Where extends Builder
 
 				if (isset($lastSubAnd['$and']) or isset($lastSubAnd['$or']) or isset($lastSubAnd[$field]))
 				{
-					$lastAndClause['$and'][] = $lastSubAnd;
+					empty($lastSubAnd) or $lastAndClause['$and'][] = $lastSubAnd;
 					$lastSubAnd = array();
 				}
 
@@ -204,11 +204,6 @@ class Where extends Builder
 	 */
 	public function where($field, $value = null)
 	{
-		if ($field instanceof Closure)
-		{
-			return $this->_where('$and', $field);
-		}
-
 		return $this->_where('$and', $field, $value);
 	}
 
@@ -262,7 +257,7 @@ class Where extends Builder
 	 */
 	public function orWhereNot($field, $value)
 	{
-		return $this->_where('or', $field, array('$ne' => $value));
+		return $this->_where('$or', $field, array('$ne' => $value));
 	}
 
 	/**
@@ -287,9 +282,9 @@ class Where extends Builder
 	 * @param   string  $type       chain type
 	 * @return  object  $this
 	 */
-	public function whereLike($field, $value, $flags = 'imxsu', $delimiter = null, $type = '$and')
+	public function whereLike($field, $value, $flags = 'imxsu', $delimiter = '/', $type = '$and')
 	{
-		$value = preg_quote($value, '#');
+		$value = preg_quote($value, '/');
 
 		if (preg_match('#^%(.*)$#isU', $value))
 		{
@@ -443,6 +438,17 @@ class Where extends Builder
 	}
 
 	/**
+	 * Appends an or-where-not-exists statement
+	 *
+	 * @param   string  $field      field name
+	 * @return  object  $this
+	 */
+	public function orWhereNotExists($field)
+	{
+		return $this->_where('$or', $field, array('$exists' => false));
+	}
+
+	/**
 	 * Appends a and-where-in statement
 	 *
 	 * @param   string  $field   field name
@@ -463,7 +469,7 @@ class Where extends Builder
 	 */
 	public function andWhereIn($field, $values)
 	{
-		return call_user_func_array(array($this, 'whereIn'), array($field, $value));
+		return call_user_func_array(array($this, 'whereIn'), array($field, $values));
 	}
 
 	/**
@@ -499,7 +505,7 @@ class Where extends Builder
 	 */
 	public function andWhereAll($field, $values)
 	{
-		return call_user_func_array(array($this, 'whereAll'), array($field, $value));
+		return call_user_func_array(array($this, 'whereAll'), array($field, $values));
 	}
 
 	/**
@@ -535,7 +541,7 @@ class Where extends Builder
 	 */
 	public function andWhereNotIn($field, $values)
 	{
-		return call_user_func_array(array($this, 'whereNotIn'), array($field, $value));
+		return call_user_func_array(array($this, 'whereNotIn'), array($field, $values));
 	}
 
 	/**
@@ -595,7 +601,10 @@ class Where extends Builder
 	 */
 	public function whereType($field, $type)
 	{
-		return $this->_where('$and', $field, array('$type' => $type));
+		return $this->_where('$and', $field, array
+		(
+			'$type' => $this->resolveType($type)
+		));
 	}
 
 	/**
@@ -619,7 +628,10 @@ class Where extends Builder
 	 */
 	public function orWhereType($field, $type)
 	{
-		return $this->_where('$or', $field, array('$type' => $type));
+		return $this->_where('$or', $field, array
+		(
+			'$type' => $this->resolveType($type)
+		));
 	}
 
 	/**
@@ -655,7 +667,7 @@ class Where extends Builder
 	 */
 	public function orWhereLt($field, $value)
 	{
-		return $this->_where('$or', $field, array('$lt' => $type));
+		return $this->_where('$or', $field, array('$lt' => $value));
 	}
 
 	/**
@@ -717,7 +729,7 @@ class Where extends Builder
 	 */
 	public function andWhereBetween($field, $min, $max)
 	{
-		return call_user_func_array(array($this, 'whereGt'), array($field, $min, $max));
+		return call_user_func_array(array($this, 'whereBetween'), array($field, $min, $max));
 	}
 
 	/**
@@ -790,8 +802,8 @@ class Where extends Builder
 	{
 		if ($clause instanceof Closure)
 		{
-			$query = new static($clause);
-
+			$query = new static();
+			$clause($query);
 			$clause = $query->getWhere();
 
 			if (empty($clause))
@@ -815,7 +827,7 @@ class Where extends Builder
 	 * @param   integer        $type    chain type
 	 * @return  object         $this
 	 */
-	public function andNotWhere($clause)
+	public function andNorWhere($clause)
 	{
 		return $this->norWhere($clause);
 	}
@@ -829,7 +841,7 @@ class Where extends Builder
 	 */
 	public function orNorWhere($clause)
 	{
-		return $this->nowWhere($clause, '$or');
+		return $this->norWhere($clause, '$or');
 	}
 
 	/**
@@ -850,12 +862,12 @@ class Where extends Builder
 		{
 			if (isset($and['$and']) and count($and['$and']) === 1)
 			{
-				$and = $and['$and'][0];
+				$and = reset($and['$and']);
 			}
 
 			if (isset($and['$or']) and count($and['$or']) === 1)
 			{
-				$and = $and['$or'][0];
+				$and = reset($and['$or']);
 			}
 		}
 
@@ -865,5 +877,37 @@ class Where extends Builder
 		}
 
 		return $where;
+	}
+
+	/**
+	 * Resolves a string data type to its integer counterpart
+	 *
+	 * @param   string|int  $type  data type
+	 * @return
+	 */
+	public function resolveType($type)
+	{
+		if (is_numeric($type))
+		{
+			return (int) $type;
+		}
+
+		$type = strtoupper($type);
+
+		static $types = array(
+			'DOUBLE' => 1, 'STRING' => 2, 'OBJECT' => 3, 'ARRAY' => 4,
+			'BINARY' => 5, 'ID' => 8, 'BOOL' => 8, 'BOOLEAN' => 8,
+			'DATE' => 9, 'NULL' => 10, 'REGEX' => 11, 'JAVASCRIPT' => 13,
+			'CODE' => 13, 'SYMBOL' => 14, 'JAVASCRIPT_SCOPE' => 15,
+			'CODE_SCOPE' => 15, 'INT32' => 16, 'TS' => 17, 'TIMESTAMP' => 17,
+			'INT64' => 18, 'MIN' => -1, 'MAX' => 127,
+		);
+
+		if ( ! isset($types[$type]))
+		{
+			throw new \InvalidArgumentException('Type "'.$type.'" could not be resolved');
+		}
+
+		return $types[$type];
 	}
 }
