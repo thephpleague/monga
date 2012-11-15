@@ -10,7 +10,7 @@ A simple and swift MongoDB abstraction layer for PHP5.3+
 * A filter builder that doesn't make your mind go nuts.
 * All sorts of handy update functions.
 * An abstraction for sorting single results.
-* GridSF support for a Mongo filesystem.
+* GridFS support for a Mongo filesystem.
 
 ## Vision
 
