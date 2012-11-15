@@ -1,8 +1,20 @@
 {
-    "name": "monga/monga",
-    "type": "library",
-    "description": "MongoDB Abstraction.",
-    "autoload": {
+	"name": "monga/monga",
+	"type": "library",
+	"description": "MongoDB Abstraction Layer",
+	"keywords": ["MongoDB"],
+	"homepage": "https://github.com/FrenkyNet/Monga",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Frank de Jonge",
+			"email": "frank@ku.nl"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"autoload": {
 		"psr-0": { "Monga": "src/" },
 		"files": ["src/Monga.php"]
 	}
