@@ -31,7 +31,7 @@ class Monga
 	/**
 	 * Create a MongoId object
 	 *
-	 * @param   string  $id  id strng
+	 * @param   string  $id  id string
 	 * @return  object  MongoId
 	 */
 	public static function id($id)

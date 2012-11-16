@@ -17,7 +17,7 @@ use Closure;
 class Remove extends Where
 {
 	/**
-	 * Wether to remove just one or multiple records.
+	 * Whether to remove just one or multiple records.
 	 */
 	protected $justOne = false;
 
@@ -37,7 +37,7 @@ class Remove extends Where
 	/**
 	 * Set the justOne option, reversed.
 	 *
-	 * @param   boolean  $single  reversed justOne option
+	 * @param   boolean  $multiple  reversed justOne option
 	 * @return  object   $this
 	 */
 	public function multiple($multiple = true)

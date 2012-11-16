@@ -79,7 +79,7 @@ class Connection
 	/**
 	 * Connect to the database.
 	 *
-	 * @return  boolean  connnection result
+	 * @return  boolean  connection result
 	 */
 	public function connect()
 	{
@@ -107,9 +107,9 @@ class Connection
 	}
 
 	/**
-	 * Returns wether the connection is connection.
+	 * Returns whether the connection is connection.
 	 *
-	 * @return  bool  wether there is a connection
+	 * @return  bool  whether there is a connection
 	 */
 	public function isConnected()
 	{
@@ -120,7 +120,7 @@ class Connection
 	 * Drops a database.
 	 *
 	 * @param   string   $database  database name
-	 * @return  boolean             wether the database was dropped successfully
+	 * @return  boolean             whether the database was dropped successfully
 	 */
 	public function dropDatabase($database)
 	{
@@ -133,7 +133,7 @@ class Connection
 	 * Retrieve a database object from a connection
 	 *
 	 * @param   string   $database  database name
-	 * @param   boolean  $wrap      wether to wrap in a Database object
+	 * @param   boolean  $wrap      whether to wrap in a Database object
 	 * @return  object              MongoDB or Monga\Database instance
 	 */
 	public function database($database, $wrap = true)
@@ -144,10 +144,10 @@ class Connection
 	}
 
 	/**
-	 * Retruns wether a database exists.
+	 * Returns whether a database exists.
 	 *
 	 * @param   boolean  $name  database name
-	 * @return  boolean  wether the database exists
+	 * @return  boolean  whether the database exists
 	 */
 	public function hasDatabase($name)
 	{
@@ -155,7 +155,7 @@ class Connection
 	}
 
 	/**
-	 * Returns a list of dabases.
+	 * Returns a list of databases.
 	 *
 	 * @param   boolean  $detailed  return detailed information
 	 * @return  array    array containing database name or info arrays

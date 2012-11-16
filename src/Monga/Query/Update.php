@@ -17,12 +17,12 @@ use Closure;
 class Update extends Where
 {
 	/**
-	 * @var  bool  $upsert  wether to allow upserts
+	 * @var  bool  $upsert  whether to allow upserts
 	 */
 	protected $upsert = false;
 
 	/**
-	 * @var  bool  $multiple  wether to update multiple or only one
+	 * @var  bool  $multiple  whether to update multiple or only one
 	 */
 	protected $multiple = true;
 
@@ -49,7 +49,7 @@ class Update extends Where
 	/**
 	 * Set the multiple option negatively.
 	 *
-	 * @param   boolean  $multiple  wether to allow single updates
+	 * @param   boolean  $single  whether to allow single updates
 	 * @return  object   $this
 	 */
 	public function single($single = true)
@@ -60,7 +60,7 @@ class Update extends Where
 	/**
 	 * Set the multiple option.
 	 *
-	 * @param   boolean  $multiple  wether to allow multiple updates
+	 * @param   boolean  $multiple  whether to allow multiple updates
 	 * @return  object   $this
 	 */
 	public function multiple($multiple = true)
@@ -71,7 +71,7 @@ class Update extends Where
 	/**
 	 * Set the upsert option.
 	 *
-	 * @param   boolean  $upsert  wether to allow upserts
+	 * @param   boolean  $upsert  whether to allow upserts
 	 * @return  object   $this
 	 */
 	public function upsert($upsert = true)
@@ -86,7 +86,7 @@ class Update extends Where
 	 *
 	 * @param  string  $type   update modifier
 	 * @param  string  $field  field to update
-	 * @param  mixed   $valye  update value
+	 * @param  mixed   $value  update value
 	 */
 	protected function _update($type, $field, $value)
 	{
@@ -155,7 +155,7 @@ class Update extends Where
 	 *
 	 * @param   string  $field  field name
 	 * @param   mixed   $value  value to append to the array
-	 * @param   bool    $all    wether to remove all (must be array)
+	 * @param   bool    $all    whether to remove all (must be array)
 	 * @return  object  $this
 	 */
 	public function push($field, $value, $all = false)
@@ -166,8 +166,8 @@ class Update extends Where
 	/**
 	 * Pushes a value onto a field array
 	 *
-	 * @param   string  $field  field name
-	 * @param   mixed   $value  value to append to the array
+	 * @param   string  $field   field name
+	 * @param   mixed   $values  value to append to the array
 	 * @return  object  $this
 	 */
 	public function pushAll($field, array $values)
@@ -181,6 +181,7 @@ class Update extends Where
 	 * @param   string   $field     field to unshift
 	 * @param   string   $value     values to remove
 	 * @param   string   $operator  condition operator
+     * @param   bool     $all
 	 * @return  object   $this
 	 */
 	public function pull($field, $value, $operator = null,  $all = false)
@@ -196,8 +197,9 @@ class Update extends Where
 	/**
 	 * Removes all matched instances from a field array
 	 *
-	 * @param   string   $field  field to unshift
-	 * @param   string   $value  values to remove
+	 * @param   string   $field     field to unshift
+	 * @param   string   $value     values to remove
+     * @param   string   $operator  condition operator
 	 * @return  object   $this
 	 */
 	public function pullAll($field, $value, $operator = null)
