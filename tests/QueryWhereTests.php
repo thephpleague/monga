@@ -841,6 +841,120 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $this->getProperty('where'));
 	}
 
+	public function testWhereNear()
+	{
+		$this->query->whereNear('location', 10, 10, array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testAndWhereNear()
+	{
+		$this->query->andWhereNear('location', 10, 10, array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testOrWhereNear()
+	{
+		$this->query->whereNear('location', 10, 10, array('$maxDistance' => 5))
+			->orWhereNear('location', 10, 10, array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
+					)
+				),
+				array(
+					'$and' => array(
+						array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testWhereWithin()
+	{
+		$this->query->whereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testAndWhereWithin()
+	{
+		$this->query->andWhereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testOrWhereWithin()
+	{
+		$this->query->whereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5))
+			->orWhereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
+					)
+				),
+				array(
+					'$and' => array(
+						array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
 	public function testWhereBetween()
 	{
 		$this->query->whereBetween('name', 10, 15);

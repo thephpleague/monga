@@ -792,6 +792,78 @@ class Where extends Builder
 	}
 
 	/**
+	 * Appends a and-where-near statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function whereNear($field, $lon, $lat, $options = array())
+	{
+		return $this->_where('$and', $field, array('$near' => array($lon, $lat)) + $options);
+	}
+
+	/**
+	 * Appends a and-where-near statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function andWhereNear($field, $lon, $lat, $options = array())
+	{
+		return call_user_func_array(array($this, 'whereNear'), array($field, $lon, $lat, $options));
+	}
+
+	/**
+	 * Appends a and-where-near statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function orWhereNear($field, $lon, $lat, $options = array())
+	{
+		return $this->_where('$or', $field, array('$near' => array($lon, $lat)) + $options);
+	}
+
+	/**
+	 * Appends a and-where-within statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function whereWithin($field, $shape, $options = array())
+	{
+		return $this->_where('$and', $field, array('$within' => $shape) + $options);
+	}
+
+	/**
+	 * Appends a and-where-within statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function andWhereWithin($field, $shape, $options = array())
+	{
+		return call_user_func_array(array($this, 'whereWithin'), array($field, $shape, $options));
+	}
+
+	/**
+	 * Appends a and-where-near statement
+	 *
+	 * @param   float   $lon  longitude
+	 * @param   float   $lat  latitude
+	 * @return  object  $this
+	 */
+	public function orWhereWithin($field, $shape, $options = array())
+	{
+		return $this->_where('$or', $field, array('$within' => $shape) + $options);
+	}
+
+	/**
 	 * Appends a and-nor-where-clause
 	 *
 	 * @param   array|closure  $clause  nor where clause
