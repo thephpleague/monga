@@ -45,7 +45,7 @@ class Database
 	/**
 	 * Retrieve all collection names
 	 *
-	 * @return  array  array of collection nanmes
+	 * @return  array  array of collection names
 	 */
 	public function listCollections()
 	{
@@ -53,10 +53,10 @@ class Database
 	}
 
 	/**
-	 * Check wether the database contains a given connection
+	 * Check whether the database contains a given connection
 	 *
 	 * @param   string   $collection  collection name
-	 * @return  boolean  wether the collection exists in the database
+	 * @return  boolean  whether the collection exists in the database
 	 */
 	public function hasCollection($collection)
 	{
@@ -66,7 +66,7 @@ class Database
 	/**
 	 * Returns all collection.
 	 *
-	 * @param   boolean  $wrap  wether to wrap the collection instances in Collection classes.
+	 * @param   boolean  $wrap  whether to wrap the collection instances in Collection classes.
 	 * @return  array    connections array
 	 */
 	public function allCollections($wrap = false)
@@ -127,7 +127,7 @@ class Database
 	}
 
 	/**
-	 * Return the MongoDB databse instance
+	 * Return the MongoDB database instance
 	 *
 	 * @return  object  MongoDB database instance
 	 */
@@ -140,7 +140,7 @@ class Database
 	 * Retrieve a collection
 	 *
 	 * @param   string   $collection  collection name
-	 * @param   boolean  $wrap        wether to wrap it in a Collection class.
+	 * @param   boolean  $wrap        whether to wrap it in a Collection class.
 	 * @return  mixed    Collection instance or MongoCollection instance.
 	 */
 	public function collection($collection, $wrap = true)
@@ -154,8 +154,8 @@ class Database
 	/**
 	 * Retrieve a GridFS object
 	 *
-	 * @param   string   $collection  collection name
-	 * @param   boolean  $wrap        wether to wrap it in a Collection class.
+	 * @param   string   $prefix  collection name
+	 * @param   boolean  $wrap    whether to wrap it in a Collection class.
 	 * @return  mixed    Collection instance or MongoCollection instance.
 	 */
 	public function filesystem($prefix = 'fs', $wrap = true)
@@ -188,9 +188,9 @@ class Database
 	}
 
 	/**
-	 * Excecute javascript on the database
+	 * Execute javascript on the database
 	 *
-	 * @param   mixed  $core       MongoCode or javascript string
+	 * @param   mixed  $code       MongoCode or javascript string
 	 * @param   array  $arguments  function arguments
 	 * @return  mixed  result
 	 */

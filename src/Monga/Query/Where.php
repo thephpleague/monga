@@ -55,7 +55,7 @@ class Where extends Builder
 
 		// Fetch the last clause in the $or array
 		// to allow further chaining it's required
-		// to be wrapped in an @and statment.
+		// to be wrapped in an @and statement.
 		$lastClause = array_pop($where['$or']);
 
 		if( ! isset($lastClause['$and']))
@@ -74,7 +74,7 @@ class Where extends Builder
 	}
 
 	/**
-	 * Internal where statment formatter
+	 * Internal where statement formatter
 	 *
 	 * @param   string  $type       chain type
 	 * @param   string  $field      fieldname
@@ -138,14 +138,14 @@ class Where extends Builder
 		// or create a new one when none available.
 		$lastAndClause = array_pop($lastOrClause['$and']) ?: array();
 
-		// Handle the result from nested where statments
+		// Handle the result from nested where statements
 		if ($isNested)
 		{
 			// Re-append the last $and clause
 			empty($lastAndClause) or $lastOrClause['$and'][] = $lastAndClause;
 
 			// The nested query has a base key (either $and or $or)
-			// So following queries will always begon in a new clause
+			// So following queries will always begin in a new clause
 			$lastAndClause = $statement;
 		}
 		else
@@ -328,7 +328,6 @@ class Where extends Builder
 	 * @param   mixed   $value      filter value
 	 * @param   string  $flags      regex flags
 	 * @param   string  $delimiter  preg_quote delimiter
-	 * @param   string  $type       chain type
 	 * @return  object  $this
 	 */
 	public function andWhereLike($field, $value, $flags = 'imxsu', $delimiter = null)
@@ -356,7 +355,7 @@ class Where extends Builder
 	/**
 	 * Appends an and-where-regex statement
 	 *
-	 * @param   string  $field      fiel dname
+	 * @param   string  $field      fieldname
 	 * @param   mixed   $value      filter value
 	 * @return  object  $this
 	 */
@@ -698,7 +697,7 @@ class Where extends Builder
 	 * Appends a or-where-greater-than statement
 	 *
 	 * @param   string   $field   field name
-	 * @param   integer  $value   hight boundary
+	 * @param   integer  $value   high boundary
 	 * @return  object   $this
 	 */
 	public function orWhereGt($field, $value)
@@ -748,7 +747,7 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-id statement
 	 *
-	 * @param   string   $id     id
+	 * @param   string   $value  id
 	 * @param   integer  $field  _id field
 	 * @return  object   $this
 	 */
@@ -765,9 +764,9 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-id statement
 	 *
-	 * @param   string   $id     id
-	 * @param   integer  $field  _id field
-	 * @return  object   $this
+	 * @param   string  $value  id
+	 * @param   string  $field  _id field
+	 * @return  object  $this
 	 */
 	public function andWhereId($value, $field = '_id')
 	{
@@ -777,8 +776,8 @@ class Where extends Builder
 	/**
 	 * Appends a or-where-id statement
 	 *
-	 * @param   string   $id     id
-	 * @param   integer  $field  _id field
+     * @param   string  $value  id
+     * @param   string  $field  _id field
 	 * @return  object   $this
 	 */
 	public function orWhereId($value, $field = '_id')
@@ -794,8 +793,10 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-near statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+	 * @param   float   $lon      longitude
+	 * @param   float   $lat      latitude
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function whereNear($field, $lon, $lat, $options = array())
@@ -806,8 +807,10 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-near statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+	 * @param   float   $lon      longitude
+	 * @param   float   $lat      latitude
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function andWhereNear($field, $lon, $lat, $options = array())
@@ -818,8 +821,10 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-near statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+     * @param   float   $lon      longitude
+     * @param   float   $lat      latitude
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function orWhereNear($field, $lon, $lat, $options = array())
@@ -830,8 +835,9 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-within statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+     * @param   string  $shape    shape
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function whereWithin($field, $shape, $options = array())
@@ -842,8 +848,9 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-within statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+     * @param   string  $shape    shape
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function andWhereWithin($field, $shape, $options = array())
@@ -854,8 +861,9 @@ class Where extends Builder
 	/**
 	 * Appends a and-where-near statement
 	 *
-	 * @param   float   $lon  longitude
-	 * @param   float   $lat  latitude
+     * @param   string  $field    _id field
+     * @param   string  $shape    shape
+     * @param   array   $options  options
 	 * @return  object  $this
 	 */
 	public function orWhereWithin($field, $shape, $options = array())
@@ -896,7 +904,6 @@ class Where extends Builder
 	 * Appends a and-nor-where-clause
 	 *
 	 * @param   array|closure  $clause  nor where clause
-	 * @param   integer        $type    chain type
 	 * @return  object         $this
 	 */
 	public function andNorWhere($clause)
@@ -908,7 +915,6 @@ class Where extends Builder
 	 * Appends a or-nor-where-clause
 	 *
 	 * @param   array|closure  $clause  nor where clause
-	 * @param   integer        $type    chain type
 	 * @return  object         $this
 	 */
 	public function orNorWhere($clause)

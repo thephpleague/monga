@@ -25,7 +25,7 @@ class Filesystem extends Collection
 	/**
 	 * Sets the MongoGridFS.
 	 *
-	 * @param  object  $filestem  MongoGridFS object.
+	 * @param  object  $filesystem  MongoGridFS object.
 	 */
 	public function __construct(MongoGridFS $filesystem)
 	{
@@ -47,8 +47,9 @@ class Filesystem extends Collection
 	/**
 	 * Store a set of bytes.
 	 *
-	 * @param   string  $filename  file name
+	 * @param   string  $bytes     bytes
 	 * @param   array   $metadata  metadata
+     * @param   array   $options   options
 	 * @return  object  MongoId object
 	 */
 	public function storeBytes($bytes, $metadata = array(), $options = array())
@@ -61,6 +62,7 @@ class Filesystem extends Collection
 	 *
 	 * @param   string  $filename  file name
 	 * @param   array   $metadata  metadata
+     * @param   array   $options   options
 	 * @return  object  MongoId object
 	 */
 	public function storeFile($filename, $metadata = array(), $options = array())
@@ -106,7 +108,7 @@ class Filesystem extends Collection
 	 * Finds one file.
 	 *
 	 * @param   mixed        $query   filename or search query
-	 * @param   array        $fields  metadata fields select/excule statement
+	 * @param   array        $fields  metadata fields select/exclude statement
 	 * @return  object|null           MongoGridFSFile instance or null when not found.
 	 */
 	public function findOne($query = array(), $fields = array())

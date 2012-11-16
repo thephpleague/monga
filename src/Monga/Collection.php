@@ -71,7 +71,7 @@ class Collection
 	/**
 	 * Counts the given collection with an optional filter query
 	 *
-	 * @param   array|closre  $query  count filter
+	 * @param   array|closure  $query  count filter
 	 * @return  int                   number of documents
 	 */
 	public function count($query = array())
@@ -149,7 +149,7 @@ class Collection
 	 *
 	 * @param   mixed    $query    configuration closure, raw mongo conditions array
 	 * @param   array    $fields   associative array for field exclusion/inclusion
-	 * @param   boolean  $findOne  wether to find one or multiple
+	 * @param   boolean  $findOne  whether to find one or multiple
 	 * @return  mixed              result Cursor for multiple, document array for one.
 	 */
 	public function find($query = array(), $fields = array(), $findOne = false)
@@ -232,7 +232,7 @@ class Collection
 	 */
 	public function insert(array $data, $options = array())
 	{
-		// Check wether we're dealing with a batch insert.
+		// Check whether we're dealing with a batch insert.
 		if (isset($data[0]) and is_array($data[0]))
 		{
 			// Insert using batchInsert

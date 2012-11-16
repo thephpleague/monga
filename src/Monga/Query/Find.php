@@ -30,7 +30,7 @@ class Find extends Where
 	protected $limit;
 
 	/**
-	 * @var  bool  $findOne  wether to find one, or more
+	 * @var  bool  $findOne  whether to find one, or more
 	 */
 	protected $findOne = false;
 
@@ -68,7 +68,7 @@ class Find extends Where
 	/**
 	 *  Orders a collection
 	 *
-	 *  @param  string field       field to order by
+	 *  @param  string $field       field to order by
 	 *  @param  string $direction  asc/desc/1/-1
 	 *  @return object             current instance
 	 */
@@ -104,7 +104,7 @@ class Find extends Where
 	/**
 	 *  Specifies fields to exclude
 	 *
-	 *  @param  string $field fields to explude
+	 *  @param  string $field fields to exclude
 	 *
 	 *  @return object        current instance
 	 */
@@ -138,7 +138,7 @@ class Find extends Where
 	/**
 	 *  Retrieve the select statement.
 	 *
-	 *  @return array|null array of fields to select or exlude
+	 *  @return array|null array of fields to select or exclude
 	 */
 	public function getFields()
 	{
@@ -188,9 +188,9 @@ class Find extends Where
 	}
 
 	/**
-	 * Returns wether to find one, false for multiple
+	 * Returns whether to find one, false for multiple
 	 *
-	 * @return  boolean  wether to find one
+	 * @return  boolean  whether to find one
 	 */
 	public function getFindOne()
 	{

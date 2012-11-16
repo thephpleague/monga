@@ -49,7 +49,7 @@ class Cursor implements \Countable, \IteratorAggregate
 	}
 
 	/**
-	 * Implemeting IteratorAggregate
+	 * Implementing IteratorAggregate
 	 *
 	 * @return  object  MongoCursor
 	 */
@@ -88,7 +88,7 @@ class Cursor implements \Countable, \IteratorAggregate
 		// Retrieve the actual objects.
 		$documents = $this->toArray();
 
-		// Get the collection idenfitief
+		// Get the collection idenfitier
 		$collection = (string) $this->collection->getCollection();
 
 		foreach ($documents as &$document)
