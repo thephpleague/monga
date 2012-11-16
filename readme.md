@@ -22,6 +22,80 @@ Monga was created with the acknowledgement of the MongoDB PHP package already be
 * Geospatial helpers
 * Docs
 
+## Examples
+
+```php
+// Get a connection
+$connection = Monga::connection($dns, $connectionOptions);
+
+// Get the database
+$database = $connection->database('db_name');
+
+// Drop the database
+$database->drop();
+
+// Get a collection
+$collection = $database->collection('collection_name');
+
+// Drop the collection
+$collection->drop();
+
+// Truncate the collection
+$collection->truncate();
+
+// Insert some values into the collection
+$insertIds = $collection->insert(array(
+	array(
+		'name' => 'John',
+		'surname' => 'Doe',
+		'nick' => 'The Unknown Man'
+		'age' => 20,
+	),
+	array(
+		'name' => 'Frank',
+		'surname' => 'de Jonge',
+		'nick' => 'Unknown',
+		'nik' => 'No Man',
+		'age' => 23
+	),
+));
+
+// Update a collection
+$collection->update(function($query){
+	$query->increment('age')
+		->remove('nik')
+		->set('nick', 'FrenkyNet');
+});
+
+// Find Frank
+$frank = $collection->findOne(function($query){
+	$query->where('name', 'Frank')
+		->whereLike('surname', '%e Jo%');
+});
+
+// Or find him using normal array syntax
+$frank = $collection->find(array('name' => 'Frank', 'surname' => new MongoRegex('/e Jo/imxsu')));
+
+$frank['age']++;
+
+$collection->save($frank);
+
+// Also supports nested queries
+$users = $collection->find(function($query){
+	$query->where(function($query){
+		$query->where('name', 'Josh')
+			->orWhere('surname', 'Doe');
+	})->orWhere(function(){
+		$query->where('name', 'Frank')
+			->where('surname', 'de Jonge');
+	});
+});
+
+// get the users as an array
+$arr = $users->asArray();
+```
+
+
 If you need any help, come find me in the IRC channels (#fuelphp/#cabinet/#mongodb by the nick of: FrenkyNet)
 
 Enjoy!
