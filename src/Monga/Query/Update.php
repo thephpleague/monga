@@ -125,7 +125,10 @@ class Update extends Where
 	 */
 	public function remove($field)
 	{
-		$field = func_get_args();
+		if ( ! is_array($field))
+		{
+			$field = func_get_args();
+		}
 
 		foreach ($field as $f)
 		{
@@ -133,6 +136,18 @@ class Update extends Where
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Rename a field.
+	 *
+	 * @param   string  $field  field name
+	 * @param   string  $to     new field name
+	 * @return  object  $this
+	 */
+	public function rename($field, $to)
+	{
+		return $this->_update('$rename', $field, $to);
 	}
 
 	/**

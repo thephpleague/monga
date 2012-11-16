@@ -64,6 +64,16 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
 		$this->getProperty('update'));
 	}
 
+	public function testRename()
+	{
+		$this->update->rename('one', 'two');
+
+		$this->assertEquals(array(
+			'one' => array('$rename', 'two'),
+		),
+		$this->getProperty('update'));
+	}
+
 	public function testPush()
 	{
 		$this->update->push('field', 'value');
