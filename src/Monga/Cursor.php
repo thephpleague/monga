@@ -17,14 +17,25 @@ use MongoDBRef;
 
 class Cursor implements \Countable, \IteratorAggregate
 {
-	protected $cursor;
+	/**
+	 * @var  object  $result  MongoCursor
+	 */
+	protected $result;
 
+	/**
+	 * @var  object  $collection  Monga\Collection
+	 */
 	protected $collection;
 
-	public function __construct(MongoCursor $cursor, Collection $collection = null)
+	/**
+	 * Constructor, sets the result and collection
+	 *
+	 * @param  object  $result      MongoCursor
+	 * @param  object  $collection  Monga\Collection
+	 */
+	public function __construct(MongoCursor $result, Collection $collection = null)
 	{
-		$this->cursor = $cursor;
-
+		$this->result = $result;
 		$collection and $this->collection = $collection;
 	}
 
@@ -45,17 +56,17 @@ class Cursor implements \Countable, \IteratorAggregate
 	 */
 	public function getCursor()
 	{
-		return $this->cursor;
+		return $this->result;
 	}
 
 	/**
 	 * Implementing IteratorAggregate
 	 *
-	 * @return  object  MongoCursor
+	 * @return  object  Mongoresult
 	 */
 	public function getIterator()
 	{
-		return $this->cursor;
+		return $this->result;
 	}
 
 	/**
@@ -65,21 +76,21 @@ class Cursor implements \Countable, \IteratorAggregate
 	 */
 	public function count()
 	{
-		return $this->cursor->count(true);
+		return $this->result->count(true);
 	}
 
 	/**
-	 * Returns the cursor as an array
+	 * Returns the result as an array
 	 *
 	 * @return  array  the iterator as array
 	 */
 	public function toArray()
 	{
-		return iterator_to_array($this->cursor);
+		return iterator_to_array($this->getIterator());
 	}
 
 	/**
-	 * Return the cursor content as MongoDBREf objects.
+	 * Return the result content as MongoDBREf objects.
 	 *
 	 * @return  array  array of mongo references
 	 */
@@ -108,19 +119,19 @@ class Cursor implements \Countable, \IteratorAggregate
 	 */
 	public function __call($method, $arguments)
 	{
-		if ( ! method_exists($this->cursor, $method))
+		if ( ! method_exists($this->result, $method))
 		{
 			throw new \BadMethodCallException('Call to undefined function '.get_called_class().'::'.$method.'.');
 		}
 
 		// Trigger the method.
-		$function = array($this->cursor, $method);
+		$function = array($this->result, $method);
 		$result = call_user_func_array($function, $arguments);
 
 		// When the cursor is returned, return the current instance.
 		// It has no use returning the cursor because the cursor
 		// contained in this instance will already be affected.
-		// Returning it's will result in an out-of-sync cursor
+		// Returning it's will cursor in an out-of-sync cursor
 		// in this instance.
 		if ($result instanceof MongoCursor)
 		{

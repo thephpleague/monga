@@ -8,6 +8,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
 			->database('__database__');
 
 		$collection = $database->collection('_collection');
+		$collection->drop();
 		$values = array(
 			array('name' => 'Bill'),
 			array('name' => 'Frank'),
