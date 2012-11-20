@@ -670,6 +670,42 @@ class Where extends Builder
 	}
 
 	/**
+	 * Appends a and-where-lower-than-or-equal statement
+	 *
+	 * @param   string   $field   field name
+	 * @param   integer  $value   lower boundary
+	 * @return  object   $this
+	 */
+	public function whereLte($field, $value)
+	{
+		return $this->_where('$and', $field, array('$lte' => $value));
+	}
+
+	/**
+	 * Appends a and-where-lower-than-or-equal statement
+	 *
+	 * @param   string   $field   field name
+	 * @param   integer  $value   lower boundary
+	 * @return  object   $this
+	 */
+	public function andWhereLte($field, $value)
+	{
+		return call_user_func_array(array($this, 'whereLte'), array($field, $value));
+	}
+
+	/**
+	 * Appends a or-where-lower-than-or-equal statement
+	 *
+	 * @param   string   $field   field name
+	 * @param   integer  $value   lower boundary
+	 * @return  object   $this
+	 */
+	public function orWhereLte($field, $value)
+	{
+		return $this->_where('$or', $field, array('$lte' => $value));
+	}
+
+	/**
 	 * Appends a and-where-greater-than statement
 	 *
 	 * @param   string   $field   field name
@@ -706,11 +742,47 @@ class Where extends Builder
 	}
 
 	/**
-	 * Appends a and-where-between statement
+	 * Appends a and-where-greater-than-or-equal statement
 	 *
 	 * @param   string   $field   field name
-	 * @param   integer  $min     lower boundary
-	 * @param   integer  $max     height boundary
+	 * @param   integer  $value   high boundary
+	 * @return  object   $this
+	 */
+	public function whereGte($field, $value)
+	{
+		return $this->_where('$and', $field, array('$gte' => $value));
+	}
+
+	/**
+	 * Appends a and-where-greater-than-or-equal statement
+	 *
+	 * @param   string   $field   field name
+	 * @param   integer  $value   high boundary
+	 * @return  object   $this
+	 */
+	public function andWhereGte($field, $value)
+	{
+		return call_user_func_array(array($this, 'whereGte'), array($field, $value));
+	}
+
+	/**
+	 * Appends a or-where-greater-than-or-equal statement
+	 *
+	 * @param   string   $field   field name
+	 * @param   integer  $value   high boundary
+	 * @return  object   $this
+	 */
+	public function orWhereGte($field, $value)
+	{
+		return $this->_where('$or', $field, array('$gte' => $value));
+	}
+
+	/**
+	 * Appends a and-where-between statement
+	 *
+	 * @param   string   $field       field name
+	 * @param   integer  $min         lower boundary
+	 * @param   integer  $max         height boundary
 	 * @return  object   $this
 	 */
 	public function whereBetween($field, $min, $max)
@@ -920,6 +992,57 @@ class Where extends Builder
 	public function orNorWhere($clause)
 	{
 		return $this->norWhere($clause, '$or');
+	}
+
+	/**
+	 * Appends a and-not-where-clause
+	 *
+	 * @param   array|closure  $clause  nor where clause
+	 * @param   integer        $type    chain type
+	 * @return  object         $this
+	 */
+	public function notWhere($clause, $type = '$and')
+	{
+		if ($clause instanceof Closure)
+		{
+			$query = new static();
+			$clause($query);
+			$clause = $query->getWhere();
+
+			if (empty($clause))
+			{
+				return $this;
+			}
+		}
+
+		if ( ! is_array($clause))
+		{
+			throw new \InvalidArgumentException('$not statements should be Closures or arrays.');
+		}
+
+		return $this->_where($type, '$not', array($clause));
+	}
+
+	/**
+	 * Appends a and-not-where-clause
+	 *
+	 * @param   array|closure  $clause  nor where clause
+	 * @return  object         $this
+	 */
+	public function andNotWhere($clause)
+	{
+		return $this->notWhere($clause);
+	}
+
+	/**
+	 * Appends a or-not-where-clause
+	 *
+	 * @param   array|closure  $clause  nor where clause
+	 * @return  object         $this
+	 */
+	public function orNotWhere($clause)
+	{
+		return $this->notWhere($clause, '$or');
 	}
 
 	/**

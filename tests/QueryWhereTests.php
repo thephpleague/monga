@@ -784,6 +784,63 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $this->getProperty('where'));
 	}
 
+	public function testWhereLte()
+	{
+		$this->query->whereLte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$lte' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testAndWhereLte()
+	{
+		$this->query->andWhereLte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$lte' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testOrWhereLte()
+	{
+		$this->query->whereLte('name', 10)
+			->orWhereLte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$lte' => 10)),
+					)
+				),
+				array(
+					'$and' => array(
+						array('name' => array('$lte' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
 	public function testWhereGt()
 	{
 		$this->query->whereGt('name', 10);
@@ -833,6 +890,63 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 				array(
 					'$and' => array(
 						array('name' => array('$gt' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testWhereGte()
+	{
+		$this->query->whereGte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$gte' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testAndWhereGte()
+	{
+		$this->query->andWhereGte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$gte' => 10)),
+					)
+				)
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testOrWhereGte()
+	{
+		$this->query->whereGte('name', 10)
+			->orWhereGte('name', 10);
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array('name' => array('$gte' => 10)),
+					)
+				),
+				array(
+					'$and' => array(
+						array('name' => array('$gte' => 10)),
 					)
 				)
 			)
@@ -1153,6 +1267,101 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 					'$and' => array(
 						array(
 							'$nor' => array(
+								array('field' => 'value'),
+							),
+						),
+					)
+				),
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testNotWhere()
+	{
+		$this->query->notWhere(function($query){
+			$query->where('field', 'value');
+		});
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array(
+							'$not' => array(
+								array('field' => 'value'),
+							),
+						),
+					)
+				),
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testEmptyNotWhere()
+	{
+		$this->query->notWhere(function(){});
+		$this->assertNull($this->getProperty('where'));
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidNotWhere()
+	{
+		$this->query->notWhere(false);
+	}
+
+	public function testAndNotWhere()
+	{
+		$this->query->andNotWhere(function($query){
+			$query->where('field', 'value');
+		});
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array(
+							'$not' => array(
+								array('field' => 'value'),
+							),
+						),
+					)
+				),
+			)
+		);
+
+		$this->assertEquals($expected, $this->getProperty('where'));
+	}
+
+	public function testOrNotWhere()
+	{
+		$this->query->notWhere(function($query){
+			$query->where('field', 'value');
+		})
+		->orNotWhere(function($query){
+			$query->where('field', 'value');
+		});
+
+		$expected = array(
+			'$or' => array(
+				array(
+					'$and' => array(
+						array(
+							'$not' => array(
+								array('field' => 'value'),
+							),
+						),
+					)
+				),
+				array(
+					'$and' => array(
+						array(
+							'$not' => array(
 								array('field' => 'value'),
 							),
 						),
