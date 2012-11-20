@@ -167,6 +167,18 @@ class Database
 	}
 
 	/**
+	 * Drops the current database.
+	 *
+	 * @return  boolean  success boolean
+	 */
+	public function drop()
+	{
+		$result = $this->database->drop();
+
+		return $result === true or (bool) $result['ok'];
+	}
+
+	/**
 	 * Retrieve one or more references from the database.
 	 *
 	 * @param    object|array  $reference  one or more references
