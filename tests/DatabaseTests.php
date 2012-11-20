@@ -213,4 +213,9 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals(1, $result['ok']);
 		$this->assertEquals(1, $result['n']);
 	}
+
+	public function testDrop()
+	{
+		$this->assertTrue($this->database->drop());
+	}
 }
