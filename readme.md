@@ -4,7 +4,7 @@ A simple and swift MongoDB abstraction layer for PHP5.3+
 
 [Find Monga on Packagist/Composer](https://packagist.org/packages/monga/monga)
 
-## What's this all about? 
+## What's this all about?
 
 * An easy API to get connections, databases and collection.
 * A filter builder that doesn't make your mind go nuts.
@@ -19,7 +19,6 @@ Monga was created with the acknowledgement of the MongoDB PHP package already be
 ## Todo's
 
 * Indexing
-* Geospatial helpers
 * Docs
 
 ## Examples

@@ -27,6 +27,11 @@ class Update extends Where
 	protected $multiple = true;
 
 	/**
+	 * @var  bool  $atomic  whether to use atomic mode
+	 */
+	protected $atomic = false;
+
+	/**
 	 * @var  array  @update  update query
 	 */
 	protected $update = array();
@@ -55,6 +60,8 @@ class Update extends Where
 	public function single($single = true)
 	{
 		$this->multiple = ! $single;
+
+		return $this;
 	}
 
 	/**
@@ -66,6 +73,21 @@ class Update extends Where
 	public function multiple($multiple = true)
 	{
 		$this->multiple = (bool) $multiple;
+
+		return $this;
+	}
+
+	/**
+	 * Set the multiple option.
+	 *
+	 * @param   boolean  $atomic  whether to use atomic more
+	 * @return  object   $this
+	 */
+	public function atomic($atomic = true)
+	{
+		$this->atomic = (bool) $atomic;
+
+		return $this;
 	}
 
 	/**
@@ -273,6 +295,11 @@ class Update extends Where
 			}
 
 			$update[$type][$field] = $value;
+		}
+
+		if ($this->atomic)
+		{
+			$update['$atomic'] = 1;
 		}
 
 		return $update;

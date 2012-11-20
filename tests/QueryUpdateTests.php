@@ -163,9 +163,10 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
 		$expected = array(
 			'$set' => array('field' => 'value'),
 			'$inc' => array('downloads' => 1),
+			'$atomic' => 1
 		);
 
-		$result = $this->update->increment('downloads', 1)->set('field', 'value')->getUpdate();
+		$result = $this->update->increment('downloads', 1)->set('field', 'value')->atomic()->getUpdate();
 
 		$this->assertEquals($expected, $result);
 	}
