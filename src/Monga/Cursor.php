@@ -11,7 +11,6 @@
  */
 
 namespace Monga;
-
 use MongoCursor;
 use MongoDBRef;
 

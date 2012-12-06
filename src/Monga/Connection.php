@@ -12,7 +12,7 @@
 
 namespace Monga;
 
-use Mongo;
+use MongoClient;
 use MongoCode;
 use MongoConnectionException;
 
@@ -31,7 +31,7 @@ class Connection
 	 */
 	public function __construct($server = null, array $options = array())
 	{
-		if ($server instanceof \Mongo)
+		if ($server instanceof \MongoClient)
 		{
 			$this->connection = $server;
 		}
@@ -49,17 +49,17 @@ class Connection
 				$options['connect'] = true;
 			}
 
-			$this->connection = new Mongo($server ?: 'mongodb://localhost:27017', $options);
+			$this->connection = new MongoClient($server ?: 'mongodb://localhost:27017', $options);
 		}
 	}
 
 	/**
 	 * Connection injector
 	 *
-	 * @param   object  $connection  Mongo instance
+	 * @param   object  $connection  MongoClient instance
 	 * @return  object  $this
 	 */
-	public function setConnection(Mongo $connection)
+	public function setConnection(MongoClient $connection)
 	{
 		$this->connection = $connection;
 
@@ -172,7 +172,6 @@ class Connection
 		return array_map(function($database)
 		{
 			return $database['name'];
-
 		},
 		$result['databases']);
 	}
