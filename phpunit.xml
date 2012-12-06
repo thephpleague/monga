@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
 		backupStaticAttributes="false"
-		bootstrap="./vendor/autoload.php"
+		bootstrap="./phpunit.php"
 		colors="true"
 		convertErrorsToExceptions="true"
 		convertNoticesToExceptions="true"
@@ -19,4 +19,7 @@
 			<directory suffix=".php">./vendor/</directory>
 		</blacklist>
 	</filter>
+	<listeners>
+		<listener class="\Mockery\Adapter\Phpunit\TestListener" file="./vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php"></listener>
+	</listeners>
 </phpunit>
