@@ -78,7 +78,10 @@ class Collection
 	{
 		if ($query instanceof Closure)
 		{
-			$query = new Query\Where($this, $query);
+			$callback = $query;
+			$query = new Query\Where();
+			is_callable('Closure::bind') and $callback = $callback->bindTo($query, $query);
+			$callback($query);
 		}
 
 		if ($query instanceof Query\Where)
@@ -95,6 +98,72 @@ class Collection
 	}
 
 	/**
+	 * Returns the distinct values for a given key.
+	 *
+	 * @param   string  $field  field to use
+	 * @param   mixed   $query  match query
+	 * @return  array   array of distinct values
+	 */
+	public function distinct($key, $query = array())
+	{
+		if ($query instanceof Closure)
+		{
+			// Store the callback
+			$callback = $query;
+
+			// Create a new Where filter.
+			$query = new Query\Where();
+
+			// Bind the callback when possible
+			is_callable('Closure::bind') and $callback = $callback->bindTo($query, $query);
+
+			// trigger callback
+			$callback($query);
+		}
+
+		if ($query instanceof Query\Where)
+		{
+			// Get the filter.
+			$query = $query->getWhere();
+		}
+
+		return $this->collection->distinct($key, $query);
+	}
+
+	/**
+	 * Aggregate a collection
+	 *
+	 * @param   mixed  $aggregation  aggregaction pipeline of callback Closure
+	 * @return  array  aggregation result
+	 */
+	public function aggregate($aggregation = array())
+	{
+		if ($aggregation instanceof Closure)
+		{
+			// Store the callback
+			$callback = $aggregation;
+
+			// Create a new pipeline
+			$aggregation = new Query\Aggregation();
+
+			// Bind the closure if you can
+			is_callable('Closure::bind') and $callback = $callback->bindTo($aggregation, $aggregation);
+
+			// Fire the callback
+			$callback($aggregation);
+		}
+
+		if ($aggregation instanceof Query\Aggregation)
+		{
+			// Retrieve the pipeline
+			$aggregation = $aggregation->getPipeline();
+		}
+
+		// Execute the aggregation.
+		return $this->collection->aggregate($aggregation);
+	}
+
+	/**
 	 * Truncates the table.
 	 *
 	 * @return  bool  success boolean
@@ -104,6 +173,31 @@ class Collection
 		$result = $this->collection->remove(array());
 
 		return $result === true or (bool) $result['ok'];
+	}
+
+	/**
+	 * Manipulate collection indexes
+	 *
+	 * @param   Closure  $callback  callback
+	 * @return  object   $this
+	 */
+	public function indexes(Closure $callback)
+	{
+		$indexes = new Query\Indexes($this->collection);
+		is_callable('Closure::bind') and $callback = $callback->bindTo($indexes, $indexes);
+		$callback($indexes);
+
+		return $this;
+	}
+
+	/**
+	 * Retrieve the collection indexes
+	 *
+	 * @return  array  collection indexes
+	 */
+	public function listIndexes()
+	{
+		return $this->collection->getIndexInfo();
 	}
 
 	/**
@@ -122,6 +216,9 @@ class Collection
 
 			// Set the given options
 			$query->setOptions($options);
+
+			// Bind closure when possible
+			is_callable('Closure::bind') and $criteria = $criteria->bindTo($query, $query);
 
 			// Execute the callback
 			$criteria($query);
@@ -279,6 +376,7 @@ class Collection
 		{
 			$query = new Query\Update();
 			$query->setOptions($options);
+			is_callable('Closure::bind') and $values = $values->bindTo($query, $query);
 			$values($query);
 
 			$options = $query->getOptions();
