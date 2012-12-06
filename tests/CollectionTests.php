@@ -2,13 +2,12 @@
 
 use Monga\Collection;
 use Monga\Database;
+use Mockery as m;
 
 class CollectionTests extends PHPUnit_Framework_TestCase
 {
 	protected $database;
-
 	protected $connection;
-
 	protected $collection;
 
 	public function setUp()
@@ -64,7 +63,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 	{
 		$result = $this->collection->count();
 		$this->assertEquals(0, $result);
-		$result = $this->collection->getCollection()->insert(array('this' => 'value'));
+		$this->collection->getCollection()->insert(array('this' => 'value'));
+		$result = $this->collection->count();
 		$this->assertEquals(1, $result);
 	}
 
@@ -82,7 +82,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 		$where->where('name', 'Frank');
 		$result = $this->collection->count($where);
 		$this->assertEquals(0, $result);
-		$result = $this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$result = $this->collection->count($where);
 		$this->assertEquals(1, $result);
 	}
 
@@ -93,7 +94,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 		};
 		$result = $this->collection->count($where);
 		$this->assertEquals(0, $result);
-		$result = $this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$this->collection->getCollection()->insert(array('name' => 'Frank'));
+		$result = $this->collection->count($where);
 		$this->assertEquals(1, $result);
 	}
 
@@ -154,6 +156,84 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 	public function testInvalidRemove()
 	{
 		$this->collection->remove(false);
+	}
+
+	public function testListIndexes()
+	{
+		$this->assertInternalType('array', $this->collection->listIndexes());
+	}
+
+	public function testDistinct()
+	{
+		$collection = m::mock('MongoCollection');
+		$collection->shouldReceive('distinct')
+			->with('surname', array('age' => 25))
+			->once()
+			->andReturn(array('randomstring'));
+
+		$expected = array('randomstring');
+		$c = new Collection($collection);
+		$result = $c->distinct('surname', array('age' => 25));
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testDistinctClosure()
+	{
+		$collection = m::mock('MongoCollection');
+		$collection->shouldReceive('distinct')
+			->with('surname', array('age' => 25))
+			->once()
+			->andReturn(array('randomstring'));
+
+		$expected = array('randomstring');
+		$c = new Collection($collection);
+		$result = $c->distinct('surname', function($w){
+			$w->where('age', 25);
+		});
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testAggregation()
+	{
+		$collection = m::mock('MongoCollection');
+		$collection->shouldReceive('aggregate')
+			->with(array('randomstring'))
+			->once()
+			->andReturn(array('randomstring'));
+
+		$expected = array('randomstring');
+		$c = new Collection($collection);
+		$result = $c->aggregate(array('randomstring'));
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testAggregationClosure()
+	{
+		$collection = m::mock('MongoCollection');
+		$collection->shouldReceive('aggregate')
+			->with(array(
+				array('$limit' => 1),
+			))
+			->once()
+			->andReturn(array('randomstring'));
+
+		$expected = array('randomstring');
+		$c = new Collection($collection);
+		$result = $c->aggregate(function($a){
+			$a->limit(1);
+		});
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testIndexes()
+	{
+		$result = false;
+		$callback = function() use(&$result) {
+			$result = true;
+		};
+		$this->collection->indexes($callback);
+
+		$this->assertTrue($result);
 	}
 
 	public function testFind()
@@ -232,9 +312,9 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 	public function testInvalidInsert()
 	{
 		$collection = $this->getMockBuilder('MongoCollection')
-                       ->disableOriginalConstructor()
-                       ->setMethods(array('insert'))
-                       ->getMock();
+			->disableOriginalConstructor()
+			->setMethods(array('insert'))
+			->getMock();
 		$collection->expects($this->once())
 			->method('insert')
 			->with($this->equalTo(array('invalid')))

@@ -24,7 +24,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 		$reflection = new ReflectionObject($connection);
 		$connectionProperty = $reflection->getProperty('connection');
 		$connectionProperty->setAccessible(true);
-		$this->assertInstanceOf('Mongo', $connectionProperty->getValue($connection));
+		$this->assertInstanceOf('MongoClient', $connectionProperty->getValue($connection));
 		$this->assertEquals($mongoHash, spl_object_hash($connectionProperty->getValue($connection)));
 	}
 
@@ -83,12 +83,11 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('array', $list);
 	}
 
-
 	public function testGetMongoObject()
 	{
 		$mongo = $this->connection->getConnection();
 
-		$this->assertInstanceOf('Mongo', $mongo);
+		$this->assertInstanceOf('MongoClient', $mongo);
 	}
 
 
@@ -131,7 +130,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	{
 		$mongo = $this->connection->getConnection();
 
-		$this->assertInstanceOf('Mongo', $mongo);
+		$this->assertInstanceOf('MongoClient', $mongo);
 	}
 
 
