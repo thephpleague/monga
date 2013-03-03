@@ -83,7 +83,8 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 	public function testOrWhere()
 	{
 		$this->query->where('name', 'John')
-			->orWhere('name', 'Steve');
+			->orWhere('name', 'Steve')
+			->orWhere(array('name' => 'Jack', 'surname' => 'Johnes'));
 
 		$expected = array(
 			'$or' => array(
@@ -95,6 +96,16 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 				array(
 					'$and' => array(
 						array('name' => 'Steve'),
+					)
+				),
+				array(
+					'$and' => array(
+						array('name' => 'Jack'),
+					)
+				),
+				array(
+					'$and' => array(
+						array('surname' => 'Johnes'),
 					)
 				)
 			)
