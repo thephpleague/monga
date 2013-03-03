@@ -41,12 +41,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 	public function testWhere()
 	{
 		$this->query->where('name', 'John');
+		$this->query->where(array(
+			'surname' => 'Doe',
+			'age' => 25,
+		));
 
 		$expected = array(
 			'$or' => array(
 				array(
 					'$and' => array(
-						array('name' => 'John'),
+						array(
+							'name' => 'John',
+							'surname' => 'Doe',
+							'age' => 25,
+						),
 					)
 				)
 			)

@@ -83,6 +83,16 @@ class Where extends Builder
 	 */
 	protected function _where($type, $field, $statement = null)
 	{
+		if (is_array($field))
+		{
+			foreach ($field as $_field => $_statement)
+			{
+				$this->_where($type, $_field, $_statement);
+			}
+
+			return $this;
+		}
+
 		$isNested = false;
 
 		// Closures represent nested where clauses.
@@ -216,7 +226,7 @@ class Where extends Builder
 	 */
 	public function andWhere($field, $value = null)
 	{
-		return call_user_func_array(array($this, 'where'), func_get_args());
+		return $this->_where('$and', $field, $value);
 	}
 
 	/**
