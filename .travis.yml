@@ -6,10 +6,10 @@ services:
 php:
   - 5.3
   - 5.4
+  - 5.5
 
 before_script:
-  - pecl install mongo
-  - echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - echo "extension = <extension>.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - mongo admin --eval 'db.addUser("travis", "test");'
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
