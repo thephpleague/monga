@@ -33,7 +33,6 @@ class Aggregation
 		{
 			$callback = $projection;
 			$projection = new Projection();
-			is_callable('Closure::bind') and $callback = $callback->bindTo($projection, $projection);
 			$callback($projection);
 		}
 

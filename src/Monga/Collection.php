@@ -80,7 +80,6 @@ class Collection
 		{
 			$callback = $query;
 			$query = new Query\Where();
-			is_callable('Closure::bind') and $callback = $callback->bindTo($query, $query);
 			$callback($query);
 		}
 
@@ -114,9 +113,6 @@ class Collection
 			// Create a new Where filter.
 			$query = new Query\Where();
 
-			// Bind the callback when possible
-			is_callable('Closure::bind') and $callback = $callback->bindTo($query, $query);
-
 			// trigger callback
 			$callback($query);
 		}
@@ -145,9 +141,6 @@ class Collection
 
 			// Create a new pipeline
 			$aggregation = new Query\Aggregation();
-
-			// Bind the closure if you can
-			is_callable('Closure::bind') and $callback = $callback->bindTo($aggregation, $aggregation);
 
 			// Fire the callback
 			$callback($aggregation);
@@ -184,7 +177,6 @@ class Collection
 	public function indexes(Closure $callback)
 	{
 		$indexes = new Query\Indexes($this->collection);
-		is_callable('Closure::bind') and $callback = $callback->bindTo($indexes, $indexes);
 		$callback($indexes);
 
 		return $this;
@@ -216,9 +208,6 @@ class Collection
 
 			// Set the given options
 			$query->setOptions($options);
-
-			// Bind closure when possible
-			is_callable('Closure::bind') and $criteria = $criteria->bindTo($query, $query);
 
 			// Execute the callback
 			$criteria($query);
@@ -376,7 +365,6 @@ class Collection
 		{
 			$query = new Query\Update();
 			$query->setOptions($options);
-			is_callable('Closure::bind') and $values = $values->bindTo($query, $query);
 			$values($query);
 
 			$options = $query->getOptions();
