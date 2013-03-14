@@ -45,7 +45,7 @@ $insertIds = $collection->insert(array(
 	array(
 		'name' => 'John',
 		'surname' => 'Doe',
-		'nick' => 'The Unknown Man'
+		'nick' => 'The Unknown Man',
 		'age' => 20,
 	),
 	array(
@@ -53,7 +53,7 @@ $insertIds = $collection->insert(array(
 		'surname' => 'de Jonge',
 		'nick' => 'Unknown',
 		'nik' => 'No Man',
-		'age' => 23
+		'age' => 23,
 	),
 ));
 
