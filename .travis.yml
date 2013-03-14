@@ -6,11 +6,15 @@ services:
 php:
   - 5.3
   - 5.4
+   - 5.5
+
+matrix:
+  allow_failures:
+    - php: 5.5
 
 before_script:
   - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - mongo admin --eval 'db.addUser("travis", "test");'
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - composer install --dev --prefer-source
 
 script: phpunit --coverage-text
