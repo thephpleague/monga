@@ -89,7 +89,7 @@ $users = $collection->find(function($query){
 });
 
 // get the users as an array
-$arr = $users->asArray();
+$arr = $users->toArray();
 ```
 
 ## Aggregation
