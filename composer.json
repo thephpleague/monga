@@ -1,9 +1,9 @@
 {
-	"name": "monga/monga",
+	"name": "php-sbfc/monga",
 	"type": "library",
 	"description": "MongoDB Abstraction Layer",
 	"keywords": ["MongoDB"],
-	"homepage": "https://github.com/FrenkyNet/Monga",
+	"homepage": "https://github.com/php-sbfc/monga",
 	"license": "MIT",
 	"authors": [
 		{
