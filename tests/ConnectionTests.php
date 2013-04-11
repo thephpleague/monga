@@ -1,6 +1,6 @@
 <?php
 
-use Monga\Connection;
+use SuperFriends\Monga\Connection;
 
 class ConnectionTests extends PHPUnit_Framework_TestCase
 {
@@ -10,7 +10,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	{
 		if ( ! $this->connection)
 		{
-			$this->connection = new Monga\Connection(null, array(
+			$this->connection = new Connection(null, array(
 				'connect' => true,
 			));
 		}
@@ -31,7 +31,6 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testDisconnect()
 	{
 		$this->connection->disconnect();
-
 		$this->assertFalse($this->connection->isConnected());
 	}
 
@@ -39,15 +38,10 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testReconnectonnect()
 	{
 		$this->connection->disconnect();
-
 		$this->assertTrue($this->connection->disconnect());
-
 		$this->assertFalse($this->connection->isConnected());
-
 		$this->connection->connect();
-
 		$this->assertTrue($this->connection->connect());
-
 		$this->assertTrue($this->connection->isConnected());
 	}
 
@@ -60,14 +54,14 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 
 	public function testDatabaseDefaultServer()
 	{
-		$connection = new Monga\Connection(null);
+		$connection = new Connection(null);
 		$host = (string) $connection->getConnection();
 		$this->assertEquals('localhost:27017', $host);
 	}
 
 	public function testDatabaseConfig()
 	{
-		$connection = new Monga\Connection(array('connect' => true));
+		$connection = new Connection(array('connect' => true));
 		$host = (string) $connection->getConnection();
 		$this->assertEquals('localhost:27017', $host);
 	}
@@ -113,15 +107,13 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testGetDatabase()
 	{
 		$database = $this->connection->database('my_db');
-
-		$this->assertInstanceOf('Monga\Database', $database);
+		$this->assertInstanceOf('SuperFriends\Monga\Database', $database);
 	}
 
 
 	public function testGetMongoDatabase()
 	{
 		$database = $this->connection->database('my_db', false);
-
 		$this->assertInstanceOf('MongoDB', $database);
 	}
 
@@ -129,7 +121,6 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testGetConnection()
 	{
 		$mongo = $this->connection->getConnection();
-
 		$this->assertInstanceOf('MongoClient', $mongo);
 	}
 
@@ -137,19 +128,13 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testReplaceConnection()
 	{
 		$original = $this->connection->getConnection();
-
 		$new = new Mongo();
-
 		$original_hash = spl_object_hash($original);
 		$new_hash = spl_object_hash($new);
-
 		$this->connection->setConnection($new);
-
 		$get_hash = spl_object_hash($this->connection->getConnection());
-
 		$this->assertEquals($get_hash, $new_hash);
 		$this->assertNotEquals($get_hash, $original_hash);
-
 		$this->connection->setConnection($original);
 	}
 }

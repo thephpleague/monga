@@ -7,7 +7,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->query = new Monga\Query\Where();
+		$this->query = new SuperFriends\Monga\Query\Where();
 	}
 
 	public function getProperty($property)
@@ -1414,7 +1414,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 			),
 		), $this->query->getWhere());
 
-		$this->query = new Monga\Query\Where();
+		$this->query = new SuperFriends\Monga\Query\Where();
 
 		$this->query->where(function($query){
 			$query->where('one', 1)
@@ -1428,7 +1428,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 			),
 		), $this->query->getWhere());
 
-		$this->query = new Monga\Query\Where();
+		$this->query = new SuperFriends\Monga\Query\Where();
 
 		$this->query->setWhere(array(
 			'$or' => array(

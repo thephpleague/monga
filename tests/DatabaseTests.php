@@ -1,7 +1,8 @@
 <?php
 
-use Monga\Connection;
-use Monga\Database;
+use SuperFriends\Monga\Connection;
+use SuperFriends\Monga\Database;
+use SuperFriends\Monga;
 
 class DatabaseTests extends PHPUnit_Framework_TestCase
 {
@@ -50,7 +51,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$propertyConnection = $reflection->getProperty('connection');
 		$propertyConnection->setAccessible(true);
 		$this->assertInstanceOf('MongoDB', $propertyDatabase->getValue($database));
-		$this->assertInstanceOf('Monga\Connection', $propertyConnection->getValue($database));
+		$this->assertInstanceOf('SuperFriends\Monga\Connection', $propertyConnection->getValue($database));
 		$this->assertEquals($connectionHash, spl_object_hash($propertyConnection->getValue($database)));
 	}
 
@@ -83,7 +84,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 	public function testGetConnection()
 	{
 		$database = $this->database->getConnection();
-		$this->assertInstanceOf('Monga\Connection', $database);
+		$this->assertInstanceOf('SuperFriends\Monga\Connection', $database);
 	}
 
 	public function testSetConnection()
@@ -96,7 +97,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$reflection = new ReflectionObject($this->database);
 		$property = $reflection->getProperty('connection');
 		$property->setAccessible(true);
-		$this->assertInstanceOf('Monga\Connection', $property->getValue($this->database));
+		$this->assertInstanceOf('SuperFriends\Monga\Connection', $property->getValue($this->database));
 		$this->assertEquals($newHash, spl_object_hash($property->getValue($this->database)));
 		$this->assertNotEquals($originalHash, spl_object_hash($property->getValue($this->database)));
 		$this->database->setConnection($original);
@@ -140,7 +141,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 		$database->demo3->insert(array('some' => 'data'));
 
 		$all = $this->database->allCollections(true);
-		$this->assertContainsOnlyInstancesOf('Monga\Collection', $all);
+		$this->assertContainsOnlyInstancesOf('SuperFriends\Monga\Collection', $all);
 
 		$raw = $this->database->allCollections();
 		$this->assertContainsOnlyInstancesOf('MongoCollection', $raw);
@@ -149,7 +150,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 	public function testGetCollection()
 	{
 		$collection = $this->database->collection('demo');
-		$this->assertInstanceOf('Monga\Collection', $collection);
+		$this->assertInstanceOf('SuperFriends\Monga\Collection', $collection);
 	}
 
 	public function testGetRawCollection()
@@ -161,7 +162,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 	public function testGetFilesystem()
 	{
 		$fs = $this->database->filesystem('demo');
-		$this->assertInstanceOf('Monga\Filesystem', $fs);
+		$this->assertInstanceOf('SuperFriends\Monga\Filesystem', $fs);
 	}
 
 	public function testGetRawFilesystem()

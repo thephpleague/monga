@@ -6,7 +6,7 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->find = new Monga\Query\Find();
+		$this->find = new SuperFriends\Monga\Query\Find();
 	}
 
 	public function getProperty($property)

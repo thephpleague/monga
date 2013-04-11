@@ -10,7 +10,7 @@
  * @link       http://github.com/FrenkyNet/Monga
  */
 
-namespace Monga;
+namespace SuperFriends\Monga;
 
 use MongoGridFS;
 use Closure;

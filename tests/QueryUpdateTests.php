@@ -6,7 +6,7 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->update = new Monga\Query\Update();
+		$this->update = new SuperFriends\Monga\Query\Update();
 	}
 
 	public function getProperty($property)

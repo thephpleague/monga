@@ -1,5 +1,7 @@
 <?php
 
+use SuperFriends\Monga;
+
 class MongaTests extends PHPUnit_Framework_TestCase
 {
 	public function testMongaId()
@@ -65,6 +67,6 @@ class MongaTests extends PHPUnit_Framework_TestCase
 	public function testMongaConnection()
 	{
 		$connection = Monga::connection();
-		$this->assertInstanceOf('Monga\\Connection', $connection);
+		$this->assertInstanceOf('SuperFriends\Monga\\Connection', $connection);
 	}
 }

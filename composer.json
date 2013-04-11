@@ -18,8 +18,7 @@
 		"mockery/mockery": "0.7.*"
 	},
 	"autoload": {
-		"psr-0": { "Monga": "src/" },
-		"files": ["src/Monga.php"]
-	},
-	"minimum-stability": "dev"
+		"psr-0": { "SuperFriends\\Monga": "src/" },
+		"files": ["src/SuperFriends/Monga.php"]
+	}
 }

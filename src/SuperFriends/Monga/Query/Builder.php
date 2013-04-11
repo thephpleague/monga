@@ -10,10 +10,10 @@
  * @link       http://github.com/FrenkyNet/Monga
  */
 
-namespace Monga\Query;
+namespace SuperFriends\Monga\Query;
 
 use Closure;
-use Monga\Collection;
+use SuperFriends\Monga\Collection;
 use MongoCursor;
 
 abstract class Builder

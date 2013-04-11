@@ -10,7 +10,15 @@
  * @link       http://github.com/FrenkyNet/Monga
  */
 
-use Monga\Connection;
+namespace SuperFriends;
+
+use SuperFriends\Monga\Connection;
+use MongoId;
+use MongoCode;
+use MongoDate;
+use MongoDB;
+use MongoRegex;
+use MongoBinData;
 
 class Monga
 {

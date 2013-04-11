@@ -10,6 +10,6 @@
  * @link       http://github.com/FrenkyNet/Monga
  */
 
-namespace Monga;
+namespace SuperFriends\Monga;
 
 class Exception extends \Exception {}
