@@ -1,4 +1,4 @@
-# Monga [![Build Status](https://secure.travis-ci.org/php-sbfc/monga.png?branch=master)](https://travis-ci.org/FrenkyNet/Monga)
+# Monga [![Build Status](https://secure.travis-ci.org/php-sbfc/monga.png?branch=master)](https://travis-ci.org/php-sbfc/monga)
 
 A simple and swift MongoDB abstraction layer for PHP5.3+
 
