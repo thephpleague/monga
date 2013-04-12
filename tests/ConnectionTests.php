@@ -1,6 +1,6 @@
 <?php
 
-use SuperFriends\Monga\Connection;
+use League\Monga\Connection;
 
 class ConnectionTests extends PHPUnit_Framework_TestCase
 {
@@ -107,7 +107,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testGetDatabase()
 	{
 		$database = $this->connection->database('my_db');
-		$this->assertInstanceOf('SuperFriends\Monga\Database', $database);
+		$this->assertInstanceOf('League\Monga\Database', $database);
 	}
 
 

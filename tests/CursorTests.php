@@ -1,6 +1,6 @@
 <?php
 
-use SuperFriends\Monga;
+use League\Monga;
 
 class CursorTests extends PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
 		$mongocursor = $cursor->getCursor();
 		$this->assertInstanceOf('MongoCursor', $mongocursor);
 		$this->assertEquals(3, $cursor->count());
-		$this->assertInstanceOf('SuperFriends\Monga\Collection', $oldCollection);
+		$this->assertInstanceOf('League\Monga\Collection', $oldCollection);
 
 		foreach($cursor as $row)
 		{
@@ -49,7 +49,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('array', $refs);
 		$this->assertContainsOnly('array', $refs);
 		$this->assertInternalType('array', $cursor->explain());
-		$this->assertInstanceOf('SuperFriends\Monga\Cursor', $cursor->partial(false));
+		$this->assertInstanceOf('League\Monga\Cursor', $cursor->partial(false));
 		$collection->drop();
 	}
 
@@ -62,7 +62,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$cursor = new SuperFriends\Monga\Cursor($mock);
+		$cursor = new League\Monga\Cursor($mock);
 
 		$cursor->badMethodCall();
 	}

@@ -1,8 +1,8 @@
 <?php
 
-use SuperFriends\Monga\Collection;
-use SuperFriends\Monga\Database;
-use SuperFriends\Monga;
+use League\Monga\Collection;
+use League\Monga\Database;
+use League\Monga;
 use Mockery as m;
 
 class CollectionTests extends PHPUnit_Framework_TestCase
@@ -79,7 +79,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
 	public function testCountWhere()
 	{
-		$where = new SuperFriends\Monga\Query\Where();
+		$where = new League\Monga\Query\Where();
 		$where->where('name', 'Frank');
 		$result = $this->collection->count($where);
 		$this->assertEquals(0, $result);
@@ -240,7 +240,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 	public function testFind()
 	{
 		$result = $this->collection->find();
-		$this->assertInstanceOf('SuperFriends\Monga\Cursor', $result);
+		$this->assertInstanceOf('League\Monga\Cursor', $result);
 	}
 
 	public function testFindOneEmpty()

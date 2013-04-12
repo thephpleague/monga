@@ -18,7 +18,7 @@
 		"mockery/mockery": "0.7.*"
 	},
 	"autoload": {
-		"psr-0": { "SuperFriends\\Monga": "src/" },
-		"files": ["src/SuperFriends/Monga.php"]
+		"psr-0": { "League\\Monga": "src/" },
+		"files": ["src/League/Monga.php"]
 	}
 }

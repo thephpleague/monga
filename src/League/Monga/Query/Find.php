@@ -10,7 +10,7 @@
  * @link       http://github.com/php-sbfc/monga
  */
 
-namespace SuperFriends\Monga\Query;
+namespace League\Monga\Query;
 
 class Find extends Where
 {

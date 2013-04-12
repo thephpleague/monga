@@ -1,6 +1,6 @@
 <?php
 
-use SuperFriends\Monga\Query\Indexes as i;
+use League\Monga\Query\Indexes as i;
 use Mockery as m;
 
 class QueryIndexesTests extends PHPUnit_Framework_TestCase

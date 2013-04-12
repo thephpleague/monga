@@ -10,9 +10,9 @@
  * @link       http://github.com/php-sbfc/monga
  */
 
-namespace SuperFriends;
+namespace League;
 
-use SuperFriends\Monga\Connection;
+use League\Monga\Connection;
 use MongoId;
 use MongoCode;
 use MongoDate;

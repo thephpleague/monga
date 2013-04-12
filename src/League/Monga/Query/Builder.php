@@ -10,10 +10,10 @@
  * @link       http://github.com/php-sbfc/monga
  */
 
-namespace SuperFriends\Monga\Query;
+namespace League\Monga\Query;
 
 use Closure;
-use SuperFriends\Monga\Collection;
+use League\Monga\Collection;
 use MongoCursor;
 
 abstract class Builder

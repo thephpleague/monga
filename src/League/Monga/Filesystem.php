@@ -10,7 +10,7 @@
  * @link       http://github.com/php-sbfc/monga
  */
 
-namespace SuperFriends\Monga;
+namespace League\Monga;
 
 use MongoGridFS;
 use Closure;

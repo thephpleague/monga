@@ -1,6 +1,6 @@
 <?php
 
-class BuilderMock extends SuperFriends\Monga\Query\Builder {}
+class BuilderMock extends League\Monga\Query\Builder {}
 
 class QueryBuilderTests extends PHPUnit_Framework_TestCase
 {

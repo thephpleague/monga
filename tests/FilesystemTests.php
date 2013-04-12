@@ -35,7 +35,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with('filename.json', array('downloads' => 0))
 			->will($this->returnValue($id));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$result = $fs->store('filename.json', array('downloads' => 0));
 		$this->assertEquals($id, $result);
@@ -55,7 +55,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with('filename.json', array('downloads' => 0), array())
 			->will($this->returnValue($id));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$result = $fs->storeBytes('filename.json', array('downloads' => 0));
 		$this->assertEquals($id, $result);
@@ -75,7 +75,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with('filename.json', array('downloads' => 0))
 			->will($this->returnValue($id));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$result = $fs->storeUpload('filename.json', array('downloads' => 0));
 		$this->assertEquals($id, $result);
@@ -99,7 +99,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->will($this->returnValue(new FileMock(false)));
 
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$this->assertFalse($fs->extract('filename.json'));
 	}
@@ -126,7 +126,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with(array('_id' => 'some_id'))
 			->will($this->returnValue(true));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$this->assertTrue($fs->extract('filename.json'));
 	}
@@ -145,7 +145,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with('filename.json', array('downloads' => 0), array())
 			->will($this->returnValue($id));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$result = $fs->storeFile('filename.json', array('downloads' => 0));
 		$this->assertEquals($id, $result);
@@ -163,7 +163,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 			->with(array('key' => 'value'))
 			->will($this->returnValue('_dummy_'));
 
-		$fs = new SuperFriends\Monga\Filesystem($mock);
+		$fs = new League\Monga\Filesystem($mock);
 
 		$result = $fs->findOne(array('key' => 'value'));
 		$this->assertEquals('_dummy_', $result);

@@ -1,6 +1,6 @@
 <?php
 
-use SuperFriends\Monga;
+use League\Monga;
 
 class MongaTests extends PHPUnit_Framework_TestCase
 {
@@ -67,6 +67,6 @@ class MongaTests extends PHPUnit_Framework_TestCase
 	public function testMongaConnection()
 	{
 		$connection = Monga::connection();
-		$this->assertInstanceOf('SuperFriends\Monga\\Connection', $connection);
+		$this->assertInstanceOf('League\Monga\\Connection', $connection);
 	}
 }

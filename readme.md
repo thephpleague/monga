@@ -23,7 +23,7 @@ During the development a lot of planning has gone into creating a nice streamlin
 
 ```php
 
-use SuperFriends\Monga;
+use League\Monga;
 
 // Get a connection
 $connection = Monga::connection($dns, $connectionOptions);

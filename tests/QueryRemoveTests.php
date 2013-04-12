@@ -6,7 +6,7 @@ class QueryRemoveTests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->remove = new SuperFriends\Monga\Query\Remove();
+		$this->remove = new League\Monga\Query\Remove();
 	}
 
 	public function getProperty($property)
