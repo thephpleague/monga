@@ -6,7 +6,7 @@ class MongaTests extends PHPUnit_Framework_TestCase
 {
 	public function testMongaId()
 	{
-		$id = Monga::id('pe9ufpweuf');
+		$id = Monga::id('516ba5033b21c50005a93f76');
 
 		$this->assertInstanceOf('MongoId', $id);
 	}
@@ -45,7 +45,6 @@ class MongaTests extends PHPUnit_Framework_TestCase
 
 		$this->assertInstanceOf('MongoDate', $date);
 		$this->assertEquals($time, $date->sec);
-		$this->assertEquals(2, $date->usec);
 	}
 
 	public function testMongaRegex()

@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-sbfc/monga
+ * @link       http://github.com/php-leop/monga
  */
 
 namespace League;

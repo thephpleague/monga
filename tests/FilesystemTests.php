@@ -23,7 +23,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 {
 	public function testStore()
 	{
-		$id = new MongoId('09ecu0q9fh2h3');
+		$id = new MongoId('516ba5033b21c50005a93f76');
 
 		$mock = $this->getMockBuilder('MongoGridFS')
 			->disableOriginalConstructor()
@@ -43,7 +43,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
 	public function testStoreBytes()
 	{
-		$id = new MongoId('09ecu0q9fh2h3');
+		$id = new MongoId('516ba5033b21c50005a93f76');
 
 		$mock = $this->getMockBuilder('MongoGridFS')
 			->disableOriginalConstructor()
@@ -63,7 +63,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
 	public function testStoreUpload()
 	{
-		$id = new MongoId('09ecu0q9fh2h3');
+		$id = new MongoId('516ba5033b21c50005a93f76');
 
 		$mock = $this->getMockBuilder('MongoGridFS')
 			->disableOriginalConstructor()
@@ -133,7 +133,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
 	public function testStoreFile()
 	{
-		$id = new MongoId('09ecu0q9fh2h3');
+		$id = new MongoId('516ba5033b21c50005a93f76');
 
 		$mock = $this->getMockBuilder('MongoGridFS')
 			->disableOriginalConstructor()
