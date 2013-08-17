@@ -2,7 +2,7 @@
 
 A simple and swift MongoDB abstraction layer for PHP5.3+
 
-[Find Monga on Packagist/Composer](https://packagist.org/packages/monga/monga)
+[Find Monga on Packagist/Composer](https://packagist.org/packages/php-loep/monga)
 
 ## What's this all about?
 
