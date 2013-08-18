@@ -1,4 +1,4 @@
-# Monga [![Build Status](https://secure.travis-ci.org/php-sbfc/monga.png?branch=master)](https://travis-ci.org/php-sbfc/monga)
+# Monga [![Build Status](https://secure.travis-ci.org/php-loep/monga.png?branch=master)](https://travis-ci.org/php-sbfc/monga)
 
 A simple and swift MongoDB abstraction layer for PHP5.3+
 
@@ -119,6 +119,6 @@ $collection->aggregate(function($a){
 });
 ```
 
-If you need any help, come find me in the IRC channels (#fuelphp/#cabinet/#mongodb by the nick of: FrenkyNet)
+If you need any help, come find me in the IRC channels (#php-loep by the nick of: FrenkyNet)
 
 Enjoy!

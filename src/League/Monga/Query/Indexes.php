@@ -16,121 +16,119 @@ use MongoCollection;
 
 class Indexes
 {
-	/**
-	 * Cnstructor, sets collection
-	 *
-	 * @param  object  MongoCollection
-	 */
-	public function __construct(MongoCollection $collection)
-	{
-		$this->collection = $collection;
-	}
+    /**
+     * Cnstructor, sets collection
+     *
+     * @param  object  MongoCollection
+     */
+    public function __construct(MongoCollection $collection)
+    {
+        $this->collection = $collection;
+    }
 
-	/**
-	 * Return the collection
-	 *
-	 * @return  object  MongoCollection
-	 */
-	public function getCollection()
-	{
-		return $this->collection;
-	}
+    /**
+     * Return the collection
+     *
+     * @return object MongoCollection
+     */
+    public function getCollection()
+    {
+        return $this->collection;
+    }
 
-	/**
-	 * Inject a collection
-	 *
-	 * @param   object  MongoCollection
-	 * @return  object  $this
-	 */
-	public function setCollection(MongoCollection $collection)
-	{
-		$this->collection = $collection;
+    /**
+     * Inject a collection
+     *
+     * @param   object  MongoCollection
+     * @return object $this
+     */
+    public function setCollection(MongoCollection $collection)
+    {
+        $this->collection = $collection;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Create an index.
-	 *
-	 * @param   array   $index    string fieldname or multi-key-index array
-	 * @param   array   $options  index options
-	 * @return  object  $this
-	 */
-	public function create(array $index, $options = array())
-	{
-		// Convert expressive syntax
-		$index = $this->prepareIndex($index);
+    /**
+     * Create an index.
+     *
+     * @param  array  $index   string fieldname or multi-key-index array
+     * @param  array  $options index options
+     * @return object $this
+     */
+    public function create(array $index, $options = array())
+    {
+        // Convert expressive syntax
+        $index = $this->prepareIndex($index);
 
-		// Ensure the index
-		$this->collection->ensureIndex($index, $options);
+        // Ensure the index
+        $this->collection->ensureIndex($index, $options);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Geospatial shortcut.
-	 *
-	 * @param   string  $field    field to use
-	 * @param   array   $options  index options
-	 * @return  object  $this
-	 */
-	public function geo($field, $options = array())
-	{
-		return $this->create(array($field => '2d'), $options);
-	}
+    /**
+     * Geospatial shortcut.
+     *
+     * @param  string $field   field to use
+     * @param  array  $options index options
+     * @return object $this
+     */
+    public function geo($field, $options = array())
+    {
+        return $this->create(array($field => '2d'), $options);
+    }
 
-	/**
-	 * Prepate an index, allowing more expressive syntax.
-	 *
-	 * @param   object  $index  index
-	 * @return  object  prepared index
-	 */
-	protected function prepareIndex($index)
-	{
-		foreach ($index as &$value)
-		{
-			// Convert ascending
-			$value = $value === 'asc' ? 1 : $value;
+    /**
+     * Prepate an index, allowing more expressive syntax.
+     *
+     * @param  object $index index
+     * @return object prepared index
+     */
+    protected function prepareIndex($index)
+    {
+        foreach ($index as &$value) {
+            // Convert ascending
+            $value = $value === 'asc' ? 1 : $value;
 
-			// Convert descending
-			$value = $value === 'desc' ? -1 : $value;
+            // Convert descending
+            $value = $value === 'desc' ? -1 : $value;
 
-			// Convert geo to 2d
-			$value = $value === 'geo' ? '2d' : $value;
-		}
+            // Convert geo to 2d
+            $value = $value === 'geo' ? '2d' : $value;
+        }
 
-		return $index;
-	}
+        return $index;
+    }
 
-	/**
-	 * Drop one or more indexes
-	 *
-	 * @param   mixed   $index  string index name or index
-	 * @return  object  $this
-	 */
-	public function drop($index)
-	{
-		$indexes = func_get_args();
+    /**
+     * Drop one or more indexes
+     *
+     * @param  mixed  $index string index name or index
+     * @return object $this
+     */
+    public function drop($index)
+    {
+        $indexes = func_get_args();
 
-		foreach ($indexes as $index)
-		{
-			$index = is_array($index) ? $this->prepareIndex($index) : $index;
+        foreach ($indexes as $index) {
+            $index = is_array($index) ? $this->prepareIndex($index) : $index;
 
-			$this->collection->deleteIndex($index);
-		}
+            $this->collection->deleteIndex($index);
+        }
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Drop all the indexes for the current collection.
-	 *
-	 * return  object  $this
-	 */
-	public function dropAll()
-	{
-		$this->collection->deleteIndexes();
+    /**
+     * Drop all the indexes for the current collection.
+     *
+     * return  object  $this
+     */
+    public function dropAll()
+    {
+        $this->collection->deleteIndexes();
 
-		return $this;
-	}
+        return $this;
+    }
 }

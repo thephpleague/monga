@@ -14,26 +14,26 @@ namespace League\Monga\Query;
 
 class Group extends Computer
 {
-	/**
-	 * Set the group field
-	 *
-	 * @param   mixed   group field or hash
-	 * @return  object  $this
-	 */
-	public function by($index)
-	{
-		$this->fields['_id'] = $this->prepareField($index);
+    /**
+     * Set the group field
+     *
+     * @param   mixed   group field or hash
+     * @return object $this
+     */
+    public function by($index)
+    {
+        $this->fields['_id'] = $this->prepareField($index);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Return the group contents.
-	 *
-	 * @return  array  group statement
-	 */
-	public function getGroup()
-	{
-		return $this->fields;
-	}
+    /**
+     * Return the group contents.
+     *
+     * @return array group statement
+     */
+    public function getGroup()
+    {
+        return $this->fields;
+    }
 }

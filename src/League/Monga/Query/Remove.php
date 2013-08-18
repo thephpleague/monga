@@ -12,53 +12,51 @@
 
 namespace League\Monga\Query;
 
-use Closure;
-
 class Remove extends Where
 {
-	/**
-	 * Whether to remove just one or multiple records.
-	 */
-	protected $justOne = false;
+    /**
+     * Whether to remove just one or multiple records.
+     */
+    protected $justOne = false;
 
-	/**
-	 * Set the justOne option.
-	 *
-	 * @param   boolean  $single  justOne option
-	 * @return  object   $this
-	 */
-	public function single($single = true)
-	{
-		$this->justOne = (bool) $single;
+    /**
+     * Set the justOne option.
+     *
+     * @param  boolean $single justOne option
+     * @return object  $this
+     */
+    public function single($single = true)
+    {
+        $this->justOne = (bool) $single;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Set the justOne option, reversed.
-	 *
-	 * @param   boolean  $multiple  reversed justOne option
-	 * @return  object   $this
-	 */
-	public function multiple($multiple = true)
-	{
-		$this->justOne = ! $multiple;
+    /**
+     * Set the justOne option, reversed.
+     *
+     * @param  boolean $multiple reversed justOne option
+     * @return object  $this
+     */
+    public function multiple($multiple = true)
+    {
+        $this->justOne = ! $multiple;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Retrieve query options.
-	 *
-	 * @return  array  query options.
-	 */
-	public function getOptions()
-	{
-		$conditions = parent::getOptions();
+    /**
+     * Retrieve query options.
+     *
+     * @return array query options.
+     */
+    public function getOptions()
+    {
+        $conditions = parent::getOptions();
 
-		// Append remove specific options
-		$conditions['justOne'] = $this->justOne;
+        // Append remove specific options
+        $conditions['justOne'] = $this->justOne;
 
-		return $conditions;
-	}
+        return $conditions;
+    }
 }
