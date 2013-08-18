@@ -14,7 +14,7 @@ matrix:
 
 before_script:
   - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - mongo admin --eval 'db.addUser("travis", "test");'
-  - composer install --dev --prefer-source
+  - composer self-update
+  - composer install --dev -o
 
 script: phpunit --coverage-text
