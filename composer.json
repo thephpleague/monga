@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "MongoDB Abstraction Layer",
 	"keywords": ["MongoDB"],
-	"homepage": "https://github.com/php-sbfc/monga",
+	"homepage": "https://github.com/php-loep/monga",
 	"license": "MIT",
 	"authors": [
 		{
