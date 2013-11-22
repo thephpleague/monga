@@ -100,15 +100,15 @@ class Where extends Builder
             // Compile the query
             $statement = $nested->getWhere();
 
+            if (empty($statement)) {
+                return $this;
+            }
+
             // set the $field to $type so we can detect it later on
             $field = $type;
 
             // set the query as nested
             $isNested = true;
-        }
-
-        if (empty($statement)) {
-            return $this;
         }
 
         // Ensure the master $or clause
