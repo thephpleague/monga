@@ -18,7 +18,6 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 			$this->connection = Monga::connection();
 		}
 
-		$this->database = null;
 		$this->database = $this->connection->database('__unit_testing__');
 		$this->collection = $this->database->collection('__unit_testing__');
 	}
@@ -26,7 +25,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 	public function tearDown()
 	{
 		$this->database->collection('__unit_testing__')->getCollection()->drop();
-		$this->connection->dropDatabase('__unit_testing__');
+		// $this->connection->dropDatabase('__unit_testing__');
+		$this->database = null;
 	}
 
 	/**
