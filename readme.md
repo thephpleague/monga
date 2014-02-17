@@ -1,4 +1,4 @@
-# Monga [![Build Status](https://secure.travis-ci.org/league/monga.png?branch=master)](https://travis-ci.org/league/monga)
+# Monga [![Build Status](https://secure.travis-ci.org/thephpleague/monga.png?branch=master)](https://travis-ci.org/thephpleague/monga)
 
 A simple and swift MongoDB abstraction layer for PHP5.3+
 
