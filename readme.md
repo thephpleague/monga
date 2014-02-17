@@ -1,8 +1,8 @@
-# Monga [![Build Status](https://secure.travis-ci.org/php-loep/monga.png?branch=master)](https://travis-ci.org/php-sbfc/monga)
+# Monga [![Build Status](https://secure.travis-ci.org/league/monga.png?branch=master)](https://travis-ci.org/league/monga)
 
 A simple and swift MongoDB abstraction layer for PHP5.3+
 
-[Find Monga on Packagist/Composer](https://packagist.org/packages/php-loep/monga)
+[Find Monga on Packagist/Composer](https://packagist.org/packages/league/monga)
 
 ## What's this all about?
 
