@@ -128,7 +128,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 	public function testReplaceConnection()
 	{
 		$original = $this->connection->getConnection();
-		$new = new Mongo();
+		$new = new MongoClient();
 		$original_hash = spl_object_hash($original);
 		$new_hash = spl_object_hash($new);
 		$this->connection->setConnection($new);

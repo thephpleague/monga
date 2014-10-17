@@ -28,7 +28,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 
 	public function testBasicNewDatabase()
 	{
-		$mongo = new Mongo();
+		$mongo = new MongoClient();
 		$database = new Database($mongo->{"__unit_testing__"});
 		$reflection = new ReflectionObject($database);
 		$propertyDatabase = $reflection->getProperty('database');
@@ -41,7 +41,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 
 	public function testNewDatabaseWithConnection()
 	{
-		$mongo = new Mongo();
+		$mongo = new MongoClient();
 		$connection = Monga::connection();
 		$connectionHash = spl_object_hash($connection);
 		$database = new Database($mongo->{"__unit_testing__"}, $connection);
