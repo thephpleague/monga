@@ -38,7 +38,7 @@ class Connection
             }
 
             // Mimic the default mongo connect settings.
-            if ( ! isset($options['connect'])) {
+            if (! isset($options['connect'])) {
                 $options['connect'] = true;
             }
 
@@ -159,9 +159,11 @@ class Connection
             return $result;
         }
 
-        return array_map(function($database) {
-            return $database['name'];
-        },
-        $result['databases']);
+        return array_map(
+            function ($database) {
+                return $database['name'];
+            },
+            $result['databases']
+        );
     }
 }

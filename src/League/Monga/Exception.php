@@ -12,4 +12,6 @@
 
 namespace League\Monga;
 
-class Exception extends \Exception {}
+class Exception extends \Exception
+{
+}

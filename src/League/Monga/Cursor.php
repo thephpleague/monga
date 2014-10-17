@@ -11,6 +11,7 @@
  */
 
 namespace League\Monga;
+
 use MongoCursor;
 use MongoDBRef;
 
@@ -117,7 +118,7 @@ class Cursor implements \Countable, \IteratorAggregate
      */
     public function __call($method, $arguments)
     {
-        if ( ! method_exists($this->result, $method)) {
+        if (! method_exists($this->result, $method)) {
             throw new \BadMethodCallException('Call to undefined function '.get_called_class().'::'.$method.'.');
         }
 

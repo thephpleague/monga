@@ -94,7 +94,7 @@ class Filesystem extends Collection
     {
         $file = $this->findOne($name);
 
-        if ( ! $file or ! $file->write($destination)) {
+        if (! $file or ! $file->write($destination)) {
             return false;
         }
 

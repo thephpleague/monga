@@ -85,7 +85,7 @@ class Collection
             $query = $query->getWhere();
         }
 
-        if ( ! is_array($query)) {
+        if (! is_array($query)) {
             throw new \InvalidArgumentException('The count query should be an array.');
         }
 
@@ -211,7 +211,7 @@ class Collection
             $options = $query->getOptions();
         }
 
-        if ( ! is_array($criteria)) {
+        if (! is_array($criteria)) {
             throw new \InvalidArgumentException('Remove criteria must be an array.');
         }
 
@@ -246,7 +246,7 @@ class Collection
             $postFind = $find->getPostFindActions();
         }
 
-        if ( ! is_array($query) or ! is_array($fields)) {
+        if (! is_array($query) or ! is_array($fields)) {
             throw new \InvalidArgumentException('Find params $query and $fields must be arrays.');
         }
 
@@ -308,7 +308,7 @@ class Collection
             // Insert using batchInsert
             $result = $this->collection->batchInsert($data, $options);
 
-            if ( ! $result or ! ($result === true or (bool) $result['ok'])) {
+            if (! $result or ! ($result === true or (bool) $result['ok'])) {
                 return false;
             }
 
@@ -352,7 +352,7 @@ class Collection
             $query = $query->getWhere();
         }
 
-        if ( ! is_array($values) or ! is_array($options)) {
+        if (! is_array($values) or ! is_array($options)) {
             throw new \InvalidArgumentException('Update params $update and $options must be arrays.');
         }
 
