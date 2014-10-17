@@ -90,11 +90,7 @@ class Connection
      */
     public function disconnect()
     {
-        if ($this->connection->connected) {
-            return $this->connection->close();
-        }
-
-        return true;
+        return $this->connection->close();
     }
 
     /**
@@ -104,7 +100,10 @@ class Connection
      */
     public function isConnected()
     {
-        return $this->getConnection()->connected;
+        if ($this->getConnection()->getConnections()) {
+            return true;
+        }
+        return false;
     }
 
     /**
