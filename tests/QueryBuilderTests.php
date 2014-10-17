@@ -22,9 +22,9 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 	public function testSafe()
 	{
 		$this->builder->safe();
-		$this->assertTrue($this->getProperty('safe'));
-		$this->builder->safe(false);
-		$this->assertFalse($this->getProperty('safe'));
+		$this->assertEquals(1, $this->getProperty('safe'));
+		$this->builder->safe(0);
+		$this->assertEquals(0, $this->getProperty('safe'));
 	}
 
 	public function testFsync()
@@ -46,19 +46,19 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 	{
 		$this->builder->setOptions(array(
 			'fsync' => true,
-			'safe' => true,
+			'safe' => 1,
 		));
 
 		$this->assertTrue($this->getProperty('fsync'));
-		$this->assertTrue($this->getProperty('safe'));
+		$this->assertEquals(1, $this->getProperty('safe'));
 
 		$this->builder->setOptions(array(
 			'fsync' => false,
-			'safe' => false,
+			'safe' => 0,
 		));
 
 		$this->assertFalse($this->getProperty('fsync'));
-		$this->assertFalse($this->getProperty('safe'));
+		$this->assertEquals(0, $this->getProperty('safe'));
 	}
 
 	public function testGetOptions()
@@ -66,7 +66,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 		$result = $this->builder->getOptions();
 
 		$this->assertEquals(array(
-			'safe' => false,
+			'w' => 0,
 			'fsync' => false,
 			'timeout' => MongoCursor::$timeout
 		), $result);
@@ -75,7 +75,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 
 
 		$this->assertEquals(array(
-			'safe' => false,
+			'w' => 0,
 			'fsync' => false,
 			'timeout' => 100
 		), $result);
