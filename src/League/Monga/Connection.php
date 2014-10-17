@@ -76,7 +76,7 @@ class Connection
      */
     public function connect()
     {
-        if (empty($this->connection->getConnections()) {
+        if (empty($this->connection->getConnections())) {
             return $this->connection->connect();
         }
 
