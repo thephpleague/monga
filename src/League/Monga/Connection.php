@@ -22,7 +22,7 @@ class Connection
     protected $connection;
 
     /**
-     * @ var boolean $connected If there is a current connection
+     * @var boolean $connected If there is a current connection
      */
     protected $connected = false;
 
