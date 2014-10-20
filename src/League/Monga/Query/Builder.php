@@ -19,7 +19,7 @@ abstract class Builder
     /**
      * @var  boolean  $safe  safe option
      */
-    protected $safe = 0;
+    protected $safe = false;
 
     /**
      * @var  integer  $timeout  query timeout
@@ -37,7 +37,7 @@ abstract class Builder
      * @param  boolean $safe safe mode
      * @return object  $this
      */
-    public function safe($safe = 1)
+    public function safe($safe = true)
     {
         $this->safe = $safe;
 
@@ -77,8 +77,12 @@ abstract class Builder
      */
     public function getOptions()
     {
+        $w = 0;
+        if ($this->safe) {
+            $w = 1;
+        }
         return array(
-            'w' => $this->safe,
+            'w' => $w,
             'fsync' => $this->fsync,
             'timeout' => $this->timeout ?: MongoCursor::$timeout,
         );

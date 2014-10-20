@@ -22,9 +22,9 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 	public function testSafe()
 	{
 		$this->builder->safe();
-		$this->assertEquals(1, $this->getProperty('safe'));
-		$this->builder->safe(0);
-		$this->assertEquals(0, $this->getProperty('safe'));
+		$this->assertTrue($this->getProperty('safe'));
+		$this->builder->safe(false);
+		$this->assertFalse($this->getProperty('safe'));
 	}
 
 	public function testFsync()
@@ -46,7 +46,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 	{
 		$this->builder->setOptions(array(
 			'fsync' => true,
-			'safe' => 1,
+			'safe' => true,
 		));
 
 		$this->assertTrue($this->getProperty('fsync'));
@@ -54,11 +54,11 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 
 		$this->builder->setOptions(array(
 			'fsync' => false,
-			'safe' => 0,
+			'safe' => false,
 		));
 
 		$this->assertFalse($this->getProperty('fsync'));
-		$this->assertEquals(0, $this->getProperty('safe'));
+		$this->assertFalse($this->getProperty('safe'));
 	}
 
 	public function testGetOptions()
