@@ -61,14 +61,14 @@ $insertIds = $collection->insert(array(
 ));
 
 // Update a collection
-$collection->update(function($query){
+$collection->update(function ($query) {
 	$query->increment('age')
 		->remove('nik')
 		->set('nick', 'FrenkyNet');
 });
 
 // Find Frank
-$frank = $collection->findOne(function($query){
+$frank = $collection->findOne(function ($query) {
 	$query->where('name', 'Frank')
 		->whereLike('surname', '%e Jo%');
 });
@@ -81,11 +81,11 @@ $frank['age']++;
 $collection->save($frank);
 
 // Also supports nested queries
-$users = $collection->find(function($query){
-	$query->where(function($query){
+$users = $collection->find(function ($query) {
+	$query->where(function ($query) {
 		$query->where('name', 'Josh')
 			->orWhere('surname', 'Doe');
-	})->orWhere(function(){
+	})->orWhere(function () {
 		$query->where('name', 'Frank')
 			->where('surname', 'de Jonge');
 	});
@@ -100,7 +100,7 @@ $arr = $users->toArray();
 A big part of the newly released MongoDB pecl package is aggregation support. Which is super easy to do with Monga:
 
 ```php
-$collection->aggregate(function($a){
+$collection->aggregate(function ($a) {
 	$a->project(array(
 		'name' => 1,
 		'surname' => -1,
@@ -108,11 +108,11 @@ $collection->aggregate(function($a){
 	))->unwind('tags');
 
 	// But also more advanced groups/projections
-	$a->project(function($p){
+	$a->project(function ($p) {
 		$p->select('field')
 			->select('scores')
 			->exclude('other_field');
-	})->group(function($g){
+	})->group(function ($g) {
 		$g->by(array('$name', '$surname'))
 			->sum('scores');
 	});
