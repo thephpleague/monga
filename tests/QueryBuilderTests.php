@@ -50,7 +50,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 		));
 
 		$this->assertTrue($this->getProperty('fsync'));
-		$this->assertEquals(1, $this->getProperty('safe'));
+		$this->assertTrue($this->getProperty('safe'));
 
 		$this->builder->setOptions(array(
 			'fsync' => false,
