@@ -1,12 +1,12 @@
 # Monga [![Build Status](https://secure.travis-ci.org/thephpleague/monga.png?branch=master)](https://travis-ci.org/thephpleague/monga)
 
-A simple and swift MongoDB abstraction layer for PHP5.3+
+A simple and swift MongoDB abstraction layer for PHP 5.3+
 
 [Find Monga on Packagist/Composer](https://packagist.org/packages/league/monga)
 
 ## What's this all about?
 
-* An easy API to get connections, databases and collection.
+* An easy API to get connections, databases and collections.
 * A filter builder that doesn't make your mind go nuts.
 * All sorts of handy update functions.
 * An abstraction for sorting single results.
@@ -16,8 +16,8 @@ A simple and swift MongoDB abstraction layer for PHP5.3+
 ## Vision
 
 Monga was created with the acknowledgement of the MongoDB PHP package already being pretty awesome. That's why in a lot of cases Monga is just a simple wrapper around the MongoDB classes.
-It provides some helpers and helps you set up queries using a query builder. Which you cal also choose not to use! All will still works accordingly.
-During the development a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builder for SQL-like database.
+It provides some helpers and helps you set up queries using a query builder. Which you can also choose not to use! Everything will still work accordingly.
+During the development, a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builders for SQL-like databases.
 
 ## Examples
 
@@ -61,14 +61,14 @@ $insertIds = $collection->insert(array(
 ));
 
 // Update a collection
-$collection->update(function($query){
+$collection->update(function ($query) {
 	$query->increment('age')
 		->remove('nik')
 		->set('nick', 'FrenkyNet');
 });
 
 // Find Frank
-$frank = $collection->findOne(function($query){
+$frank = $collection->findOne(function ($query) {
 	$query->where('name', 'Frank')
 		->whereLike('surname', '%e Jo%');
 });
@@ -81,11 +81,11 @@ $frank['age']++;
 $collection->save($frank);
 
 // Also supports nested queries
-$users = $collection->find(function($query){
-	$query->where(function($query){
+$users = $collection->find(function ($query) {
+	$query->where(function ($query) {
 		$query->where('name', 'Josh')
 			->orWhere('surname', 'Doe');
-	})->orWhere(function(){
+	})->orWhere(function () {
 		$query->where('name', 'Frank')
 			->where('surname', 'de Jonge');
 	});
@@ -100,7 +100,7 @@ $arr = $users->toArray();
 A big part of the newly released MongoDB pecl package is aggregation support. Which is super easy to do with Monga:
 
 ```php
-$collection->aggregate(function($a){
+$collection->aggregate(function ($a) {
 	$a->project(array(
 		'name' => 1,
 		'surname' => -1,
@@ -108,11 +108,11 @@ $collection->aggregate(function($a){
 	))->unwind('tags');
 
 	// But also more advanced groups/projections
-	$a->project(function($p){
+	$a->project(function ($p) {
 		$p->select('field')
 			->select('scores')
 			->exclude('other_field');
-	})->group(function($g){
+	})->group(function ($g) {
 		$g->by(array('$name', '$surname'))
 			->sum('scores');
 	});
