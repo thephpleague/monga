@@ -360,7 +360,7 @@ class Collection
 
         $result = $this->collection->update($query, $values, $options);
 
-        return $result === true or !! $result['ok'];
+        return $result === true or (bool) $result['ok'];
     }
 
     /**
