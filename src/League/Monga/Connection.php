@@ -95,7 +95,7 @@ class Connection
      */
     public function disconnect()
     {
-        if($this->connection->close()) {
+        if ($this->connection->close()) {
             $this->connected = false;
             return true;
         }
