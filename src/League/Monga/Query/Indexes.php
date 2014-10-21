@@ -19,7 +19,7 @@ class Indexes
     /**
      * Cnstructor, sets collection
      *
-     * @param  object  MongoCollection
+     * @param object MongoCollection
      */
     public function __construct(MongoCollection $collection)
     {
@@ -39,7 +39,7 @@ class Indexes
     /**
      * Inject a collection
      *
-     * @param   object  MongoCollection
+     * @param  object MongoCollection
      * @return object $this
      */
     public function setCollection(MongoCollection $collection)
@@ -83,7 +83,7 @@ class Indexes
      * Prepate an index, allowing more expressive syntax.
      *
      * @param  object $index index
-     * @return object prepared index
+     * @return object $index prepared index
      */
     protected function prepareIndex($index)
     {
@@ -123,7 +123,7 @@ class Indexes
     /**
      * Drop all the indexes for the current collection.
      *
-     * return  object  $this
+     * @return object $this
      */
     public function dropAll()
     {

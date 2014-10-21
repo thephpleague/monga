@@ -17,7 +17,7 @@ class Group extends Computer
     /**
      * Set the group field
      *
-     * @param   mixed   group field or hash
+     * @param  mixed  group field or hash
      * @return object $this
      */
     public function by($index)

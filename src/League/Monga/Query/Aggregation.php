@@ -84,8 +84,8 @@ class Aggregation
     /**
      * Add a skip operation to the pipeline
      *
-     * @param int $amount amount to skip
-     * @object  object  $this
+     * @param  int    $amount amount to skip
+     * @return object $this
      */
     public function skip($amount)
     {
@@ -97,8 +97,8 @@ class Aggregation
     /**
      * Add a limit operation to the pipeline
      *
-     * @param int $amount limit
-     * @object  object  $this
+     * @param  int    $amount limit
+     * @return object $this
      */
     public function limit($amount)
     {

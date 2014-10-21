@@ -219,7 +219,7 @@ class Database
      *
      * @param array $command command array
      * @param array $options command options
-     * @param  array  result
+     * @param array result
      */
     public function command(array $command, array $options = array())
     {

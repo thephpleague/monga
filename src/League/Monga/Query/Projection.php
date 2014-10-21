@@ -14,6 +14,13 @@ namespace League\Monga\Query;
 
 class Projection extends Computer
 {
+
+    /**
+     * Specifies a field to be included
+     *
+     * @param  string $field The field to include
+     * @return object $this
+     */
     public function select($field)
     {
         $this->fields[$field] = 1;
@@ -21,6 +28,12 @@ class Projection extends Computer
         return $this;
     }
 
+    /**
+     * Specifies a field to be suppressed
+     *
+     * @param  string $field The field to suppress
+     * @return object $this
+     */
     public function exclude($field)
     {
         $this->fields[$field] = -1;
@@ -28,6 +41,13 @@ class Projection extends Computer
         return $this;
     }
 
+    /**
+     * Sets an alias for a field.
+     *
+     * @param  string $field The field's name
+     * @param  string $alias The field's alias
+     * @return object $this
+     */
     public function alias($field, $alias)
     {
         $this->fields[$alias] = $this->prepareField($field);
