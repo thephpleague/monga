@@ -132,7 +132,7 @@ abstract class Computer
     }
 
     /**
-     * Prepends a dolar sign to field names
+     * Prepends a dollar sign to field names
      *
      * @param  string $field key name
      * @return string prepared key fieldname
