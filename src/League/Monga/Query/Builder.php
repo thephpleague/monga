@@ -78,7 +78,7 @@ abstract class Builder
     public function getOptions()
     {
         return array(
-            'safe' => $this->safe,
+            'w' => $this->safe ? 1 : 0,
             'fsync' => $this->fsync,
             'timeout' => $this->timeout ?: MongoCursor::$timeout,
         );

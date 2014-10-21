@@ -22,6 +22,11 @@ class Connection
     protected $connection;
 
     /**
+     * @var boolean $connected If there is a current connection
+     */
+    protected $connected = false;
+
+    /**
      * Establishes a MongoDB connection
      *
      * @param string $server  mongo dns
@@ -38,7 +43,7 @@ class Connection
             }
 
             // Mimic the default mongo connect settings.
-            if ( ! isset($options['connect'])) {
+            if (! isset($options['connect'])) {
                 $options['connect'] = true;
             }
 
@@ -76,11 +81,11 @@ class Connection
      */
     public function connect()
     {
-        if (! $this->connection->connected) {
-            return $this->connection->connect();
+        if ($this->connection->connect()) {
+            $this->connected = true;
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     /**
@@ -90,11 +95,11 @@ class Connection
      */
     public function disconnect()
     {
-        if ($this->connection->connected) {
-            return $this->connection->close();
+        if($this->connection->close()) {
+            $this->connected = false;
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     /**
@@ -104,7 +109,7 @@ class Connection
      */
     public function isConnected()
     {
-        return $this->getConnection()->connected;
+        return $this->connected;
     }
 
     /**
@@ -159,9 +164,11 @@ class Connection
             return $result;
         }
 
-        return array_map(function($database) {
-            return $database['name'];
-        },
-        $result['databases']);
+        return array_map(
+            function ($database) {
+                return $database['name'];
+            },
+            $result['databases']
+        );
     }
 }

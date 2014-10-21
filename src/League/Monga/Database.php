@@ -76,10 +76,12 @@ class Database
             return $collections;
         }
 
-        return array_map(function($collection) {
-            return new Collection($collection);
-        },
-        $collections);
+        return array_map(
+            function ($collection) {
+                return new Collection($collection);
+            },
+            $collections
+        );
     }
 
     /**
@@ -186,10 +188,12 @@ class Database
         $reference = $array ? $reference : array($reference);
         $database = $this->database;
 
-        $result = array_map(function ($ref) use ($database) {
-            return MongoDBRef::get($database, $ref);
-        },
-        $reference);
+        $result = array_map(
+            function ($ref) use ($database) {
+                return MongoDBRef::get($database, $ref);
+            },
+            $reference
+        );
 
         return $array ? $result : reset($result);
     }
@@ -203,7 +207,7 @@ class Database
      */
     public function executeCode($code, array $arguments = array())
     {
-        if ( ! ($code instanceof MongoCode)) {
+        if (! ($code instanceof MongoCode)) {
             $code = new MongoCode($code);
         }
 

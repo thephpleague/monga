@@ -66,7 +66,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 		$result = $this->builder->getOptions();
 
 		$this->assertEquals(array(
-			'safe' => false,
+			'w' => 0,
 			'fsync' => false,
 			'timeout' => MongoCursor::$timeout
 		), $result);
@@ -75,7 +75,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 
 
 		$this->assertEquals(array(
-			'safe' => false,
+			'w' => 0,
 			'fsync' => false,
 			'timeout' => 100
 		), $result);

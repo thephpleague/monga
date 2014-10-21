@@ -44,7 +44,7 @@ class Where extends Builder
         }
 
         // Ensure the base $or clause
-        if ( ! isset($where['$or'])) {
+        if (! isset($where['$or'])) {
             // wrap the statement in an $or clause
             $where = array('$or' => array($where));
         }
@@ -54,7 +54,7 @@ class Where extends Builder
         // to be wrapped in an @and statement.
         $lastClause = array_pop($where['$or']);
 
-        if ( ! isset($lastClause['$and'])) {
+        if (! isset($lastClause['$and'])) {
             // Wrap in an @and statement
             $lastClause = array('$and' => array($lastClause));
         }
@@ -76,11 +76,11 @@ class Where extends Builder
      * @param  mixed  $statement filter statement
      * @return object $this
      */
-    protected function _where($type, $field, $statement = null)
+    protected function formatWhere($type, $field, $statement = null)
     {
         if (is_array($field)) {
             foreach ($field as $_field => $_statement) {
-                $this->_where($type, $_field, $_statement);
+                $this->formatWhere($type, $_field, $_statement);
             }
 
             return $this;
@@ -144,8 +144,8 @@ class Where extends Builder
             // So following queries will always begin in a new clause
             $lastAndClause = $statement;
         } else {
-            if ( ! isset($lastAndClause['$and'])) {
-                if ( ! isset($lastAndClause[$field])) {
+            if (! isset($lastAndClause['$and'])) {
+                if (! isset($lastAndClause[$field])) {
                     $lastAndClause[$field] = $statement;
                 } elseif ($field === '$nor') {
                     $lastAndClause['$nor'] = array_merge($lastAndClause['$nor'], $statement);
@@ -189,7 +189,7 @@ class Where extends Builder
      */
     public function where($field, $value = null)
     {
-        return $this->_where('$and', $field, $value);
+        return $this->formatWhere('$and', $field, $value);
     }
 
     /**
@@ -201,7 +201,7 @@ class Where extends Builder
      */
     public function andWhere($field, $value = null)
     {
-        return $this->_where('$and', $field, $value);
+        return $this->formatWhere('$and', $field, $value);
     }
 
     /**
@@ -214,10 +214,10 @@ class Where extends Builder
     public function orWhere($field, $value = null)
     {
         if ($field instanceof Closure) {
-            return $this->_where('$or', $field);
+            return $this->formatWhere('$or', $field);
         }
 
-        return $this->_where('$or', $field, $value);
+        return $this->formatWhere('$or', $field, $value);
     }
 
     /**
@@ -229,7 +229,7 @@ class Where extends Builder
      */
     public function whereNot($field, $value)
     {
-        return $this->_where('$and', $field, array('$ne' => $value));
+        return $this->formatWhere('$and', $field, array('$ne' => $value));
     }
 
     /**
@@ -241,7 +241,7 @@ class Where extends Builder
      */
     public function orWhereNot($field, $value)
     {
-        return $this->_where('$or', $field, array('$ne' => $value));
+        return $this->formatWhere('$or', $field, array('$ne' => $value));
     }
 
     /**
@@ -282,7 +282,7 @@ class Where extends Builder
             $value = $value.'$';
         }
 
-        return $this->_where($type, $field, new MongoRegex('/'.$value.'/'.$flags));
+        return $this->formatWhere($type, $field, new MongoRegex('/'.$value.'/'.$flags));
     }
 
     /**
@@ -326,7 +326,7 @@ class Where extends Builder
             $value = new MongoRegex($value);
         }
 
-        return $this->_where('$and', $field, $value);
+        return $this->formatWhere('$and', $field, $value);
     }
 
     /**
@@ -354,7 +354,7 @@ class Where extends Builder
             $value = new MongoRegex($value);
         }
 
-        return $this->_where('$or', $field, $value);
+        return $this->formatWhere('$or', $field, $value);
     }
 
     /**
@@ -365,7 +365,7 @@ class Where extends Builder
      */
     public function whereExists($field)
     {
-        return $this->_where('$and', $field, array('$exists' => true));
+        return $this->formatWhere('$and', $field, array('$exists' => true));
     }
 
     /**
@@ -376,7 +376,7 @@ class Where extends Builder
      */
     public function orWhereExists($field)
     {
-        return $this->_where('$or', $field, array('$exists' => true));
+        return $this->formatWhere('$or', $field, array('$exists' => true));
     }
 
     /**
@@ -398,7 +398,7 @@ class Where extends Builder
      */
     public function whereNotExists($field)
     {
-        return $this->_where('$and', $field, array('$exists' => false));
+        return $this->formatWhere('$and', $field, array('$exists' => false));
     }
 
     /**
@@ -420,7 +420,7 @@ class Where extends Builder
      */
     public function orWhereNotExists($field)
     {
-        return $this->_where('$or', $field, array('$exists' => false));
+        return $this->formatWhere('$or', $field, array('$exists' => false));
     }
 
     /**
@@ -432,7 +432,7 @@ class Where extends Builder
      */
     public function whereIn($field, $values)
     {
-        return $this->_where('$and', $field, array('$in' => array_values($values)));
+        return $this->formatWhere('$and', $field, array('$in' => array_values($values)));
     }
 
     /**
@@ -456,7 +456,7 @@ class Where extends Builder
      */
     public function orWhereIn($field, $values)
     {
-        return $this->_where('$or', $field, array('$in' => array_values($values)));
+        return $this->formatWhere('$or', $field, array('$in' => array_values($values)));
     }
 
     /**
@@ -468,7 +468,7 @@ class Where extends Builder
      */
     public function whereAll($field, $values)
     {
-        return $this->_where('$and', $field, array('$all' => array_values($values)));
+        return $this->formatWhere('$and', $field, array('$all' => array_values($values)));
     }
 
     /**
@@ -492,7 +492,7 @@ class Where extends Builder
      */
     public function orWhereAll($field, $values)
     {
-        return $this->_where('$or', $field, array('$all' => array_values($values)));
+        return $this->formatWhere('$or', $field, array('$all' => array_values($values)));
     }
 
     /**
@@ -504,7 +504,7 @@ class Where extends Builder
      */
     public function whereNotIn($field, $values)
     {
-        return $this->_where('$and', $field, array('$nin' => array_values($values)));
+        return $this->formatWhere('$and', $field, array('$nin' => array_values($values)));
     }
 
     /**
@@ -528,7 +528,7 @@ class Where extends Builder
      */
     public function orWhereNotIn($field, $values)
     {
-        return $this->_where('$or', $field, array('$nin' => array_values($values)));
+        return $this->formatWhere('$or', $field, array('$nin' => array_values($values)));
     }
 
     /**
@@ -540,7 +540,7 @@ class Where extends Builder
      */
     public function whereSize($field, $size)
     {
-        return $this->_where('$and', $field, array('$size' => $size));
+        return $this->formatWhere('$and', $field, array('$size' => $size));
     }
 
     /**
@@ -564,7 +564,7 @@ class Where extends Builder
      */
     public function orWhereSize($field, $size)
     {
-        return $this->_where('$or', $field, array('$size' => $size));
+        return $this->formatWhere('$or', $field, array('$size' => $size));
     }
 
     /**
@@ -576,10 +576,7 @@ class Where extends Builder
      */
     public function whereType($field, $type)
     {
-        return $this->_where('$and', $field, array
-        (
-            '$type' => $this->resolveType($type)
-        ));
+        return $this->formatWhere('$and', $field, array('$type' => $this->resolveType($type)));
     }
 
     /**
@@ -603,10 +600,7 @@ class Where extends Builder
      */
     public function orWhereType($field, $type)
     {
-        return $this->_where('$or', $field, array
-        (
-            '$type' => $this->resolveType($type)
-        ));
+        return $this->formatWhere('$or', $field, array('$type' => $this->resolveType($type)));
     }
 
     /**
@@ -618,7 +612,7 @@ class Where extends Builder
      */
     public function whereLt($field, $value)
     {
-        return $this->_where('$and', $field, array('$lt' => $value));
+        return $this->formatWhere('$and', $field, array('$lt' => $value));
     }
 
     /**
@@ -642,7 +636,7 @@ class Where extends Builder
      */
     public function orWhereLt($field, $value)
     {
-        return $this->_where('$or', $field, array('$lt' => $value));
+        return $this->formatWhere('$or', $field, array('$lt' => $value));
     }
 
     /**
@@ -654,7 +648,7 @@ class Where extends Builder
      */
     public function whereLte($field, $value)
     {
-        return $this->_where('$and', $field, array('$lte' => $value));
+        return $this->formatWhere('$and', $field, array('$lte' => $value));
     }
 
     /**
@@ -678,7 +672,7 @@ class Where extends Builder
      */
     public function orWhereLte($field, $value)
     {
-        return $this->_where('$or', $field, array('$lte' => $value));
+        return $this->formatWhere('$or', $field, array('$lte' => $value));
     }
 
     /**
@@ -690,7 +684,7 @@ class Where extends Builder
      */
     public function whereGt($field, $value)
     {
-        return $this->_where('$and', $field, array('$gt' => $value));
+        return $this->formatWhere('$and', $field, array('$gt' => $value));
     }
 
     /**
@@ -714,7 +708,7 @@ class Where extends Builder
      */
     public function orWhereGt($field, $value)
     {
-        return $this->_where('$or', $field, array('$gt' => $value));
+        return $this->formatWhere('$or', $field, array('$gt' => $value));
     }
 
     /**
@@ -726,7 +720,7 @@ class Where extends Builder
      */
     public function whereGte($field, $value)
     {
-        return $this->_where('$and', $field, array('$gte' => $value));
+        return $this->formatWhere('$and', $field, array('$gte' => $value));
     }
 
     /**
@@ -750,7 +744,7 @@ class Where extends Builder
      */
     public function orWhereGte($field, $value)
     {
-        return $this->_where('$or', $field, array('$gte' => $value));
+        return $this->formatWhere('$or', $field, array('$gte' => $value));
     }
 
     /**
@@ -763,7 +757,7 @@ class Where extends Builder
      */
     public function whereBetween($field, $min, $max)
     {
-        return $this->_where('$and', $field, array('$gt' => $min, '$lt' => $max));
+        return $this->formatWhere('$and', $field, array('$gt' => $min, '$lt' => $max));
     }
 
     /**
@@ -789,7 +783,7 @@ class Where extends Builder
      */
     public function orWhereBetween($field, $min, $max)
     {
-        return $this->_where('$or', $field, array('$gt' => $min, '$lt' => $max));
+        return $this->formatWhere('$or', $field, array('$gt' => $min, '$lt' => $max));
     }
 
     /**
@@ -805,7 +799,7 @@ class Where extends Builder
             $value = new MongoId($value);
         }
 
-        return $this->_where('$and', $field, $value);
+        return $this->formatWhere('$and', $field, $value);
     }
 
     /**
@@ -833,7 +827,7 @@ class Where extends Builder
             $value = new MongoId($value);
         }
 
-        return $this->_where('$or', $field, $value);
+        return $this->formatWhere('$or', $field, $value);
     }
 
     /**
@@ -847,7 +841,7 @@ class Where extends Builder
      */
     public function whereNear($field, $lon, $lat, $options = array())
     {
-        return $this->_where('$and', $field, array('$near' => array($lon, $lat)) + $options);
+        return $this->formatWhere('$and', $field, array('$near' => array($lon, $lat)) + $options);
     }
 
     /**
@@ -875,7 +869,7 @@ class Where extends Builder
      */
     public function orWhereNear($field, $lon, $lat, $options = array())
     {
-        return $this->_where('$or', $field, array('$near' => array($lon, $lat)) + $options);
+        return $this->formatWhere('$or', $field, array('$near' => array($lon, $lat)) + $options);
     }
 
     /**
@@ -888,7 +882,7 @@ class Where extends Builder
      */
     public function whereWithin($field, $shape, $options = array())
     {
-        return $this->_where('$and', $field, array('$within' => $shape) + $options);
+        return $this->formatWhere('$and', $field, array('$within' => $shape) + $options);
     }
 
     /**
@@ -914,7 +908,7 @@ class Where extends Builder
      */
     public function orWhereWithin($field, $shape, $options = array())
     {
-        return $this->_where('$or', $field, array('$within' => $shape) + $options);
+        return $this->formatWhere('$or', $field, array('$within' => $shape) + $options);
     }
 
     /**
@@ -936,11 +930,11 @@ class Where extends Builder
             }
         }
 
-        if ( ! is_array($clause)) {
+        if (! is_array($clause)) {
             throw new \InvalidArgumentException('$nor statements should be Closures or arrays.');
         }
 
-        return $this->_where($type, '$nor', array($clause));
+        return $this->formatWhere($type, '$nor', array($clause));
     }
 
     /**
@@ -984,11 +978,11 @@ class Where extends Builder
             }
         }
 
-        if ( ! is_array($clause)) {
+        if (! is_array($clause)) {
             throw new \InvalidArgumentException('$not statements should be Closures or arrays.');
         }
 
-        return $this->_where($type, '$not', array($clause));
+        return $this->formatWhere($type, '$not', array($clause));
     }
 
     /**
@@ -1066,7 +1060,7 @@ class Where extends Builder
             'INT64' => 18, 'MIN' => -1, 'MAX' => 127,
         );
 
-        if ( ! isset($types[$type])) {
+        if (! isset($types[$type])) {
             throw new \InvalidArgumentException('Type "'.$type.'" could not be resolved');
         }
 

@@ -108,7 +108,7 @@ class Update extends Where
      * @param string $field field to update
      * @param mixed  $value update value
      */
-    protected function _update($type, $field, $value)
+    protected function update($type, $field, $value)
     {
         $this->update[$field] = array($type, $value);
 
@@ -124,12 +124,12 @@ class Update extends Where
      */
     public function set($field, $value)
     {
-        if ( ! is_array($field)) {
+        if (! is_array($field)) {
             $field = array($field => $value);
         }
 
         foreach ($field as $f => $v) {
-            $this->_update('$set', $f, $value);
+            $this->update('$set', $f, $value);
         }
 
         return $this;
@@ -143,12 +143,12 @@ class Update extends Where
      */
     public function remove($field)
     {
-        if ( ! is_array($field)) {
+        if (! is_array($field)) {
             $field = func_get_args();
         }
 
         foreach ($field as $f) {
-            $this->_update('$unset', $f, 1);
+            $this->update('$unset', $f, 1);
         }
 
         return $this;
@@ -163,7 +163,7 @@ class Update extends Where
      */
     public function rename($field, $to)
     {
-        return $this->_update('$rename', $field, $to);
+        return $this->update('$rename', $field, $to);
     }
 
     /**
@@ -176,7 +176,7 @@ class Update extends Where
      */
     public function push($field, $value, $all = false)
     {
-        return $this->_update($all ? '$pushAll' : '$push', $field, $value);
+        return $this->update($all ? '$pushAll' : '$push', $field, $value);
     }
 
     /**
@@ -200,13 +200,13 @@ class Update extends Where
      * @param  bool   $all
      * @return object $this
      */
-    public function pull($field, $value, $operator = null,  $all = false)
+    public function pull($field, $value, $operator = null, $all = false)
     {
         if ($operator) {
             $value = array($operator => $value);
         }
 
-        return $this->_update($all ? '$pullAll' : '$pull', $field, $value);
+        return $this->update($all ? '$pullAll' : '$pull', $field, $value);
     }
 
     /**
@@ -232,7 +232,7 @@ class Update extends Where
      */
     public function addToSet($field, $value)
     {
-        return $this->_update('$addToSet', $field, (array) $value);
+        return $this->update('$addToSet', $field, (array) $value);
     }
 
     /**
@@ -243,7 +243,7 @@ class Update extends Where
      */
     public function unshift($field)
     {
-        return $this->_update('$pop', $field, -1);
+        return $this->update('$pop', $field, -1);
     }
 
     /**
@@ -254,7 +254,7 @@ class Update extends Where
      */
     public function pop($field)
     {
-        return $this->_update('$pop', $field, 1);
+        return $this->update('$pop', $field, 1);
     }
 
     /**
@@ -266,7 +266,7 @@ class Update extends Where
      */
     public function increment($field, $by = 1)
     {
-        return $this->_update('$inc', $field, (int) $by);
+        return $this->update('$inc', $field, (int) $by);
     }
 
     /**
@@ -281,7 +281,7 @@ class Update extends Where
         foreach ($this->update as $field => $data) {
             list($type, $value) = $data;
 
-            if ( ! isset($update[$type])) {
+            if (! isset($update[$type])) {
                 $update[$type] = array();
             }
 
