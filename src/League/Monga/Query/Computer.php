@@ -131,8 +131,6 @@ abstract class Computer
         return $this;
     }
 
-    //public function all($result, $field = null)
-
     /**
      * Prepends a dolar sign to field names
      *
