@@ -9,8 +9,6 @@
 
 A simple and swift MongoDB abstraction layer for PHP 5.3+
 
-[Find Monga on Packagist/Composer](https://packagist.org/packages/league/monga)
-
 ## What's this all about?
 
 * An easy API to get connections, databases and collections.
