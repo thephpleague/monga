@@ -1,0 +1,8 @@
+filter:
+    paths: [src/*]
+    excluded_paths: [tests/*, coverage/*]
+tools:
+    php_analyzer: true
+checks:
+    php:
+        code_rating: true
