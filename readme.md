@@ -1,8 +1,13 @@
-# Monga [![Build Status](https://secure.travis-ci.org/thephpleague/monga.png?branch=master)](https://travis-ci.org/thephpleague/monga)
+# Monga
+
+[![Latest Version](https://img.shields.io/github/release/thephpleague/monga.svg?style=flat-square)](https://github.com/thephpleague/monga/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga)
+[![Total Downloads](https://img.shields.io/packagist/dt/php-loep/monga.svg?style=flat-square)](https://packagist.org/packages/php-loep/monga)
 
 A simple and swift MongoDB abstraction layer for PHP 5.3+
-
-[Find Monga on Packagist/Composer](https://packagist.org/packages/league/monga)
 
 ## What's this all about?
 
@@ -19,7 +24,15 @@ Monga was created with the acknowledgement of the MongoDB PHP package already be
 It provides some helpers and helps you set up queries using a query builder. Which you can also choose not to use! Everything will still work accordingly.
 During the development, a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builders for SQL-like databases.
 
-## Examples
+## Install
+
+Via Composer
+
+``` bash
+$ composer require php-loep/monga
+```
+
+## Usage
 
 ```php
 
