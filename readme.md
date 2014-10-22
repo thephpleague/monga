@@ -29,7 +29,7 @@ During the development, a lot of planning has gone into creating a nice streamli
 Via Composer
 
 ``` bash
-$ composer require php-loep/monga
+$ composer require league/monga
 ```
 
 ## Usage
