@@ -26,7 +26,15 @@ Monga was created with the acknowledgement of the MongoDB PHP package already be
 It provides some helpers and helps you set up queries using a query builder. Which you can also choose not to use! Everything will still work accordingly.
 During the development, a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builders for SQL-like databases.
 
-## Examples
+## Install
+
+Via Composer
+
+``` bash
+$ composer require php-loep/monga
+```
+
+## Usage
 
 ```php
 
