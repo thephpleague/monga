@@ -1,4 +1,11 @@
-# Monga [![Build Status](https://secure.travis-ci.org/thephpleague/monga.png?branch=master)](https://travis-ci.org/thephpleague/monga)
+# Monga
+
+[![Latest Version](https://img.shields.io/github/release/thephpleague/monga.svg?style=flat-square)](https://github.com/thephpleague/monga/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga)
+[![Total Downloads](https://img.shields.io/packagist/dt/the-loep/monga.svg?style=flat-square)](https://packagist.org/packages/the-loep/monga)
 
 A simple and swift MongoDB abstraction layer for PHP 5.3+
 
