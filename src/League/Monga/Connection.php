@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga;
@@ -95,7 +95,7 @@ class Connection
      */
     public function disconnect()
     {
-        if($this->connection->close()) {
+        if ($this->connection->close()) {
             $this->connected = false;
             return true;
         }

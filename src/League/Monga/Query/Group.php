@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga\Query;
@@ -17,7 +17,7 @@ class Group extends Computer
     /**
      * Set the group field
      *
-     * @param   mixed   group field or hash
+     * @param  mixed  group field or hash
      * @return object $this
      */
     public function by($index)

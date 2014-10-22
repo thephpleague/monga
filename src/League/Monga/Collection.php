@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga;
@@ -360,7 +360,7 @@ class Collection
 
         $result = $this->collection->update($query, $values, $options);
 
-        return $result === true or !! $result['ok'];
+        return $result === true or (bool) $result['ok'];
     }
 
     /**

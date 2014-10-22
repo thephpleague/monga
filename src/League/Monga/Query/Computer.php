@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga\Query;
@@ -131,10 +131,8 @@ abstract class Computer
         return $this;
     }
 
-    //public function all($result, $field = null)
-
     /**
-     * Prepends a dolar sign to field names
+     * Prepends a dollar sign to field names
      *
      * @param  string $field key name
      * @return string prepared key fieldname

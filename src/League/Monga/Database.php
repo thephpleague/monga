@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga;
@@ -219,7 +219,7 @@ class Database
      *
      * @param array $command command array
      * @param array $options command options
-     * @param  array  result
+     * @param array result
      */
     public function command(array $command, array $options = array())
     {

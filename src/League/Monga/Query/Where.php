@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2012 Frank de Jonge
- * @link       http://github.com/php-leop/monga
+ * @link       http://github.com/thephpleague/monga
  */
 
 namespace League\Monga\Query;
@@ -25,14 +25,15 @@ class Where extends Builder
 
     /**
      * Replaces the where statement. The statement
-     * will be reformatted to match allow further
+     * will be reformatted to match, allowing further
      * chaining by Monga.
      *
-     *
+     * @param  array  $where An array of where conditions
+     * @return object $this
      */
     public function setWhere(array $where)
     {
-        // When to statement is empty set the
+        // When the statement is empty set the
         // where property to null to prevent
         // empty statement errors.
         if (empty($where)) {
@@ -1040,8 +1041,8 @@ class Where extends Builder
     /**
      * Resolves a string data type to its integer counterpart
      *
-     * @param string|int $type data type
-     * @return
+     * @param  string|int $type data type
+     * @return int The data type's integer
      */
     public function resolveType($type)
     {
