@@ -5,97 +5,97 @@ use Mockery as m;
 
 class QueryIndexesTests extends PHPUnit_Framework_TestCase
 {
-	protected $indexes;
+    protected $indexes;
 
-	public function tearDown()
-	{
-		m::close();
-	}
+    public function tearDown()
+    {
+        m::close();
+    }
 
-	public function testGetCollection()
-	{
-		$collection = m::mock('MongoCollection');
-		$indexes = new i($collection);
-		$this->assertInstanceOf('MongoCollection', $indexes->getCollection());
-	}
+    public function testGetCollection()
+    {
+        $collection = m::mock('MongoCollection');
+        $indexes = new i($collection);
+        $this->assertInstanceOf('MongoCollection', $indexes->getCollection());
+    }
 
-	public function testSetCollection()
-	{
-		$collection = m::mock('MongoCollection');
-		$collection2 = m::mock('MongoCollection');
-		$indexes = new i($collection);
+    public function testSetCollection()
+    {
+        $collection = m::mock('MongoCollection');
+        $collection2 = m::mock('MongoCollection');
+        $indexes = new i($collection);
 
-		$hash = spl_object_hash($collection);
-		$hash2 = spl_object_hash($collection2);
+        $hash = spl_object_hash($collection);
+        $hash2 = spl_object_hash($collection2);
 
-		$this->assertEquals($hash, spl_object_hash($indexes->getCollection()));
-		$indexes->setCollection($collection2);
-		$this->assertEquals($hash2, spl_object_hash($indexes->getCollection()));
-	}
+        $this->assertEquals($hash, spl_object_hash($indexes->getCollection()));
+        $indexes->setCollection($collection2);
+        $this->assertEquals($hash2, spl_object_hash($indexes->getCollection()));
+    }
 
-	public function testCreate()
-	{
-		$index = array('field' => 1);
-		$mock = m::mock('MongoCollection');
-		$mock->shouldReceive('ensureIndex')
-			->with($index, array());
+    public function testCreate()
+    {
+        $index = array('field' => 1);
+        $mock = m::mock('MongoCollection');
+        $mock->shouldReceive('ensureIndex')
+            ->with($index, array());
 
-		$i = new i($mock);
-		$i->create($index);
-	}
+        $i = new i($mock);
+        $i->create($index);
+    }
 
-	public function testGeo()
-	{
-		$index = array('field' => '2d');
-		$mock = m::mock('MongoCollection');
-		$mock->shouldReceive('ensureIndex')
-			->with($index, array());
+    public function testGeo()
+    {
+        $index = array('field' => '2d');
+        $mock = m::mock('MongoCollection');
+        $mock->shouldReceive('ensureIndex')
+            ->with($index, array());
 
-		$i = new i($mock);
-		$i->geo('field');
-	}
+        $i = new i($mock);
+        $i->geo('field');
+    }
 
-	public function testPrepareIndex()
-	{
-		$i = new i(m::mock('MongoCollection'));
+    public function testPrepareIndex()
+    {
+        $i = new i(m::mock('MongoCollection'));
 
-		$expected = array(
-			'asc' => 1,
-			'desc' => -1,
-			'geo' => '2d',
-			'field' => 1,
-		);
+        $expected = array(
+            'asc' => 1,
+            'desc' => -1,
+            'geo' => '2d',
+            'field' => 1,
+        );
 
-		$reflection = new ReflectionObject($i);
-		$method = $reflection->getMethod('prepareIndex');
-		$method->setAccessible(true);
-		$result = $method->invoke($i, array(
-			'asc' => 'asc',
-			'desc' => 'desc',
-			'geo' => 'geo',
-			'field' => 1,
-		));
+        $reflection = new ReflectionObject($i);
+        $method = $reflection->getMethod('prepareIndex');
+        $method->setAccessible(true);
+        $result = $method->invoke($i, array(
+            'asc' => 'asc',
+            'desc' => 'desc',
+            'geo' => 'geo',
+            'field' => 1,
+        ));
 
-		$this->assertEquals($expected, $result);
-	}
+        $this->assertEquals($expected, $result);
+    }
 
-	public function testDrop()
-	{
-		$mock = m::mock('MongoCollection');
-		$mock->shouldReceive('deleteIndex');
-		$i = new i($mock);
+    public function testDrop()
+    {
+        $mock = m::mock('MongoCollection');
+        $mock->shouldReceive('deleteIndex');
+        $i = new i($mock);
 
-		$i->drop('index_name');
-	}
+        $i->drop('index_name');
+    }
 
-	public function testDropAll()
-	{
-		$mock = m::mock('MongoCollection');
+    public function testDropAll()
+    {
+        $mock = m::mock('MongoCollection');
 
-		$mock->shouldReceive('deleteIndexes')
-			->withNoArgs();
+        $mock->shouldReceive('deleteIndexes')
+            ->withNoArgs();
 
-		$i = new i($mock);
-		$i->dropAll();
-	}
+        $i = new i($mock);
+        $i->dropAll();
+    }
 }
