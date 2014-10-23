@@ -29,14 +29,6 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 		$this->database = null;
 	}
 
-	/**
-	 * @expectedException Exception
-	 */
-	public function testInvalidConstructor()
-	{
-		$collection = new Collection(false);
-	}
-
 	public function testGetCollection()
 	{
 		$collection = $this->collection->getCollection();
