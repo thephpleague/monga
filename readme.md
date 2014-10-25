@@ -135,3 +135,7 @@ $collection->aggregate(function ($a) {
 If you need any help, come find me in the IRC channels (#php-loep by the nick of: FrenkyNet)
 
 Enjoy!
+
+## License
+
+The MIT License (MIT). Please see [License File](https://github.com/thephpleague/monga/blob/master/LICENSE) for more information.
