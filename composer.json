@@ -21,6 +21,6 @@
 		"psr-0": { "League\\Monga": "src/" }
 	},
 	"replace": {
-		"php-loep/monga": "1.*"
+		"php-loep/monga": "self.version"
 	}
 }
