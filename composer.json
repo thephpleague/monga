@@ -1,9 +1,9 @@
 {
-	"name": "php-loep/monga",
+	"name": "league/monga",
 	"type": "library",
 	"description": "MongoDB Abstraction Layer",
 	"keywords": ["MongoDB"],
-	"homepage": "https://github.com/php-loep/monga",
+	"homepage": "https://github.com/thephpleague/monga",
 	"license": "MIT",
 	"authors": [
 		{
@@ -19,5 +19,8 @@
 	},
 	"autoload": {
 		"psr-0": { "League\\Monga": "src/" }
+	},
+	"replace": {
+		"php-loep/monga": "1.*"
 	}
 }
