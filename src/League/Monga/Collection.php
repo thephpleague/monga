@@ -342,7 +342,7 @@ class Collection
      */
     public function update($values = array(), $query = null, $options = array())
     {
-        if ($values instanceof CLosure) {
+        if ($values instanceof Closure) {
             $query = new Query\Update();
             $query->setOptions($options);
             $values($query);
