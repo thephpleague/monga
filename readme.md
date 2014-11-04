@@ -1,7 +1,7 @@
 # Monga
 
 [![Latest Version](https://img.shields.io/github/release/thephpleague/monga.svg?style=flat-square)](https://github.com/thephpleague/monga/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/monga.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/monga)
@@ -138,4 +138,4 @@ Enjoy!
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/thephpleague/monga/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
