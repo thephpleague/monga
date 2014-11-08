@@ -99,7 +99,6 @@ class Filesystem extends Collection
         }
 
         return (bool) $this->collection->remove(array('_id' => $file->file['_id']));
-
     }
 
     /**

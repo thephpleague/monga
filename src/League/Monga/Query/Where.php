@@ -13,8 +13,8 @@
 namespace League\Monga\Query;
 
 use Closure;
-use MongoRegex;
 use MongoId;
+use MongoRegex;
 
 class Where extends Builder
 {
@@ -154,7 +154,7 @@ class Where extends Builder
                     $lastAndClause = array(
                         '$and' => array(
                             $lastAndClause,
-                            array($field => $statement)
+                            array($field => $statement),
                         ),
                     );
                 }
@@ -1042,7 +1042,7 @@ class Where extends Builder
      * Resolves a string data type to its integer counterpart
      *
      * @param  string|int $type data type
-     * @return int The data type's integer
+     * @return int        The data type's integer
      */
     public function resolveType($type)
     {

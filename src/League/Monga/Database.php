@@ -12,8 +12,8 @@
 
 namespace League\Monga;
 
-use MongoDB;
 use MongoCode;
+use MongoDB;
 use MongoDBRef;
 
 class Database

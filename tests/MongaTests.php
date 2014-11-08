@@ -56,8 +56,8 @@ class MongaTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException MongoException
-	 */
+     * @expectedException MongoException
+     */
     public function testInvalidRegex()
     {
         $regex = Monga::regex('#(.*)#imu');

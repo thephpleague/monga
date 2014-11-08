@@ -13,12 +13,12 @@
 namespace League;
 
 use League\Monga\Connection;
-use MongoId;
-use MongoCode;
-use MongoDate;
-use MongoDB;
-use MongoRegex;
 use MongoBinData;
+use MongoCode;
+use MongoDB;
+use MongoDate;
+use MongoId;
+use MongoRegex;
 
 class Monga
 {

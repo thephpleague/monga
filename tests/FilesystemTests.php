@@ -98,7 +98,6 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
             ->with('filename.json')
             ->will($this->returnValue(new FileMock(false)));
 
-
         $fs = new League\Monga\Filesystem($mock);
 
         $this->assertFalse($fs->extract('filename.json'));

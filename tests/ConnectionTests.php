@@ -8,7 +8,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if ( ! $this->connection) {
+        if (! $this->connection) {
             $this->connection = new Connection(null, array(
                 'connect' => true,
             ));
@@ -33,7 +33,6 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->connection->isConnected());
     }
 
-
     public function testReconnectonnect()
     {
         $this->connection->disconnect();
@@ -43,7 +42,6 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->connection->connect());
         $this->assertTrue($this->connection->isConnected());
     }
-
 
     public function testHasDatabase()
     {
@@ -83,14 +81,12 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MongoClient', $mongo);
     }
 
-
     public function testDropUnknownDatabase()
     {
         $result = $this->connection->dropDatabase('_unknown_');
 
         $this->assertTrue($result);
     }
-
 
     public function testDropKnownDatabase()
     {
@@ -102,13 +98,11 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
-
     public function testGetDatabase()
     {
         $database = $this->connection->database('my_db');
         $this->assertInstanceOf('League\Monga\Database', $database);
     }
-
 
     public function testGetMongoDatabase()
     {
@@ -116,13 +110,11 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('MongoDB', $database);
     }
 
-
     public function testGetConnection()
     {
         $mongo = $this->connection->getConnection();
         $this->assertInstanceOf('MongoClient', $mongo);
     }
-
 
     public function testReplaceConnection()
     {

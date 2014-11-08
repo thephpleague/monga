@@ -1,7 +1,6 @@
 <?php
 
 use League\Monga\Query\Aggregation as Agr;
-use Mockery as m;
 
 class QueryAggregateTests extends PHPUnit_Framework_TestCase
 {

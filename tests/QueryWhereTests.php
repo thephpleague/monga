@@ -15,6 +15,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionObject($this->query);
         $property = $property = $reflection->getProperty($property);
         $property->setAccessible(true);
+
         return $property->getValue($this->query);
     }
 
@@ -28,9 +29,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => 'John'),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -55,9 +56,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                             'surname' => 'Doe',
                             'age' => 25,
                         ),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -72,9 +73,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => 'John'),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -91,24 +92,24 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => 'John'),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => 'Steve'),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => 'Jack'),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('surname' => 'Johnes'),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -123,9 +124,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$ne' => 'John')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -140,9 +141,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$ne' => 'John')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -158,14 +159,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$ne' => 'John')),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$ne' => 'Steve')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -189,12 +190,12 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array(
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                )
+                                ),
                             ),
-                        )
-                    )
-                )
-            )
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -218,12 +219,12 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array(
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                )
+                                ),
                             ),
-                        )
-                    )
-                )
-            )
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -248,10 +249,10 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array(
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                )
+                                ),
                             ),
-                        )
-                    )
+                        ),
+                    ),
                 ),
                 array(
                     '$and' => array(
@@ -274,7 +275,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             '$or' => array(
                 array(
                     '$and' => array(
-                        array('field' => new MongoRegex('/^value/imxsu'))
+                        array('field' => new MongoRegex('/^value/imxsu')),
                     ),
                 ),
             ),
@@ -292,12 +293,12 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             '$or' => array(
                 array(
                     '$and' => array(
-                        array('field' => new MongoRegex('/^value/imxsu'))
+                        array('field' => new MongoRegex('/^value/imxsu')),
                     ),
                 ),
                 array(
                     '$and' => array(
-                        array('field' => new MongoRegex('/value$/imxsu'))
+                        array('field' => new MongoRegex('/value$/imxsu')),
                     ),
                 ),
             ),
@@ -336,9 +337,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => true)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -353,9 +354,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => true)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -371,14 +372,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => true)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => true)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -393,9 +394,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => false)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -410,9 +411,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => false)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -428,14 +429,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => false)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$exists' => false)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -450,9 +451,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$in' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -467,9 +468,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$in' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -485,14 +486,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$in' => array(1, 2, '3'))),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$in' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -507,9 +508,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$all' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -524,9 +525,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$all' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -542,14 +543,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$all' => array(1, 2, '3'))),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$all' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -564,9 +565,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$nin' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -581,9 +582,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$nin' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -599,14 +600,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$nin' => array(1, 2, '3'))),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$nin' => array(1, 2, '3'))),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -621,9 +622,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$size' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -638,9 +639,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$size' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -656,14 +657,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$size' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$size' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -678,17 +679,17 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$type' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidWhereType()
     {
         $this->query->whereType('name', 'invalid');
@@ -698,9 +699,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$type' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -715,9 +716,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$type' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -733,14 +734,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$type' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$type' => 2)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -755,9 +756,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -772,9 +773,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -790,14 +791,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -812,9 +813,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -829,9 +830,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -847,14 +848,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lte' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$lte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -869,9 +870,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -886,9 +887,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -904,14 +905,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gt' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -926,9 +927,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -943,9 +944,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -961,14 +962,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$gte' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$gte' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -983,9 +984,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1000,9 +1001,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1018,14 +1019,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1033,16 +1034,16 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 
     public function testWhereWithin()
     {
-        $this->query->whereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+        $this->query->whereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
 
         $expected = array(
             '$or' => array(
                 array(
                     '$and' => array(
                         array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1050,16 +1051,16 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 
     public function testAndWhereWithin()
     {
-        $this->query->andWhereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+        $this->query->andWhereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
 
         $expected = array(
             '$or' => array(
                 array(
                     '$and' => array(
                         array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1067,22 +1068,22 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
 
     public function testOrWhereWithin()
     {
-        $this->query->whereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5))
-            ->orWhereWithin('location', array('$box' => array(array(0,0),array(10,10))), array('$maxDistance' => 5));
+        $this->query->whereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5))
+            ->orWhereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
 
         $expected = array(
             '$or' => array(
                 array(
                     '$and' => array(
                         array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1097,9 +1098,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 15, '$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1114,9 +1115,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 15, '$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1132,14 +1133,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 15, '$gt' => 10)),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('name' => array('$lt' => 15, '$gt' => 10)),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1154,9 +1155,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1171,9 +1172,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1189,14 +1190,14 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 array(
                     '$and' => array(
                         array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
                         array('id' => new MongoId('50a2cdf711fa67c551000001')),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1217,9 +1218,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1232,8 +1233,8 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidNorWhere()
     {
         $this->query->norWhere(false);
@@ -1254,9 +1255,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1280,7 +1281,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
@@ -1289,9 +1290,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1312,9 +1313,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1327,8 +1328,8 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidNotWhere()
     {
         $this->query->notWhere(false);
@@ -1349,9 +1350,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1375,7 +1376,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
                 array(
                     '$and' => array(
@@ -1384,9 +1385,9 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                                 array('field' => 'value'),
                             ),
                         ),
-                    )
+                    ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));
@@ -1409,7 +1410,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                     '$or' => array(
                         array('one' => 1),
                         array('two' => 2),
-                    )
+                    ),
                 ),
             ),
         ), $this->query->getWhere());
@@ -1436,8 +1437,8 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                     array('$or' => array(
                         array('this' => 'that'),
                     )),
-                ))
-            )
+                )),
+            ),
         ));
 
         $this->assertEquals(array('this' => 'that'), $this->query->getWhere());
@@ -1456,7 +1457,7 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             '$nor' => array(
                 array('one' => 1, 'two' => 2),
                 array('three' => 1, 'four' => 2),
-        )), $this->query->getWhere());
+        ), ), $this->query->getWhere());
 
         $this->query->setWhere(array());
         $this->query->where('name', 'john')
@@ -1531,10 +1532,10 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             '$or' => array(
                 array(
                     '$and' => array(
-                        array('something' => 'broken')
+                        array('something' => 'broken'),
                     ),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $this->getProperty('where'));

@@ -83,8 +83,10 @@ class Connection
     {
         if ($this->connection->connect()) {
             $this->connected = true;
+
             return true;
         }
+
         return false;
     }
 
@@ -97,8 +99,10 @@ class Connection
     {
         if ($this->connection->close()) {
             $this->connected = false;
+
             return true;
         }
+
         return false;
     }
 

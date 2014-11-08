@@ -14,6 +14,7 @@ class QueryRemoveTests extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionObject($this->remove);
         $property = $property = $reflection->getProperty($property);
         $property->setAccessible(true);
+
         return $property->getValue($this->remove);
     }
 
@@ -40,7 +41,7 @@ class QueryRemoveTests extends PHPUnit_Framework_TestCase
             'w' => 0,
             'fsync' => false,
             'timeout' => MongoCursor::$timeout,
-            'justOne' => true
+            'justOne' => true,
         ), $this->remove->getOptions());
     }
 }
