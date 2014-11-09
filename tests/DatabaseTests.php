@@ -1,8 +1,8 @@
 <?php
 
+use League\Monga;
 use League\Monga\Connection;
 use League\Monga\Database;
-use League\Monga;
 
 class DatabaseTests extends PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if ( ! $this->connection) {
+        if (! $this->connection) {
             $this->connection = Monga::connection();
         }
 

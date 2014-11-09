@@ -12,8 +12,8 @@
 
 namespace League\Monga;
 
-use MongoCollection;
 use Closure;
+use MongoCollection;
 
 class Collection
 {

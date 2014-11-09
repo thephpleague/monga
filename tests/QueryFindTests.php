@@ -14,6 +14,7 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionObject($this->find);
         $property = $property = $reflection->getProperty($property);
         $property->setAccessible(true);
+
         return $property->getValue($this->find);
     }
 
@@ -23,11 +24,10 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
         $this->find->orderBy('two', 'asc');
         $this->find->orderBy('three', 'desc');
 
-        $this->assertEquals(array
-        (
+        $this->assertEquals(array(
             'one' => 1,
             'two' => 1,
-            'three' => -1
+            'three' => -1,
         ),
         $this->getProperty('orderBy'));
     }
@@ -36,8 +36,7 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
     {
         $this->find->select('one', 'two');
 
-        $this->assertEquals(array
-        (
+        $this->assertEquals(array(
             'one' => 1,
             'two' => 1,
         ),
@@ -48,8 +47,7 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
     {
         $this->find->exclude('one', 'two');
 
-        $this->assertEquals(array
-        (
+        $this->assertEquals(array(
             'one' => -1,
             'two' => -1,
         ),
@@ -60,11 +58,10 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
     {
         $this->find->fields(array(
             'one' => 1,
-            'two' => false
+            'two' => false,
         ));
 
-        $this->assertEquals(array
-        (
+        $this->assertEquals(array(
             'one' => 1,
             'two' => -1,
         ),

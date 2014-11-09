@@ -14,7 +14,6 @@ namespace League\Monga\Query;
 
 class Projection extends Computer
 {
-
     /**
      * Specifies a field to be included
      *

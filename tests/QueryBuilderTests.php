@@ -1,6 +1,8 @@
 <?php
 
-class BuilderMock extends League\Monga\Query\Builder {}
+class BuilderMock extends League\Monga\Query\Builder
+{
+}
 
 class QueryBuilderTests extends PHPUnit_Framework_TestCase
 {
@@ -16,6 +18,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionObject($this->builder);
         $property = $property = $reflection->getProperty($property);
         $property->setAccessible(true);
+
         return $property->getValue($this->builder);
     }
 
@@ -68,16 +71,15 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => MongoCursor::$timeout
+            'timeout' => MongoCursor::$timeout,
         ), $result);
 
         $result = $this->builder->timeout(100)->getOptions();
 
-
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => 100
+            'timeout' => 100,
         ), $result);
     }
 }

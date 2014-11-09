@@ -1,8 +1,8 @@
 <?php
 
+use League\Monga;
 use League\Monga\Collection;
 use League\Monga\Database;
-use League\Monga;
 use Mockery as m;
 
 class CollectionTests extends PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if ( ! $this->connection) {
+        if (! $this->connection) {
             $this->connection = Monga::connection();
         }
 
@@ -61,8 +61,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testCountException()
     {
         $this->collection->count(false);
@@ -127,10 +127,10 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     public function testRemoveWhereClosure()
     {
         $closure = function ($query) {
-            $query->where('name' ,'Frank');
+            $query->where('name', 'Frank');
         };
         $closure2 = function ($query) {
-            $query->where('name' ,'Bert');
+            $query->where('name', 'Bert');
         };
         $this->collection->getCollection()->insert(array('name' => 'Frank'));
         $this->assertEquals(1, $this->collection->count());
@@ -143,8 +143,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidRemove()
     {
         $this->collection->remove(false);
@@ -276,8 +276,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidFind()
     {
         $this->collection->find(false);
@@ -363,8 +363,8 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException InvalidArgumentException
-	 */
+     * @expectedException InvalidArgumentException
+     */
     public function testInvalidUpdate()
     {
         $result = $this->collection->update(false);

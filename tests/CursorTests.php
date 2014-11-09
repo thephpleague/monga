@@ -19,7 +19,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
 
         $ids = $collection->insert($values);
 
-        foreach($values as $index => &$row) {
+        foreach ($values as $index => &$row) {
             $row['_id'] = $ids[$index];
         }
 
@@ -33,7 +33,7 @@ class CursorTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, $cursor->count());
         $this->assertInstanceOf('League\Monga\Collection', $oldCollection);
 
-        foreach($cursor as $row) {
+        foreach ($cursor as $row) {
             $this->assertInternalType('array', $row);
         }
 
@@ -52,8 +52,8 @@ class CursorTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @expectedException BadMethodCallException
-	 */
+     * @expectedException BadMethodCallException
+     */
     public function testBadMethodCall()
     {
         $mock = $this->getMockBuilder('MongoCursor')
