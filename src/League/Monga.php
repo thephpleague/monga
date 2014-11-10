@@ -31,7 +31,7 @@ class Monga
      */
     public static function data($data, $type = null)
     {
-        $type === null and $type = MongoBinData::BYTE_ARRAY;
+        $type === null && $type = MongoBinData::BYTE_ARRAY;
 
         return new MongoBinData($data, $type);
     }
@@ -68,7 +68,7 @@ class Monga
      */
     public static function date($sec = null, $usec = 0)
     {
-        $sec === null and $sec = time();
+        $sec === null && $sec = time();
 
         return new MongoDate($sec, $usec);
     }

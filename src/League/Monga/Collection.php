@@ -64,7 +64,7 @@ class Collection
     {
         $result = $this->collection->drop();
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 
     /**
@@ -157,7 +157,7 @@ class Collection
     {
         $result = $this->collection->remove(array());
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 
     /**
@@ -217,7 +217,7 @@ class Collection
 
         $result = $this->collection->remove($criteria, $options);
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 
     /**
@@ -246,19 +246,19 @@ class Collection
             $postFind = $find->getPostFindActions();
         }
 
-        if (! is_array($query) or ! is_array($fields)) {
+        if (! is_array($query) || ! is_array($fields)) {
             throw new \InvalidArgumentException('Find params $query and $fields must be arrays.');
         }
 
         // Prepare the find arguments
         $arguments = array();
-        empty($query) or $arguments[] = $query;
-        empty($fields) or $arguments[] = $fields;
+        empty($query) || $arguments[] = $query;
+        empty($fields) || $arguments[] = $fields;
 
         // Wrap the find function so it is callable
         $function = array(
             $this->getCollection(),
-            ($findOne and ! $postFind) ? 'findOne' : 'find',
+            ($findOne && ! $postFind) ? 'findOne' : 'find',
         );
 
         $result = call_user_func_array($function, $arguments);
@@ -275,7 +275,7 @@ class Collection
         // When there were post-find actions, we used normal find
         // so we can sort, skip, and limit. Now we'll need to retrieve
         // the first result.
-        if ($findOne and $postFind) {
+        if ($findOne && $postFind) {
             $result = $result->getNext();
         }
 
@@ -304,11 +304,11 @@ class Collection
     public function insert(array $data, $options = array())
     {
         // Check whether we're dealing with a batch insert.
-        if (isset($data[0]) and is_array($data[0])) {
+        if (isset($data[0]) && is_array($data[0])) {
             // Insert using batchInsert
             $result = $this->collection->batchInsert($data, $options);
 
-            if (! $result or ! ($result === true or (bool) $result['ok'])) {
+            if (! $result || ! ($result === true || (bool) $result['ok'])) {
                 return false;
             }
 
@@ -325,7 +325,7 @@ class Collection
 
         $result = $this->collection->insert($data, $options);
 
-        if ($result === true or (bool) $result['ok']) {
+        if ($result === true || (bool) $result['ok']) {
             return $data['_id'];
         }
 
@@ -352,15 +352,15 @@ class Collection
             $query = $query->getWhere();
         }
 
-        if (! is_array($values) or ! is_array($options)) {
+        if (! is_array($values) || ! is_array($options)) {
             throw new \InvalidArgumentException('Update params $update and $options must be arrays.');
         }
 
-        isset($query) or $query = array();
+        isset($query) || $query = array();
 
         $result = $this->collection->update($query, $values, $options);
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 
     /**
@@ -374,6 +374,6 @@ class Collection
     {
         $result = $this->collection->save($document, $options);
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 }

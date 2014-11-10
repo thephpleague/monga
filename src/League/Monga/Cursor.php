@@ -36,7 +36,7 @@ class Cursor implements \Countable, \IteratorAggregate
     public function __construct(MongoCursor $result, Collection $collection = null)
     {
         $this->result = $result;
-        $collection and $this->collection = $collection;
+        $collection && $this->collection = $collection;
     }
 
     /**

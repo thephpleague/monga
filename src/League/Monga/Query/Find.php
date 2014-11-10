@@ -176,9 +176,9 @@ class Find extends Where
     {
         $actions = array();
 
-        empty($this->orderBy) or $actions[] = array('sort', $this->orderBy);
-        $this->skip === null or $actions[] = array('skip', $this->skip);
-        $this->limit === null or $actions[] = array('limit', $this->limit);
+        empty($this->orderBy) || $actions[] = array('sort', $this->orderBy);
+        $this->skip === null || $actions[] = array('skip', $this->skip);
+        $this->limit === null || $actions[] = array('limit', $this->limit);
 
         return $actions;
     }

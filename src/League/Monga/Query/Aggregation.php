@@ -55,7 +55,7 @@ class Aggregation
         if ($group instanceof Closure) {
             $callback = $group;
             $group = new Group();
-            is_callable('Closure::bind') and $callback = $callback->bindTo($group, $group);
+            is_callable('Closure::bind') && $callback = $callback->bindTo($group, $group);
             $callback($group);
         }
 

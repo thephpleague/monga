@@ -36,7 +36,7 @@ class Database
      */
     public function __construct(MongoDB $database, Connection $connection = null)
     {
-        $connection and $this->connection = $connection;
+        $connection && $this->connection = $connection;
 
         $this->setDatabase($database);
     }
@@ -144,7 +144,7 @@ class Database
     public function collection($collection, $wrap = true)
     {
         $collection = $this->database->selectCollection($collection);
-        $wrap and $collection = new Collection($collection);
+        $wrap && $collection = new Collection($collection);
 
         return $collection;
     }
@@ -159,7 +159,7 @@ class Database
     public function filesystem($prefix = 'fs', $wrap = true)
     {
         $collection = $this->database->getGridFS($prefix);
-        $wrap and $collection = new Filesystem($collection);
+        $wrap && $collection = new Filesystem($collection);
 
         return $collection;
     }
@@ -173,7 +173,7 @@ class Database
     {
         $result = $this->database->drop();
 
-        return $result === true or (bool) $result['ok'];
+        return $result === true || (bool) $result['ok'];
     }
 
     /**

@@ -113,7 +113,7 @@ class Where extends Builder
         }
 
         // Ensure the master $or clause
-        $this->where or $this->where = array('$or' => array());
+        $this->where || $this->where = array('$or' => array());
 
         // Because $or is the base for every query
         // $or queries can always be appended to the
@@ -139,7 +139,7 @@ class Where extends Builder
         // Handle the result from nested where statements
         if ($isNested) {
             // Re-append the last $and clause
-            empty($lastAndClause) or $lastOrClause['$and'][] = $lastAndClause;
+            empty($lastAndClause) || $lastOrClause['$and'][] = $lastAndClause;
 
             // The nested query has a base key (either $and or $or)
             // So following queries will always begin in a new clause
@@ -161,8 +161,8 @@ class Where extends Builder
             } else {
                 $lastSubAnd = array_pop($lastAndClause['$and']) ?: array();
 
-                if (isset($lastSubAnd['$and']) or isset($lastSubAnd['$or']) or isset($lastSubAnd[$field])) {
-                    empty($lastSubAnd) or $lastAndClause['$and'][] = $lastSubAnd;
+                if (isset($lastSubAnd['$and']) || isset($lastSubAnd['$or']) || isset($lastSubAnd[$field])) {
+                    empty($lastSubAnd) || $lastAndClause['$and'][] = $lastSubAnd;
                     $lastSubAnd = array();
                 }
 
@@ -1022,11 +1022,11 @@ class Where extends Builder
         }
 
         foreach ($where['$or'] as &$and) {
-            if (isset($and['$and']) and count($and['$and']) === 1) {
+            if (isset($and['$and']) && count($and['$and']) === 1) {
                 $and = reset($and['$and']);
             }
 
-            if (isset($and['$or']) and count($and['$or']) === 1) {
+            if (isset($and['$or']) && count($and['$or']) === 1) {
                 $and = reset($and['$or']);
             }
         }
