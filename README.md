@@ -18,7 +18,7 @@ A simple and swift MongoDB abstraction layer for PHP 5.3+
 
 ## Vision
 
-Monga was created with the acknowledgement of the MongoDB PHP package already being pretty awesome. That's why in a lot of cases Monga is just a simple wrapper around the MongoDB classes.
+Monga was created with the acknowledgment of the MongoDB PHP package already being pretty awesome. That's why in a lot of cases Monga is just a simple wrapper around the MongoDB classes.
 It provides some helpers and helps you set up queries using a query builder. Which you can also choose not to use! Everything will still work accordingly.
 During the development, a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builders for SQL-like databases.
 
