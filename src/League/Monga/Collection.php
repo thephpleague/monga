@@ -306,7 +306,15 @@ class Collection
         // Check whether we're dealing with a batch insert.
         if (isset($data[0]) && is_array($data[0])) {
             // Insert using batchInsert
-            $result = $this->collection->batchInsert($data, $options);
+            try {
+                $result = $this->collection->batchInsert($data, $options);
+            } catch (MongoCursorException $e) {
+                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    $result = $this->collection->batchInsert($data, $options);
+                } else {
+                    throw new MongoCursorException($e->getMessage(), $e->getCode());
+                }
+            }
 
             if (! $result || ! ($result === true || (bool) $result['ok'])) {
                 return false;
@@ -323,7 +331,15 @@ class Collection
             return $result;
         }
 
-        $result = $this->collection->insert($data, $options);
+        try {
+            $result = $this->collection->insert($data, $options);
+        } catch (MongoCursorException $e) {
+            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                $result = $this->collection->insert($data, $options);
+            } else {
+                 throw new MongoCursorException($e->getMessage(), $e->getCode());
+            }
+        }
 
         if ($result === true || (bool) $result['ok']) {
             return $data['_id'];
@@ -358,7 +374,15 @@ class Collection
 
         isset($query) || $query = array();
 
-        $result = $this->collection->update($query, $values, $options);
+        try {
+            $result = $this->collection->update($query, $values, $options);
+        } catch (MongoCursorException $e) {
+            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                $result = $this->collection->update($query, $values, $options);
+            } else {
+                throw new MongoCursorException($e->getMessage(), $e->getCode());
+            }
+        }
 
         return $result === true || (bool) $result['ok'];
     }
