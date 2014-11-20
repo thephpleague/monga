@@ -221,7 +221,7 @@ class Collection
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->remove($criteria, $options);
             } else {
-                throw new MongoCursorException($e->getMessage(), $e->getCode());
+                throw $e;
             }
         }
 
@@ -320,7 +320,7 @@ class Collection
                 if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                     $result = $this->collection->batchInsert($data, $options);
                 } else {
-                    throw new MongoCursorException($e->getMessage(), $e->getCode());
+                    throw $e;
                 }
             }
 
@@ -345,7 +345,7 @@ class Collection
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->insert($data, $options);
             } else {
-                 throw new MongoCursorException($e->getMessage(), $e->getCode());
+                 throw $e;
             }
         }
 
@@ -388,7 +388,7 @@ class Collection
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->update($query, $values, $options);
             } else {
-                throw new MongoCursorException($e->getMessage(), $e->getCode());
+                throw $e;
             }
         }
 
@@ -410,7 +410,7 @@ class Collection
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->save($document, $options);
             } else {
-                throw new MongoCursorException($e->getMessage(), $e->getCode());
+                throw $e;
             }
         }
 
