@@ -215,7 +215,15 @@ class Collection
             throw new \InvalidArgumentException('Remove criteria must be an array.');
         }
 
-        $result = $this->collection->remove($criteria, $options);
+        try {
+            $result = $this->collection->remove($criteria, $options);
+        } catch (MongoCursorException $e) {
+            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                $result = $this->collection->remove($criteria, $options);
+            } else {
+                throw new MongoCursorException($e->getMessage(), $e->getCode());
+            }
+        }
 
         return $result === true || (bool) $result['ok'];
     }
@@ -396,7 +404,15 @@ class Collection
      */
     public function save(&$document, $options = array())
     {
-        $result = $this->collection->save($document, $options);
+        try {
+            $result = $this->collection->save($document, $options);
+        } catch (MongoCursorException $e) {
+            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                $result = $this->collection->save($document, $options);
+            } else {
+                throw new MongoCursorException($e->getMessage(), $e->getCode());
+            }
+        }
 
         return $result === true || (bool) $result['ok'];
     }
