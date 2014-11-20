@@ -218,6 +218,9 @@ class Collection
         try {
             $result = $this->collection->remove($criteria, $options);
         } catch (MongoCursorException $e) {
+            // Retry "remove" in case of rediscovery latency issues
+            // in replica set failover. Error codes 10107, 13435, and 10058
+            // are MongoCursorException's "not master" errors.
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->remove($criteria, $options);
             } else {
@@ -317,6 +320,9 @@ class Collection
             try {
                 $result = $this->collection->batchInsert($data, $options);
             } catch (MongoCursorException $e) {
+                // Retry "batchInsert" in case of rediscovery latency issues
+                // in replica set failover. Error codes 10107, 13435, and 10058
+                // are MongoCursorException's "not master" errors.
                 if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                     $result = $this->collection->batchInsert($data, $options);
                 } else {
@@ -343,6 +349,9 @@ class Collection
             $result = $this->collection->insert($data, $options);
         } catch (MongoCursorException $e) {
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                // Retry "insert" in case of rediscovery latency issues
+                // in replica set failover. Error codes 10107, 13435, and 10058
+                // are MongoCursorException's "not master" errors.
                 $result = $this->collection->insert($data, $options);
             } else {
                  throw $e;
@@ -385,6 +394,9 @@ class Collection
         try {
             $result = $this->collection->update($query, $values, $options);
         } catch (MongoCursorException $e) {
+            // Retry "update" in case of rediscovery latency issues
+            // in replica set failover. Error codes 10107, 13435, and 10058
+            // are MongoCursorException's "not master" errors.
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->update($query, $values, $options);
             } else {
@@ -407,6 +419,9 @@ class Collection
         try {
             $result = $this->collection->save($document, $options);
         } catch (MongoCursorException $e) {
+            // Retry "save" in case of rediscovery latency issues
+            // in replica set failover. Error codes 10107, 13435, and 10058
+            // are MongoCursorException's "not master" errors.
             if (in_array($e->getCode(), array(10107, 13435, 10058))) {
                 $result = $this->collection->save($document, $options);
             } else {
