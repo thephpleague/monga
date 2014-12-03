@@ -130,8 +130,6 @@ $collection->aggregate(function ($a) {
 });
 ```
 
-If you need any help, come find me in the IRC channels (#php-loep by the nick of: FrenkyNet)
-
 Enjoy!
 
 ## License
