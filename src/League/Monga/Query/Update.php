@@ -129,7 +129,7 @@ class Update extends Where
         }
 
         foreach ($field as $f => $v) {
-            $this->update('$set', $f, $value);
+            $this->update('$set', $f, $v);
         }
 
         return $this;
