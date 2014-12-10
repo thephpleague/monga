@@ -42,8 +42,9 @@ class Find extends Where
     /**
      * Set the result limit
      *
-     * @param  integer $amount limit
-     * @return object  $this
+     * @param integer $amount limit
+     *
+     * @return object $this
      */
     public function limit($amount)
     {
@@ -55,8 +56,9 @@ class Find extends Where
     /**
      * Set the amount to skip in the result.
      *
-     * @param  integer $amount skip
-     * @return object  $this
+     * @param integer $amount skip
+     *
+     * @return object $this
      */
     public function skip($amount)
     {
@@ -70,6 +72,7 @@ class Find extends Where
      *
      *  @param  string $field       field to order by
      *  @param  string $direction  asc/desc/1/-1
+     *
      *  @return object             current instance
      */
     public function orderBy($field, $direction = 1)
@@ -92,7 +95,7 @@ class Find extends Where
      */
     public function select($field)
     {
-        $fields = ( is_array($field) ? $field : func_get_args() );
+        $fields = (is_array($field) ? $field : func_get_args());
 
         foreach ((array) $fields as $field) {
             $this->fields[$field] = 1;
@@ -108,7 +111,7 @@ class Find extends Where
      */
     public function exclude($field)
     {
-        $fields = ( is_array($field) ? $field : func_get_args() );
+        $fields = (is_array($field) ? $field : func_get_args());
 
         foreach ($fields as $field) {
             $this->fields[$field] = -1;
@@ -144,7 +147,8 @@ class Find extends Where
     /**
      * Set the find type, one or many
      *
-     * @param  bool   $one true for one, false for many
+     * @param bool $one true for one, false for many
+     *
      * @return object current instance
      */
     public function one($one = true)
@@ -157,7 +161,8 @@ class Find extends Where
     /**
      * Set the find type, one or many
      *
-     * @param  bool   $multiple false for one, true for many
+     * @param bool $multiple false for one, true for many
+     *
      * @return object current instance
      */
     public function multiple($multiple = true)

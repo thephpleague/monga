@@ -54,7 +54,8 @@ class Database
     /**
      * Check whether the database contains a given connection
      *
-     * @param  string  $collection collection name
+     * @param string $collection collection name
+     *
      * @return boolean whether the collection exists in the database
      */
     public function hasCollection($collection)
@@ -65,8 +66,9 @@ class Database
     /**
      * Returns all collection.
      *
-     * @param  boolean $wrap whether to wrap the collection instances in Collection classes.
-     * @return array   connections array
+     * @param boolean $wrap whether to wrap the collection instances in Collection classes.
+     *
+     * @return array connections array
      */
     public function allCollections($wrap = false)
     {
@@ -110,7 +112,8 @@ class Database
     /**
      * Database injector
      *
-     * @param  mixed  $database MongoDB instance, Database instance, string identifier.
+     * @param mixed $database MongoDB instance, Database instance, string identifier.
+     *
      * @return object $this
      */
     public function setDatabase($database)
@@ -137,9 +140,10 @@ class Database
     /**
      * Retrieve a collection
      *
-     * @param  string  $collection collection name
-     * @param  boolean $wrap       whether to wrap it in a Collection class.
-     * @return mixed   Collection instance or MongoCollection instance.
+     * @param string  $collection collection name
+     * @param boolean $wrap       whether to wrap it in a Collection class.
+     *
+     * @return mixed Collection instance or MongoCollection instance.
      */
     public function collection($collection, $wrap = true)
     {
@@ -152,9 +156,10 @@ class Database
     /**
      * Retrieve a GridFS object
      *
-     * @param  string  $prefix collection name
-     * @param  boolean $wrap   whether to wrap it in a Collection class.
-     * @return mixed   Collection instance or MongoCollection instance.
+     * @param string  $prefix collection name
+     * @param boolean $wrap   whether to wrap it in a Collection class.
+     *
+     * @return mixed Collection instance or MongoCollection instance.
      */
     public function filesystem($prefix = 'fs', $wrap = true)
     {
@@ -179,8 +184,9 @@ class Database
     /**
      * Retrieve one or more references from the database.
      *
-     * @param  object|array $reference one or more references
-     * @return array        one or more documents
+     * @param object|array $reference one or more references
+     *
+     * @return array one or more documents
      */
     public function getRef($reference)
     {
@@ -201,8 +207,9 @@ class Database
     /**
      * Execute javascript on the database
      *
-     * @param  mixed $code      MongoCode or javascript string
-     * @param  array $arguments function arguments
+     * @param mixed $code      MongoCode or javascript string
+     * @param array $arguments function arguments
+     *
      * @return mixed result
      */
     public function executeCode($code, array $arguments = array())

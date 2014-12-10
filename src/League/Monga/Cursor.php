@@ -112,9 +112,10 @@ class Cursor implements \Countable, \IteratorAggregate
     /**
      * Original cursor method routing.
      *
-     * @param  string $method    method name
-     * @param  array  $arguments method arguments
-     * @return mixed  method result
+     * @param string $method    method name
+     * @param array  $arguments method arguments
+     *
+     * @return mixed method result
      */
     public function __call($method, $arguments)
     {

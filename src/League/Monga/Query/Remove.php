@@ -22,8 +22,9 @@ class Remove extends Where
     /**
      * Set the justOne option.
      *
-     * @param  boolean $single justOne option
-     * @return object  $this
+     * @param boolean $single justOne option
+     *
+     * @return object $this
      */
     public function single($single = true)
     {
@@ -35,8 +36,9 @@ class Remove extends Where
     /**
      * Set the justOne option, reversed.
      *
-     * @param  boolean $multiple reversed justOne option
-     * @return object  $this
+     * @param boolean $multiple reversed justOne option
+     *
+     * @return object $this
      */
     public function multiple($multiple = true)
     {

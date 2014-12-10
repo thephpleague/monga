@@ -34,8 +34,9 @@ abstract class Builder
     /**
      * Set the safe option
      *
-     * @param  boolean $safe safe mode
-     * @return object  $this
+     * @param boolean $safe safe mode
+     *
+     * @return object $this
      */
     public function safe($safe = true)
     {
@@ -47,8 +48,9 @@ abstract class Builder
     /**
      * Set the timeout option
      *
-     * @param  boolean $timeout query timeout
-     * @return object  $this
+     * @param boolean $timeout query timeout
+     *
+     * @return object $this
      */
     public function timeout($timeout)
     {
@@ -60,8 +62,9 @@ abstract class Builder
     /**
      * Set the fsync option
      *
-     * @param  boolean $fsync fsync option
-     * @return object  $this
+     * @param boolean $fsync fsync option
+     *
+     * @return object $this
      */
     public function fsync($fsync = true)
     {
@@ -87,7 +90,8 @@ abstract class Builder
     /**
      * Inject query options
      *
-     * @param  array  $options query options
+     * @param array $options query options
+     *
      * @return object $this
      */
     public function setOptions(array $options)

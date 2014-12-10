@@ -28,7 +28,8 @@ class Where extends Builder
      * will be reformatted to match, allowing further
      * chaining by Monga.
      *
-     * @param  array  $where An array of where conditions
+     * @param array $where An array of where conditions
+     *
      * @return object $this
      */
     public function setWhere(array $where)
@@ -72,9 +73,10 @@ class Where extends Builder
     /**
      * Internal where statement formatter
      *
-     * @param  string $type      chain type
-     * @param  string $field     fieldname
-     * @param  mixed  $statement filter statement
+     * @param string $type      chain type
+     * @param string $field     fieldname
+     * @param mixed  $statement filter statement
+     *
      * @return object $this
      */
     protected function formatWhere($type, $field, $statement = null)
@@ -184,8 +186,9 @@ class Where extends Builder
     /**
      * Appends a where statement.
      *
-     * @param  mixed  $field field name or nested query closure
-     * @param  mixed  $value filter value
+     * @param mixed $field field name or nested query closure
+     * @param mixed $value filter value
+     *
      * @return object $this
      */
     public function where($field, $value = null)
@@ -196,8 +199,9 @@ class Where extends Builder
     /**
      * Appends a where statement.
      *
-     * @param  mixed  $field field name or nested query closure
-     * @param  mixed  $value filter value
+     * @param mixed $field field name or nested query closure
+     * @param mixed $value filter value
+     *
      * @return object $this
      */
     public function andWhere($field, $value = null)
@@ -208,8 +212,9 @@ class Where extends Builder
     /**
      * Appends a or-where statement.
      *
-     * @param  mixed  $field field name or nested query closure
-     * @param  mixed  $value filter value
+     * @param mixed $field field name or nested query closure
+     * @param mixed $value filter value
+     *
      * @return object $this
      */
     public function orWhere($field, $value = null)
@@ -224,8 +229,9 @@ class Where extends Builder
     /**
      * Appends an and-where-not statement.
      *
-     * @param  string $field field name
-     * @param  mixed  $value filter value
+     * @param string $field field name
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function whereNot($field, $value)
@@ -236,8 +242,9 @@ class Where extends Builder
     /**
      * Appends a or-where-not statement.
      *
-     * @param  string $field field name
-     * @param  mixed  $value filter value
+     * @param string $field field name
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function orWhereNot($field, $value)
@@ -248,8 +255,9 @@ class Where extends Builder
     /**
      * Appends an and-where-not statement.
      *
-     * @param  string $field field name
-     * @param  mixed  $value filter value
+     * @param string $field field name
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function andWhereNot($field, $value)
@@ -260,11 +268,12 @@ class Where extends Builder
     /**
      * Appends an and-where-regex statement defined in sql syntax.
      *
-     * @param  string $field     field name
-     * @param  mixed  $value     filter value
-     * @param  string $flags     regex flags
-     * @param  string $delimiter preg_quote delimiter
-     * @param  string $type      chain type
+     * @param string $field     field name
+     * @param mixed  $value     filter value
+     * @param string $flags     regex flags
+     * @param string $delimiter preg_quote delimiter
+     * @param string $type      chain type
+     *
      * @return object $this
      */
     public function whereLike($field, $value, $flags = 'imxsu', $delimiter = '/', $type = '$and')
@@ -289,10 +298,11 @@ class Where extends Builder
     /**
      * Appends a or-where-regex statement defined in sql syntax.
      *
-     * @param  string $field     field name
-     * @param  mixed  $value     filter value
-     * @param  string $flags     regex flags
-     * @param  string $delimiter preg_quote delimiter
+     * @param string $field     field name
+     * @param mixed  $value     filter value
+     * @param string $flags     regex flags
+     * @param string $delimiter preg_quote delimiter
+     *
      * @return object $this
      */
     public function orWhereLike($field, $value, $flags = 'imxsu', $delimiter = null)
@@ -303,10 +313,11 @@ class Where extends Builder
     /**
      * Appends an and-where-regex statement defined in sql syntax.
      *
-     * @param  string $field     field name
-     * @param  mixed  $value     filter value
-     * @param  string $flags     regex flags
-     * @param  string $delimiter preg_quote delimiter
+     * @param string $field     field name
+     * @param mixed  $value     filter value
+     * @param string $flags     regex flags
+     * @param string $delimiter preg_quote delimiter
+     *
      * @return object $this
      */
     public function andWhereLike($field, $value, $flags = 'imxsu', $delimiter = null)
@@ -317,8 +328,9 @@ class Where extends Builder
     /**
      * Appends an and-where-regex statement
      *
-     * @param  string $field field name
-     * @param  mixed  $value filter value
+     * @param string $field field name
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function whereRegex($field, $value)
@@ -333,8 +345,9 @@ class Where extends Builder
     /**
      * Appends an and-where-regex statement
      *
-     * @param  string $field fieldname
-     * @param  mixed  $value filter value
+     * @param string $field fieldname
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function andWhereRegex($field, $value)
@@ -345,8 +358,9 @@ class Where extends Builder
     /**
      * Appends a or-where-regex statement
      *
-     * @param  string $field field name
-     * @param  mixed  $value filter value
+     * @param string $field field name
+     * @param mixed  $value filter value
+     *
      * @return object $this
      */
     public function orWhereRegex($field, $value)
@@ -361,7 +375,8 @@ class Where extends Builder
     /**
      * Appends an and-where-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function whereExists($field)
@@ -372,7 +387,8 @@ class Where extends Builder
     /**
      * Appends a or-where-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function orWhereExists($field)
@@ -383,7 +399,8 @@ class Where extends Builder
     /**
      * Appends an and-where-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function andWhereExists($field)
@@ -394,7 +411,8 @@ class Where extends Builder
     /**
      * Appends an and-where-not-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function whereNotExists($field)
@@ -405,7 +423,8 @@ class Where extends Builder
     /**
      * Appends an and-where-not-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function andWhereNotExists($field)
@@ -416,7 +435,8 @@ class Where extends Builder
     /**
      * Appends an or-where-not-exists statement
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function orWhereNotExists($field)
@@ -427,8 +447,9 @@ class Where extends Builder
     /**
      * Appends a and-where-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function whereIn($field, $values)
@@ -439,8 +460,9 @@ class Where extends Builder
     /**
      * Appends a and-where-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function andWhereIn($field, $values)
@@ -451,8 +473,9 @@ class Where extends Builder
     /**
      * Appends a or-where-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function orWhereIn($field, $values)
@@ -463,8 +486,9 @@ class Where extends Builder
     /**
      * Appends a and-where-all statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function whereAll($field, $values)
@@ -475,8 +499,9 @@ class Where extends Builder
     /**
      * Appends a and-where-all statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function andWhereAll($field, $values)
@@ -487,8 +512,9 @@ class Where extends Builder
     /**
      * Appends a or-where-all statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function orWhereAll($field, $values)
@@ -499,8 +525,9 @@ class Where extends Builder
     /**
      * Appends a and-where-not-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function whereNotIn($field, $values)
@@ -511,8 +538,9 @@ class Where extends Builder
     /**
      * Appends a and-where-not-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function andWhereNotIn($field, $values)
@@ -523,8 +551,9 @@ class Where extends Builder
     /**
      * Appends a or-where-not-in statement
      *
-     * @param  string $field  field name
-     * @param  array  $values search values
+     * @param string $field  field name
+     * @param array  $values search values
+     *
      * @return object $this
      */
     public function orWhereNotIn($field, $values)
@@ -535,9 +564,10 @@ class Where extends Builder
     /**
      * Appends a and-where-size statement
      *
-     * @param  string  $field field name
-     * @param  integer $size  array size
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $size  array size
+     *
+     * @return object $this
      */
     public function whereSize($field, $size)
     {
@@ -547,9 +577,10 @@ class Where extends Builder
     /**
      * Appends a and-where-size statement
      *
-     * @param  string  $field field name
-     * @param  integer $size  array size
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $size  array size
+     *
+     * @return object $this
      */
     public function andWhereSize($field, $size)
     {
@@ -559,9 +590,10 @@ class Where extends Builder
     /**
      * Appends a or-where-size statement
      *
-     * @param  string  $field field name
-     * @param  integer $size  array size
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $size  array size
+     *
+     * @return object $this
      */
     public function orWhereSize($field, $size)
     {
@@ -571,9 +603,10 @@ class Where extends Builder
     /**
      * Appends a and-where-type statement
      *
-     * @param  string  $field field name
-     * @param  integer $type  value type
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $type  value type
+     *
+     * @return object $this
      */
     public function whereType($field, $type)
     {
@@ -583,9 +616,10 @@ class Where extends Builder
     /**
      * Appends a and-where-type statement
      *
-     * @param  string  $field field name
-     * @param  integer $type  value type
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $type  value type
+     *
+     * @return object $this
      */
     public function andWhereType($field, $type)
     {
@@ -595,9 +629,10 @@ class Where extends Builder
     /**
      * Appends a or-where-type statement
      *
-     * @param  string  $field field name
-     * @param  integer $type  value type
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $type  value type
+     *
+     * @return object $this
      */
     public function orWhereType($field, $type)
     {
@@ -607,9 +642,10 @@ class Where extends Builder
     /**
      * Appends a and-where-lower-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function whereLt($field, $value)
     {
@@ -619,9 +655,10 @@ class Where extends Builder
     /**
      * Appends a and-where-lower-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function andWhereLt($field, $value)
     {
@@ -631,9 +668,10 @@ class Where extends Builder
     /**
      * Appends a or-where-lower-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function orWhereLt($field, $value)
     {
@@ -643,9 +681,10 @@ class Where extends Builder
     /**
      * Appends a and-where-lower-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function whereLte($field, $value)
     {
@@ -655,9 +694,10 @@ class Where extends Builder
     /**
      * Appends a and-where-lower-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function andWhereLte($field, $value)
     {
@@ -667,9 +707,10 @@ class Where extends Builder
     /**
      * Appends a or-where-lower-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value lower boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value lower boundary
+     *
+     * @return object $this
      */
     public function orWhereLte($field, $value)
     {
@@ -679,9 +720,10 @@ class Where extends Builder
     /**
      * Appends a and-where-greater-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function whereGt($field, $value)
     {
@@ -691,9 +733,10 @@ class Where extends Builder
     /**
      * Appends a and-where-greater-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function andWhereGt($field, $value)
     {
@@ -703,9 +746,10 @@ class Where extends Builder
     /**
      * Appends a or-where-greater-than statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function orWhereGt($field, $value)
     {
@@ -715,9 +759,10 @@ class Where extends Builder
     /**
      * Appends a and-where-greater-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function whereGte($field, $value)
     {
@@ -727,9 +772,10 @@ class Where extends Builder
     /**
      * Appends a and-where-greater-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function andWhereGte($field, $value)
     {
@@ -739,9 +785,10 @@ class Where extends Builder
     /**
      * Appends a or-where-greater-than-or-equal statement
      *
-     * @param  string  $field field name
-     * @param  integer $value high boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value high boundary
+     *
+     * @return object $this
      */
     public function orWhereGte($field, $value)
     {
@@ -751,10 +798,11 @@ class Where extends Builder
     /**
      * Appends a and-where-between statement
      *
-     * @param  string  $field field name
-     * @param  integer $min   lower boundary
-     * @param  integer $max   height boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $min   lower boundary
+     * @param integer $max   height boundary
+     *
+     * @return object $this
      */
     public function whereBetween($field, $min, $max)
     {
@@ -764,10 +812,11 @@ class Where extends Builder
     /**
      * Appends a and-where-between statement
      *
-     * @param  string  $field field name
-     * @param  integer $min   lower boundary
-     * @param  integer $max   height boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $min   lower boundary
+     * @param integer $max   height boundary
+     *
+     * @return object $this
      */
     public function andWhereBetween($field, $min, $max)
     {
@@ -777,10 +826,11 @@ class Where extends Builder
     /**
      * Appends a or-where-between statement
      *
-     * @param  string  $field field name
-     * @param  integer $min   lower boundary
-     * @param  integer $max   height boundary
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $min   lower boundary
+     * @param integer $max   height boundary
+     *
+     * @return object $this
      */
     public function orWhereBetween($field, $min, $max)
     {
@@ -790,9 +840,10 @@ class Where extends Builder
     /**
      * Appends a and-where-id statement
      *
-     * @param  string  $value id
-     * @param  integer $field _id field
-     * @return object  $this
+     * @param string  $value id
+     * @param integer $field _id field
+     *
+     * @return object $this
      */
     public function whereId($value, $field = '_id')
     {
@@ -806,8 +857,9 @@ class Where extends Builder
     /**
      * Appends a and-where-id statement
      *
-     * @param  string $value id
-     * @param  string $field _id field
+     * @param string $value id
+     * @param string $field _id field
+     *
      * @return object $this
      */
     public function andWhereId($value, $field = '_id')
@@ -818,8 +870,9 @@ class Where extends Builder
     /**
      * Appends a or-where-id statement
      *
-     * @param  string $value id
-     * @param  string $field _id field
+     * @param string $value id
+     * @param string $field _id field
+     *
      * @return object $this
      */
     public function orWhereId($value, $field = '_id')
@@ -834,10 +887,11 @@ class Where extends Builder
     /**
      * Appends a and-where-near statement
      *
-     * @param  string $field   _id field
-     * @param  float  $lon     longitude
-     * @param  float  $lat     latitude
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param float  $lon     longitude
+     * @param float  $lat     latitude
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function whereNear($field, $lon, $lat, $options = array())
@@ -848,10 +902,11 @@ class Where extends Builder
     /**
      * Appends a and-where-near statement
      *
-     * @param  string $field   _id field
-     * @param  float  $lon     longitude
-     * @param  float  $lat     latitude
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param float  $lon     longitude
+     * @param float  $lat     latitude
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function andWhereNear($field, $lon, $lat, $options = array())
@@ -862,10 +917,11 @@ class Where extends Builder
     /**
      * Appends a and-where-near statement
      *
-     * @param  string $field   _id field
-     * @param  float  $lon     longitude
-     * @param  float  $lat     latitude
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param float  $lon     longitude
+     * @param float  $lat     latitude
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function orWhereNear($field, $lon, $lat, $options = array())
@@ -876,9 +932,10 @@ class Where extends Builder
     /**
      * Appends a and-where-within statement
      *
-     * @param  string $field   _id field
-     * @param  string $shape   shape
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function whereWithin($field, $shape, $options = array())
@@ -889,9 +946,10 @@ class Where extends Builder
     /**
      * Appends a and-where-within statement
      *
-     * @param  string $field   _id field
-     * @param  string $shape   shape
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function andWhereWithin($field, $shape, $options = array())
@@ -902,9 +960,10 @@ class Where extends Builder
     /**
      * Appends a and-where-near statement
      *
-     * @param  string $field   _id field
-     * @param  string $shape   shape
-     * @param  array  $options options
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
      * @return object $this
      */
     public function orWhereWithin($field, $shape, $options = array())
@@ -915,9 +974,10 @@ class Where extends Builder
     /**
      * Appends a and-nor-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @param  integer       $type   chain type
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     * @param integer       $type   chain type
+     *
+     * @return object $this
      */
     public function norWhere($clause, $type = '$and')
     {
@@ -941,8 +1001,9 @@ class Where extends Builder
     /**
      * Appends a and-nor-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     *
+     * @return object $this
      */
     public function andNorWhere($clause)
     {
@@ -952,8 +1013,9 @@ class Where extends Builder
     /**
      * Appends a or-nor-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     *
+     * @return object $this
      */
     public function orNorWhere($clause)
     {
@@ -963,9 +1025,10 @@ class Where extends Builder
     /**
      * Appends a and-not-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @param  integer       $type   chain type
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     * @param integer       $type   chain type
+     *
+     * @return object $this
      */
     public function notWhere($clause, $type = '$and')
     {
@@ -989,8 +1052,9 @@ class Where extends Builder
     /**
      * Appends a and-not-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     *
+     * @return object $this
      */
     public function andNotWhere($clause)
     {
@@ -1000,8 +1064,9 @@ class Where extends Builder
     /**
      * Appends a or-not-where-clause
      *
-     * @param  array|closure $clause nor where clause
-     * @return object        $this
+     * @param array|closure $clause nor where clause
+     *
+     * @return object $this
      */
     public function orNotWhere($clause)
     {
@@ -1041,8 +1106,9 @@ class Where extends Builder
     /**
      * Resolves a string data type to its integer counterpart
      *
-     * @param  string|int $type data type
-     * @return int        The data type's integer
+     * @param string|int $type data type
+     *
+     * @return int The data type's integer
      */
     public function resolveType($type)
     {

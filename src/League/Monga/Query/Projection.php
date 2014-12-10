@@ -17,7 +17,8 @@ class Projection extends Computer
     /**
      * Specifies a field to be included
      *
-     * @param  string $field The field to include
+     * @param string $field The field to include
+     *
      * @return object $this
      */
     public function select($field)
@@ -30,7 +31,8 @@ class Projection extends Computer
     /**
      * Specifies a field to be suppressed
      *
-     * @param  string $field The field to suppress
+     * @param string $field The field to suppress
+     *
      * @return object $this
      */
     public function exclude($field)
@@ -43,8 +45,9 @@ class Projection extends Computer
     /**
      * Sets an alias for a field.
      *
-     * @param  string $field The field's name
-     * @param  string $alias The field's alias
+     * @param string $field The field's name
+     * @param string $alias The field's alias
+     *
      * @return object $this
      */
     public function alias($field, $alias)

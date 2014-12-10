@@ -52,8 +52,9 @@ class Update extends Where
     /**
      * Set the multiple option negatively.
      *
-     * @param  boolean $single whether to allow single updates
-     * @return object  $this
+     * @param boolean $single whether to allow single updates
+     *
+     * @return object $this
      */
     public function single($single = true)
     {
@@ -65,8 +66,9 @@ class Update extends Where
     /**
      * Set the multiple option.
      *
-     * @param  boolean $multiple whether to allow multiple updates
-     * @return object  $this
+     * @param boolean $multiple whether to allow multiple updates
+     *
+     * @return object $this
      */
     public function multiple($multiple = true)
     {
@@ -78,8 +80,9 @@ class Update extends Where
     /**
      * Set the multiple option.
      *
-     * @param  boolean $atomic whether to use atomic more
-     * @return object  $this
+     * @param boolean $atomic whether to use atomic more
+     *
+     * @return object $this
      */
     public function atomic($atomic = true)
     {
@@ -91,8 +94,9 @@ class Update extends Where
     /**
      * Set the upsert option.
      *
-     * @param  boolean $upsert whether to allow upserts
-     * @return object  $this
+     * @param boolean $upsert whether to allow upserts
+     *
+     * @return object $this
      */
     public function upsert($upsert = true)
     {
@@ -118,8 +122,9 @@ class Update extends Where
     /**
      * Update the field from a document.
      *
-     * @param  string $field field name
-     * @param  string $value new value
+     * @param string $field field name
+     * @param string $value new value
+     *
      * @return object $this
      */
     public function set($field, $value)
@@ -138,7 +143,8 @@ class Update extends Where
     /**
      * Removes a field from a document.
      *
-     * @param  string $field field to remove
+     * @param string $field field to remove
+     *
      * @return object $this
      */
     public function remove($field)
@@ -157,8 +163,9 @@ class Update extends Where
     /**
      * Rename a field.
      *
-     * @param  string $field field name
-     * @param  string $to    new field name
+     * @param string $field field name
+     * @param string $to    new field name
+     *
      * @return object $this
      */
     public function rename($field, $to)
@@ -169,9 +176,10 @@ class Update extends Where
     /**
      * Pushes a value onto a field array
      *
-     * @param  string $field field name
-     * @param  mixed  $value value to append to the array
-     * @param  bool   $all   whether to remove all (must be array)
+     * @param string $field field name
+     * @param mixed  $value value to append to the array
+     * @param bool   $all   whether to remove all (must be array)
+     *
      * @return object $this
      */
     public function push($field, $value, $all = false)
@@ -182,8 +190,9 @@ class Update extends Where
     /**
      * Pushes a value onto a field array
      *
-     * @param  string $field  field name
-     * @param  mixed  $values value to append to the array
+     * @param string $field  field name
+     * @param mixed  $values value to append to the array
+     *
      * @return object $this
      */
     public function pushAll($field, array $values)
@@ -194,10 +203,11 @@ class Update extends Where
     /**
      * Removes all matched instances from a field array
      *
-     * @param  string $field    field to unshift
-     * @param  string $value    values to remove
-     * @param  string $operator condition operator
-     * @param  bool   $all
+     * @param string $field    field to unshift
+     * @param string $value    values to remove
+     * @param string $operator condition operator
+     * @param bool   $all
+     *
      * @return object $this
      */
     public function pull($field, $value, $operator = null, $all = false)
@@ -212,9 +222,10 @@ class Update extends Where
     /**
      * Removes all matched instances from a field array
      *
-     * @param  string $field    field to unshift
-     * @param  string $value    values to remove
-     * @param  string $operator condition operator
+     * @param string $field    field to unshift
+     * @param string $value    values to remove
+     * @param string $operator condition operator
+     *
      * @return object $this
      */
     public function pullAll($field, $value, $operator = null)
@@ -226,9 +237,10 @@ class Update extends Where
      * Adds the values of an array to the set only
      * when the array doesn't contain them already
      *
-     * @param  string  $field field name
-     * @param  integer $value value to increment by
-     * @return object  $this
+     * @param string  $field field name
+     * @param integer $value value to increment by
+     *
+     * @return object $this
      */
     public function addToSet($field, $value)
     {
@@ -238,7 +250,8 @@ class Update extends Where
     /**
      * Removes an item off the beginning of a field array.
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function unshift($field)
@@ -249,7 +262,8 @@ class Update extends Where
     /**
      * Removes an item off the ending of a field array.
      *
-     * @param  string $field field name
+     * @param string $field field name
+     *
      * @return object $this
      */
     public function pop($field)
@@ -260,9 +274,10 @@ class Update extends Where
     /**
      * Increments a field value.
      *
-     * @param  string  $field field to increment
-     * @param  integer $by    value to increment by
-     * @return object  $this
+     * @param string  $field field to increment
+     * @param integer $by    value to increment by
+     *
+     * @return object $this
      */
     public function increment($field, $by = 1)
     {

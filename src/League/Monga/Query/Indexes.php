@@ -40,6 +40,7 @@ class Indexes
      * Inject a collection
      *
      * @param  object MongoCollection
+     *
      * @return object $this
      */
     public function setCollection(MongoCollection $collection)
@@ -52,8 +53,9 @@ class Indexes
     /**
      * Create an index.
      *
-     * @param  array  $index   string fieldname or multi-key-index array
-     * @param  array  $options index options
+     * @param array $index   string fieldname or multi-key-index array
+     * @param array $options index options
+     *
      * @return object $this
      */
     public function create(array $index, $options = array())
@@ -70,8 +72,9 @@ class Indexes
     /**
      * Geospatial shortcut.
      *
-     * @param  string $field   field to use
-     * @param  array  $options index options
+     * @param string $field   field to use
+     * @param array  $options index options
+     *
      * @return object $this
      */
     public function geo($field, $options = array())
@@ -82,7 +85,8 @@ class Indexes
     /**
      * Prepate an index, allowing more expressive syntax.
      *
-     * @param  object $index index
+     * @param object $index index
+     *
      * @return object $index prepared index
      */
     protected function prepareIndex($index)
@@ -104,7 +108,8 @@ class Indexes
     /**
      * Drop one or more indexes
      *
-     * @param  mixed  $index string index name or index
+     * @param mixed $index string index name or index
+     *
      * @return object $this
      */
     public function drop($index)
