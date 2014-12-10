@@ -80,7 +80,7 @@ abstract class Builder
         return array(
             'w' => $this->safe ? 1 : 0,
             'fsync' => $this->fsync,
-            'timeout' => $this->timeout ?: MongoCursor::$timeout,
+            'connectTimeoutMS' => $this->timeout ?: MongoCursor::$timeout,
         );
     }
 

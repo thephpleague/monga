@@ -40,7 +40,7 @@ class QueryRemoveTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => MongoCursor::$timeout,
+            'connectTimeoutMS' => MongoCursor::$timeout,
             'justOne' => true,
         ), $this->remove->getOptions());
     }

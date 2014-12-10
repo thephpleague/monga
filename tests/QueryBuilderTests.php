@@ -71,7 +71,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => MongoCursor::$timeout,
+            'connectTimeoutMS' => MongoCursor::$timeout,
         ), $result);
 
         $result = $this->builder->timeout(100)->getOptions();
@@ -79,7 +79,7 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => 100,
+            'connectTimeoutMS' => 100,
         ), $result);
     }
 }
