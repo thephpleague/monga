@@ -22,8 +22,9 @@ abstract class Computer
     /**
      * Aggregate a sum from a field.
      *
-     * @param  string $result result key
-     * @param  mixed  $field  field to take the sum from, 1 for totals
+     * @param string $result result key
+     * @param mixed  $field  field to take the sum from, 1 for totals
+     *
      * @return object $this
      */
     public function sum($result, $field = 1)
@@ -38,8 +39,9 @@ abstract class Computer
     /**
      * Aggregate a unique set of values.
      *
-     * @param  string $result result key
-     * @param  string $field  field to generate the set from
+     * @param string $result result key
+     * @param string $field  field to generate the set from
+     *
      * @return object $this
      */
     public function addToSet($result, $field = null)
@@ -54,8 +56,9 @@ abstract class Computer
     /**
      * Aggregate the first value of a set.
      *
-     * @param  string $result result key
-     * @param  string $field  field to generate get the first from
+     * @param string $result result key
+     * @param string $field  field to generate get the first from
+     *
      * @return object $this
      */
     public function first($result, $field = null)
@@ -70,8 +73,9 @@ abstract class Computer
     /**
      * Aggregate the last value of a set.
      *
-     * @param  string $result result key
-     * @param  string $field  field to generate get the last from
+     * @param string $result result key
+     * @param string $field  field to generate get the last from
+     *
      * @return object $this
      */
     public function last($result, $field = null)
@@ -86,8 +90,9 @@ abstract class Computer
     /**
      * Aggregate the max value of a set.
      *
-     * @param  string $result result key
-     * @param  string $field  field to generate get the max from
+     * @param string $result result key
+     * @param string $field  field to generate get the max from
+     *
      * @return object $this
      */
     public function max($result, $field = null)
@@ -102,8 +107,9 @@ abstract class Computer
     /**
      * Aggregate the min value of a set.
      *
-     * @param  string $result result key
-     * @param  string $field  field to generate get the min from
+     * @param string $result result key
+     * @param string $field  field to generate get the min from
+     *
      * @return object $this
      */
     public function min($result, $field = null)
@@ -118,8 +124,9 @@ abstract class Computer
     /**
      * Aggregate the all the values of a given key.
      *
-     * @param  string $result result key
-     * @param  string $field  field to get all the values from
+     * @param string $result result key
+     * @param string $field  field to get all the values from
+     *
      * @return object $this
      */
     public function push($result, $field = null)
@@ -134,7 +141,8 @@ abstract class Computer
     /**
      * Prepends a dollar sign to field names
      *
-     * @param  string $field key name
+     * @param string $field key name
+     *
      * @return string prepared key fieldname
      */
     protected function prepareField($field)

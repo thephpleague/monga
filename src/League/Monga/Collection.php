@@ -45,7 +45,8 @@ class Collection
     /**
      * MongoCollection injector
      *
-     * @param  object $collection MongoCollection
+     * @param object $collection MongoCollection
+     *
      * @return object $this
      */
     public function setCollection(MongoCollection $collection)
@@ -70,8 +71,9 @@ class Collection
     /**
      * Counts the given collection with an optional filter query
      *
-     * @param  array|closure $query count filter
-     * @return int           number of documents
+     * @param array|closure $query count filter
+     *
+     * @return int number of documents
      */
     public function count($query = array())
     {
@@ -95,9 +97,10 @@ class Collection
     /**
      * Returns the distinct values for a given key.
      *
-     * @param  string $field field to use
-     * @param  mixed  $query match query
-     * @return array  array of distinct values
+     * @param string $field field to use
+     * @param mixed  $query match query
+     *
+     * @return array array of distinct values
      */
     public function distinct($key, $query = array())
     {
@@ -123,7 +126,8 @@ class Collection
     /**
      * Aggregate a collection
      *
-     * @param  mixed $aggregation aggregaction pipeline of callback Closure
+     * @param mixed $aggregation aggregaction pipeline of callback Closure
+     *
      * @return array aggregation result
      */
     public function aggregate($aggregation = array())
@@ -163,8 +167,9 @@ class Collection
     /**
      * Manipulate collection indexes
      *
-     * @param  Closure $callback callback
-     * @return object  $this
+     * @param Closure $callback callback
+     *
+     * @return object $this
      */
     public function indexes(Closure $callback)
     {
@@ -187,9 +192,10 @@ class Collection
     /**
      * Removes documents from the current collection
      *
-     * @param  array|Closure $criteria remove filter
-     * @param  array         $options  remove options
-     * @return mixed         false on failure, number of deleted items on success
+     * @param array|Closure $criteria remove filter
+     * @param array         $options  remove options
+     *
+     * @return mixed false on failure, number of deleted items on success
      */
     public function remove($criteria, $options = array())
     {
@@ -234,10 +240,11 @@ class Collection
     /**
      * Finds documents.
      *
-     * @param  mixed   $query   configuration closure, raw mongo conditions array
-     * @param  array   $fields  associative array for field exclusion/inclusion
-     * @param  boolean $findOne whether to find one or multiple
-     * @return mixed   result Cursor for multiple, document array for one.
+     * @param mixed   $query   configuration closure, raw mongo conditions array
+     * @param array   $fields  associative array for field exclusion/inclusion
+     * @param boolean $findOne whether to find one or multiple
+     *
+     * @return mixed result Cursor for multiple, document array for one.
      */
     public function find($query = array(), $fields = array(), $findOne = false)
     {
@@ -296,8 +303,9 @@ class Collection
     /**
      * Finds a single documents.
      *
-     * @param  mixed      $query  configuration closure, raw mongo conditions array
-     * @param  array      $fields associative array for field exclusion/inclusion
+     * @param mixed $query  configuration closure, raw mongo conditions array
+     * @param array $fields associative array for field exclusion/inclusion
+     *
      * @return array|null document array when found, null when not found
      */
     public function findOne($query = array(), $fields = array())
@@ -308,8 +316,9 @@ class Collection
     /**
      * Inserts one or multiple documents.
      *
-     * @param  array   $data    documents or array of documents
-     * @param  array   $options insert options
+     * @param array $data    documents or array of documents
+     * @param array $options insert options
+     *
      * @return boolean success boolean
      */
     public function insert(array $data, $options = array())
@@ -354,7 +363,7 @@ class Collection
                 // are MongoCursorException's "not master" errors.
                 $result = $this->collection->insert($data, $options);
             } else {
-                 throw $e;
+                throw $e;
             }
         }
 
@@ -368,9 +377,10 @@ class Collection
     /**
      * Updates a collection
      *
-     * @param  mixed   $values  update array or callback
-     * @param  mixed   $query   update filter
-     * @param  array   $options update options
+     * @param mixed $values  update array or callback
+     * @param mixed $query   update filter
+     * @param array $options update options
+     *
      * @return boolean query success
      */
     public function update($values = array(), $query = null, $options = array())
@@ -410,8 +420,9 @@ class Collection
     /**
      * Saves a documents.
      *
-     * @param  array   $document document
-     * @param  array   $options  save options
+     * @param array $document document
+     * @param array $options  save options
+     *
      * @return boolean success boolean
      */
     public function save(&$document, $options = array())

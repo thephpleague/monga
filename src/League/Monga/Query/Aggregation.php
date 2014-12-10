@@ -24,7 +24,8 @@ class Aggregation
     /**
      * Project the results.
      *
-     * @param  array  $projection projection
+     * @param array $projection projection
+     *
      * @return object $this
      */
     public function project($projection)
@@ -47,7 +48,8 @@ class Aggregation
     /**
      * Group the results.
      *
-     * @param  mixed  $projection projection array / closure / Query\Group instance
+     * @param mixed $projection projection array / closure / Query\Group instance
+     *
      * @return object $this
      */
     public function group($group)
@@ -71,7 +73,8 @@ class Aggregation
     /**
      * Add a limit operation to the pipeline
      *
-     * @param  string $field field to unwind
+     * @param string $field field to unwind
+     *
      * @return object $this
      */
     public function unwind($field)
@@ -84,7 +87,8 @@ class Aggregation
     /**
      * Add a skip operation to the pipeline
      *
-     * @param  int    $amount amount to skip
+     * @param int $amount amount to skip
+     *
      * @return object $this
      */
     public function skip($amount)
@@ -97,7 +101,8 @@ class Aggregation
     /**
      * Add a limit operation to the pipeline
      *
-     * @param  int    $amount limit
+     * @param int $amount limit
+     *
      * @return object $this
      */
     public function limit($amount)
@@ -110,7 +115,8 @@ class Aggregation
     /**
      * Add an operation to the pipeline
      *
-     * @param  array  $operation operation
+     * @param array $operation operation
+     *
      * @return object $this
      */
     public function pipe(array $operation)
@@ -123,7 +129,8 @@ class Aggregation
     /**
      * Add a match operation to the pipeline
      *
-     * @param  mixed  $filter filter array / filter callback / Query\Where instance
+     * @param mixed $filter filter array / filter callback / Query\Where instance
+     *
      * @return object $this
      */
     public function match($filter)
@@ -161,7 +168,8 @@ class Aggregation
     /**
      * Inject the aggregation pipeline.
      *
-     * @param  array  $pipeline pipeline
+     * @param array $pipeline pipeline
+     *
      * @return object $this
      */
     public function setPipeline(array $pipeline)

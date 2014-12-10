@@ -54,7 +54,8 @@ class Connection
     /**
      * Connection injector
      *
-     * @param  object $connection MongoClient instance
+     * @param object $connection MongoClient instance
+     *
      * @return object $this
      */
     public function setConnection(MongoClient $connection)
@@ -119,7 +120,8 @@ class Connection
     /**
      * Drops a database.
      *
-     * @param  string  $database database name
+     * @param string $database database name
+     *
      * @return boolean whether the database was dropped successfully
      */
     public function dropDatabase($database)
@@ -132,9 +134,10 @@ class Connection
     /**
      * Retrieve a database object from a connection
      *
-     * @param  string  $database database name
-     * @param  boolean $wrap     whether to wrap in a Database object
-     * @return object  MongoDB or Monga\Database instance
+     * @param string  $database database name
+     * @param boolean $wrap     whether to wrap in a Database object
+     *
+     * @return object MongoDB or Monga\Database instance
      */
     public function database($database, $wrap = true)
     {
@@ -146,7 +149,8 @@ class Connection
     /**
      * Returns whether a database exists.
      *
-     * @param  boolean $name database name
+     * @param boolean $name database name
+     *
      * @return boolean whether the database exists
      */
     public function hasDatabase($name)
@@ -157,8 +161,9 @@ class Connection
     /**
      * Returns a list of databases.
      *
-     * @param  boolean $detailed return detailed information
-     * @return array   array containing database name or info arrays
+     * @param boolean $detailed return detailed information
+     *
+     * @return array array containing database name or info arrays
      */
     public function listDatabases($detailed = false)
     {
