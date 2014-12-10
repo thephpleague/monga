@@ -178,7 +178,7 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(
             'w' => 0,
             'fsync' => false,
-            'timeout' => MongoCursor::$timeout,
+            'connectTimeoutMS' => MongoCursor::$timeout,
             'upsert' => false,
             'multiple' => false,
         ), $this->update->getOptions());
