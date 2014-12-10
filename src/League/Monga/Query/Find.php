@@ -86,15 +86,15 @@ class Find extends Where
     /**
      *  Specifies fields to select
      *
-     *  @param  string $field field to select
+     *  @param  mixed 	$field field to select
      *
-     *  @return object        current instance
+     *  @return object	current instance
      */
     public function select($field)
     {
-        $fields = func_get_args();
+        $fields = ( is_array($field) ? $field : func_get_args() );
 
-        foreach ((array) $fields as $field) {
+        foreach ($fields as $field) {
             $this->fields[$field] = 1;
         }
     }
@@ -102,14 +102,14 @@ class Find extends Where
     /**
      *  Specifies fields to exclude
      *
-     *  @param  string $field fields to exclude
+     *  @param  mixed	$field fields to exclude
      *
-     *  @return object        current instance
+     *  @return object	current instance
      */
     public function exclude($field)
     {
-        $fields = func_get_args();
-
+	$fields = ( is_array($field) ? $field : func_get_args() );
+	
         foreach ($fields as $field) {
             $this->fields[$field] = -1;
         }
