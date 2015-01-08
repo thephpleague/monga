@@ -127,7 +127,7 @@ class Update extends Where
      *
      * @return object $this
      */
-    public function set($field, $value)
+    public function set($field, $value = null)
     {
         if (! is_array($field)) {
             $field = array($field => $value);
