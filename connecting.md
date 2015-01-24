@@ -4,14 +4,13 @@ permalink: /connecting/
 title: Connecting
 ---
 
-Connecting
-==========
+# Connecting
 
 First, we will want to connect to MongoDB. `Monga::connection()` is a simple
 wrapper around the `MongoClient` constructor. Its first parameter can accept
 either a `MongoClient` object or an DNS string.
 
-```
+~~~ php
 use League\Monga;
 
 // Connects mongodb://localhost:27017
@@ -25,13 +24,13 @@ $connection = Monga::connection('mongodb://localhost:27017', array(
 	'username' => 'beak:man',
 	'password' => 'p@ssword'
 ));
-```
+~~~
 
 You can find more details around `MongoClient`'s constructor [here](http://php.net/manual/en/mongoclient.construct.php).
 
 Now that we've connected to MongoDB, we'll want to specify our database:
 
-```
+~~~ php
 // Get the database
 $database = $connection->database('db_name');
-```
+~~~

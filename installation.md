@@ -4,18 +4,15 @@ permalink: /installation/
 title: Installation
 ---
 
-Installation
-============
+# Installation
 
-Requirements
-------------
+## Requirements
 
 * PHP >= 5.3.3
 * [PECL Mongo extension](http://pecl.php.net/package/mongo)
 
-Composer
---------
+## Composer
 
-```
+~~~ bash
 $ composer require league/monga
-```
+~~~
