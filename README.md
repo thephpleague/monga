@@ -130,7 +130,10 @@ $collection->aggregate(function ($a) {
 });
 ```
 
-Enjoy!
+## Security
+
+If you discover any security related issues, please email bryan@bryan-crowe instead of using the issue tracker.
+
 
 ## License
 
