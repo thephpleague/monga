@@ -51,6 +51,15 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $this->collection->setCollection($original);
     }
 
+    public function testSetMaxRetries()
+    {
+        $this->collection->setMaxRetries(5);
+        $reflection = new ReflectionObject($this->collection);
+        $property = $reflection->getProperty('maxRetries');
+        $property->setAccessible(true);
+        $this->assertEquals(5, $property->getValue($this->collection));
+    }
+
     public function testCount()
     {
         $result = $this->collection->count();
