@@ -23,6 +23,11 @@ class Collection
     protected $collection;
 
     /**
+     * @var  int  Amount of times to retry CRUD operations for "not master"
+     */
+    protected $maxRetries = 1;
+
+    /**
      * Constructor, sets the MongoCollection instance.
      *
      * @param object $collection MongoCollection
@@ -52,6 +57,21 @@ class Collection
     public function setCollection(MongoCollection $collection)
     {
         $this->collection = $collection;
+
+        return $this;
+    }
+
+    /**
+     * Set the max amount of times to retry CRUD operations in the case of
+     * "not master" exceptions.
+     *
+     * @param int $amount The amount of times
+     *
+     * @return object $this
+     */
+    public function setMaxRetries($amount)
+    {
+        $this->maxRetries = $amount;
 
         return $this;
     }
@@ -221,18 +241,29 @@ class Collection
             throw new \InvalidArgumentException('Remove criteria must be an array.');
         }
 
-        try {
-            $result = $this->collection->remove($criteria, $options);
-        } catch (MongoCursorException $e) {
-            // Retry "remove" in case of rediscovery latency issues
-            // in replica set failover. Error codes 10107, 13435, and 10058
-            // are MongoCursorException's "not master" errors.
-            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+        $maxRetries = $this->maxRetries;
+        $tries = 0;
+
+        do {
+            try {
                 $result = $this->collection->remove($criteria, $options);
-            } else {
-                throw $e;
+                break;
+            } catch (MongoCursorException $e) {
+                // Retry "save" in case of rediscovery latency issues
+                // in replica set failover. Error codes 10107, 13435, and 10058
+                // are MongoCursorException's "not master" errors.
+                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    if ($tries === $maxRetries) {
+                        throw $e;
+                    } else {
+                        $tries++;
+                        continue;
+                    }
+                } else {
+                    throw $e;
+                }
             }
-        }
+        } while ($tries <= $maxRetries);
 
         return $result === true || (bool) $result['ok'];
     }
@@ -323,21 +354,32 @@ class Collection
      */
     public function insert(array $data, $options = array())
     {
+        $maxRetries = $this->maxRetries;
+        $tries = 0;
+
         // Check whether we're dealing with a batch insert.
         if (isset($data[0]) && is_array($data[0])) {
             // Insert using batchInsert
-            try {
-                $result = $this->collection->batchInsert($data, $options);
-            } catch (MongoCursorException $e) {
-                // Retry "batchInsert" in case of rediscovery latency issues
-                // in replica set failover. Error codes 10107, 13435, and 10058
-                // are MongoCursorException's "not master" errors.
-                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+            do {
+                try {
                     $result = $this->collection->batchInsert($data, $options);
-                } else {
-                    throw $e;
+                    break;
+                } catch (MongoCursorException $e) {
+                    // Retry "save" in case of rediscovery latency issues
+                    // in replica set failover. Error codes 10107, 13435, and 10058
+                    // are MongoCursorException's "not master" errors.
+                    if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                        if ($tries === $maxRetries) {
+                            throw $e;
+                        } else {
+                            $tries++;
+                            continue;
+                        }
+                    } else {
+                        throw $e;
+                    }
                 }
-            }
+            } while ($tries <= $maxRetries);
 
             if (! $result || ! ($result === true || (bool) $result['ok'])) {
                 return false;
@@ -354,18 +396,26 @@ class Collection
             return $result;
         }
 
-        try {
-            $result = $this->collection->insert($data, $options);
-        } catch (MongoCursorException $e) {
-            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
-                // Retry "insert" in case of rediscovery latency issues
+        do {
+            try {
+                $result = $this->collection->insert($data, $options);
+                break;
+            } catch (MongoCursorException $e) {
+                // Retry "save" in case of rediscovery latency issues
                 // in replica set failover. Error codes 10107, 13435, and 10058
                 // are MongoCursorException's "not master" errors.
-                $result = $this->collection->insert($data, $options);
-            } else {
-                throw $e;
+                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    if ($tries === $maxRetries) {
+                        throw $e;
+                    } else {
+                        $tries++;
+                        continue;
+                    }
+                } else {
+                    throw $e;
+                }
             }
-        }
+        } while ($tries <= $maxRetries);
 
         if ($result === true || (bool) $result['ok']) {
             return $data['_id'];
@@ -401,18 +451,29 @@ class Collection
 
         isset($query) || $query = array();
 
-        try {
-            $result = $this->collection->update($query, $values, $options);
-        } catch (MongoCursorException $e) {
-            // Retry "update" in case of rediscovery latency issues
-            // in replica set failover. Error codes 10107, 13435, and 10058
-            // are MongoCursorException's "not master" errors.
-            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+        $maxRetries = $this->maxRetries;
+        $tries = 0;
+
+        do {
+            try {
                 $result = $this->collection->update($query, $values, $options);
-            } else {
-                throw $e;
+                break;
+            } catch (MongoCursorException $e) {
+                // Retry "save" in case of rediscovery latency issues
+                // in replica set failover. Error codes 10107, 13435, and 10058
+                // are MongoCursorException's "not master" errors.
+                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    if ($tries === $maxRetries) {
+                        throw $e;
+                    } else {
+                        $tries++;
+                        continue;
+                    }
+                } else {
+                    throw $e;
+                }
             }
-        }
+        } while ($tries <= $maxRetries);
 
         return $result === true || (bool) $result['ok'];
     }
@@ -427,18 +488,29 @@ class Collection
      */
     public function save(&$document, $options = array())
     {
-        try {
-            $result = $this->collection->save($document, $options);
-        } catch (MongoCursorException $e) {
-            // Retry "save" in case of rediscovery latency issues
-            // in replica set failover. Error codes 10107, 13435, and 10058
-            // are MongoCursorException's "not master" errors.
-            if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+        $maxRetries = $this->maxRetries;
+        $tries = 0;
+
+        do {
+            try {
                 $result = $this->collection->save($document, $options);
-            } else {
-                throw $e;
+                break;
+            } catch (MongoCursorException $e) {
+                // Retry "save" in case of rediscovery latency issues
+                // in replica set failover. Error codes 10107, 13435, and 10058
+                // are MongoCursorException's "not master" errors.
+                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    if ($tries === $maxRetries) {
+                        throw $e;
+                    } else {
+                        $tries++;
+                        continue;
+                    }
+                } else {
+                    throw $e;
+                }
             }
-        }
+        } while ($tries <= $maxRetries);
 
         return $result === true || (bool) $result['ok'];
     }
