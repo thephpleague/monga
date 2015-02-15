@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/monga.svg?style=flat-square)](https://packagist.org/packages/league/monga)
 
-A simple and swift MongoDB abstraction layer for PHP 5.3+
+A simple and swift MongoDB abstraction layer for PHP 5.4+
 
 ## What's this all about?
 

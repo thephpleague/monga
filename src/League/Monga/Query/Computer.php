@@ -1,6 +1,6 @@
 <?php
 /**
- * Monga is a swift MongoDB Abstraction for PHP 5.3+
+ * Monga is a swift MongoDB Abstraction for PHP 5.4+
  *
  * @package    Monga
  * @version    1.0
