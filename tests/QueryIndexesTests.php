@@ -35,10 +35,10 @@ class QueryIndexesTests extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        $index = array('field' => 1);
+        $index = ['field' => 1];
         $mock = m::mock('MongoCollection');
         $mock->shouldReceive('ensureIndex')
-            ->with($index, array());
+            ->with($index, []);
 
         $i = new i($mock);
         $i->create($index);
@@ -46,10 +46,10 @@ class QueryIndexesTests extends PHPUnit_Framework_TestCase
 
     public function testGeo()
     {
-        $index = array('field' => '2d');
+        $index = ['field' => '2d'];
         $mock = m::mock('MongoCollection');
         $mock->shouldReceive('ensureIndex')
-            ->with($index, array());
+            ->with($index, []);
 
         $i = new i($mock);
         $i->geo('field');
@@ -59,22 +59,22 @@ class QueryIndexesTests extends PHPUnit_Framework_TestCase
     {
         $i = new i(m::mock('MongoCollection'));
 
-        $expected = array(
+        $expected = [
             'asc' => 1,
             'desc' => -1,
             'geo' => '2d',
             'field' => 1,
-        );
+        ];
 
         $reflection = new ReflectionObject($i);
         $method = $reflection->getMethod('prepareIndex');
         $method->setAccessible(true);
-        $result = $method->invoke($i, array(
+        $result = $method->invoke($i, [
             'asc' => 'asc',
             'desc' => 'desc',
             'geo' => 'geo',
             'field' => 1,
-        ));
+        ]);
 
         $this->assertEquals($expected, $result);
     }

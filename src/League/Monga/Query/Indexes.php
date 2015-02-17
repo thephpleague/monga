@@ -58,7 +58,7 @@ class Indexes
      *
      * @return object $this
      */
-    public function create(array $index, $options = array())
+    public function create(array $index, $options = [])
     {
         // Convert expressive syntax
         $index = $this->prepareIndex($index);
@@ -77,9 +77,9 @@ class Indexes
      *
      * @return object $this
      */
-    public function geo($field, $options = array())
+    public function geo($field, $options = [])
     {
-        return $this->create(array($field => '2d'), $options);
+        return $this->create([$field => '2d'], $options);
     }
 
     /**

@@ -48,9 +48,9 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->set('field', 'value');
 
-        $this->assertEquals(array(
-            'field' => array('$set', 'value'),
-        ),
+        $this->assertEquals([
+            'field' => ['$set', 'value'],
+        ],
         $this->getProperty('update'));
     }
 
@@ -58,10 +58,10 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->remove('one', 'two');
 
-        $this->assertEquals(array(
-            'one' => array('$unset', 1),
-            'two' => array('$unset', 1),
-        ),
+        $this->assertEquals([
+            'one' => ['$unset', 1],
+            'two' => ['$unset', 1],
+        ],
         $this->getProperty('update'));
     }
 
@@ -69,9 +69,9 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->rename('one', 'two');
 
-        $this->assertEquals(array(
-            'one' => array('$rename', 'two'),
-        ),
+        $this->assertEquals([
+            'one' => ['$rename', 'two'],
+        ],
         $this->getProperty('update'));
     }
 
@@ -80,20 +80,20 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
         $this->update->push('field', 'value');
         $this->update->push('field2', 'value', true);
 
-        $this->assertEquals(array(
-            'field' => array('$push', 'value'),
-            'field2' => array('$pushAll', 'value'),
-        ),
+        $this->assertEquals([
+            'field' => ['$push', 'value'],
+            'field2' => ['$pushAll', 'value'],
+        ],
         $this->getProperty('update'));
     }
 
     public function testPushAll()
     {
-        $this->update->pushAll('field', array('value', 'other'));
+        $this->update->pushAll('field', ['value', 'other']);
 
-        $this->assertEquals(array(
-            'field' => array('$pushAll', array('value', 'other')),
-        ),
+        $this->assertEquals([
+            'field' => ['$pushAll', ['value', 'other']],
+        ],
         $this->getProperty('update'));
     }
 
@@ -102,30 +102,30 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
         $this->update->pull('field', 'value');
         $this->update->pull('field2', 10, '$gt', true);
 
-        $this->assertEquals(array(
-            'field' => array('$pull', 'value'),
-            'field2' => array('$pullAll', array('$gt' => 10)),
-        ),
+        $this->assertEquals([
+            'field' => ['$pull', 'value'],
+            'field2' => ['$pullAll', ['$gt' => 10]],
+        ],
         $this->getProperty('update'));
     }
 
     public function testPullAll()
     {
-        $this->update->pullAll('field', array('value', 'other'));
+        $this->update->pullAll('field', ['value', 'other']);
 
-        $this->assertEquals(array(
-            'field' => array('$pullAll', array('value', 'other')),
-        ),
+        $this->assertEquals([
+            'field' => ['$pullAll', ['value', 'other']],
+        ],
         $this->getProperty('update'));
     }
 
     public function testAddToSet()
     {
-        $this->update->addToSet('field', array('value', 'other'));
+        $this->update->addToSet('field', ['value', 'other']);
 
-        $this->assertEquals(array(
-            'field' => array('$addToSet', array('value', 'other')),
-        ),
+        $this->assertEquals([
+            'field' => ['$addToSet', ['value', 'other']],
+        ],
         $this->getProperty('update'));
     }
 
@@ -133,9 +133,9 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->pop('field');
 
-        $this->assertEquals(array(
-            'field' => array('$pop', 1),
-        ),
+        $this->assertEquals([
+            'field' => ['$pop', 1],
+        ],
         $this->getProperty('update'));
     }
 
@@ -143,9 +143,9 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->unshift('field');
 
-        $this->assertEquals(array(
-            'field' => array('$pop', -1),
-        ),
+        $this->assertEquals([
+            'field' => ['$pop', -1],
+        ],
         $this->getProperty('update'));
     }
 
@@ -153,19 +153,19 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     {
         $this->update->increment('field', 2);
 
-        $this->assertEquals(array(
-            'field' => array('$inc', 2),
-        ),
+        $this->assertEquals([
+            'field' => ['$inc', 2],
+        ],
         $this->getProperty('update'));
     }
 
     public function testGetUpdate()
     {
-        $expected = array(
-            '$set' => array('field' => 'value'),
-            '$inc' => array('downloads' => 1),
+        $expected = [
+            '$set' => ['field' => 'value'],
+            '$inc' => ['downloads' => 1],
             '$atomic' => 1,
-        );
+        ];
 
         $result = $this->update->increment('downloads', 1)->set('field', 'value')->atomic()->getUpdate();
 
@@ -175,12 +175,12 @@ class QueryUpdateTests extends PHPUnit_Framework_TestCase
     public function testGetOptions()
     {
         $this->update->single();
-        $this->assertEquals(array(
+        $this->assertEquals([
             'w' => 0,
             'fsync' => false,
             'connectTimeoutMS' => MongoCursor::$timeout,
             'upsert' => false,
             'multiple' => false,
-        ), $this->update->getOptions());
+        ], $this->update->getOptions());
     }
 }

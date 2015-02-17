@@ -11,11 +11,11 @@ class CursorTests extends PHPUnit_Framework_TestCase
 
         $collection = $database->collection('_collection');
         $collection->drop();
-        $values = array(
-            array('name' => 'Bill'),
-            array('name' => 'Frank'),
-            array('name' => 'George'),
-        );
+        $values = [
+            ['name' => 'Bill'],
+            ['name' => 'Frank'],
+            ['name' => 'George'],
+        ];
 
         $ids = $collection->insert($values);
 

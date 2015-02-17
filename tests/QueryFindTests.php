@@ -24,11 +24,11 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
         $this->find->orderBy('two', 'asc');
         $this->find->orderBy('three', 'desc');
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'one' => 1,
             'two' => 1,
             'three' => -1,
-        ),
+        ],
         $this->getProperty('orderBy'));
     }
 
@@ -36,10 +36,10 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
     {
         $this->find->select('one', 'two');
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'one' => 1,
             'two' => 1,
-        ),
+        ],
         $this->getProperty('fields'));
     }
 
@@ -47,35 +47,35 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
     {
         $this->find->exclude('one', 'two');
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'one' => -1,
             'two' => -1,
-        ),
+        ],
         $this->getProperty('fields'));
     }
 
     public function testFields()
     {
-        $this->find->fields(array(
+        $this->find->fields([
             'one' => 1,
             'two' => false,
-        ));
+        ]);
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'one' => 1,
             'two' => -1,
-        ),
+        ],
         $this->getProperty('fields'));
     }
 
     public function testGetFields()
     {
         $this->assertEmpty($this->getProperty('fields'));
-        $this->find->fields(array(
+        $this->find->fields([
             'one' => 1,
-        ));
+        ]);
 
-        $this->assertEquals(array('one' => 1), $this->getProperty('fields'));
+        $this->assertEquals(['one' => 1], $this->getProperty('fields'));
     }
 
     public function testOne()
@@ -103,11 +103,11 @@ class QueryFindTests extends PHPUnit_Framework_TestCase
 
     public function testGetPostFindActions()
     {
-        $expected = array(
-            array('sort', array('one' => 1)),
-            array('skip', 5),
-            array('limit', 15),
-        );
+        $expected = [
+            ['sort', ['one' => 1]],
+            ['skip', 5],
+            ['limit', 15],
+        ];
 
         $this->find->skip(5)->limit(15)->orderBy('one', 'asc');
 

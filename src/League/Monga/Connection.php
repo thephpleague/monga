@@ -32,7 +32,7 @@ class Connection
      * @param string $server  mongo dns
      * @param array  $options connection options
      */
-    public function __construct($server = null, array $options = array())
+    public function __construct($server = null, array $options = [])
     {
         if ($server instanceof MongoClient) {
             $this->connection = $server;
@@ -126,7 +126,7 @@ class Connection
      */
     public function dropDatabase($database)
     {
-        $result = $this->connection->{$database}->command(array('dropDatabase' => 1));
+        $result = $this->connection->{$database}->command(['dropDatabase' => 1]);
 
         return (bool) $result['ok'];
     }

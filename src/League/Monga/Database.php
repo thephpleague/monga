@@ -191,7 +191,7 @@ class Database
     public function getRef($reference)
     {
         $array = ! isset($reference['$ref']);
-        $reference = $array ? $reference : array($reference);
+        $reference = $array ? $reference : [$reference];
         $database = $this->database;
 
         $result = array_map(
@@ -212,7 +212,7 @@ class Database
      *
      * @return mixed result
      */
-    public function executeCode($code, array $arguments = array())
+    public function executeCode($code, array $arguments = [])
     {
         if (! ($code instanceof MongoCode)) {
             $code = new MongoCode($code);
@@ -228,7 +228,7 @@ class Database
      * @param array $options command options
      * @param array result
      */
-    public function command(array $command, array $options = array())
+    public function command(array $command, array $options = [])
     {
         return $this->database->command($command, $options);
     }

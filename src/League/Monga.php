@@ -57,7 +57,7 @@ class Monga
      *
      * @return object MongoCode
      */
-    public static function code($code, $scope = array())
+    public static function code($code, $scope = [])
     {
         return new MongoCode($code, $scope);
     }
@@ -97,7 +97,7 @@ class Monga
      *
      * @return object Monga\Connection
      */
-    public static function connection($server = null, array $options = array())
+    public static function connection($server = null, array $options = [])
     {
         return new Connection($server, $options);
     }

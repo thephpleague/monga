@@ -64,7 +64,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $result = $this->collection->count();
         $this->assertEquals(0, $result);
-        $this->collection->getCollection()->insert(array('this' => 'value'));
+        $this->collection->getCollection()->insert(['this' => 'value']);
         $result = $this->collection->count();
         $this->assertEquals(1, $result);
     }
@@ -83,7 +83,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $where->where('name', 'Frank');
         $result = $this->collection->count($where);
         $this->assertEquals(0, $result);
-        $this->collection->getCollection()->insert(array('name' => 'Frank'));
+        $this->collection->getCollection()->insert(['name' => 'Frank']);
         $result = $this->collection->count($where);
         $this->assertEquals(1, $result);
     }
@@ -95,7 +95,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         };
         $result = $this->collection->count($where);
         $this->assertEquals(0, $result);
-        $this->collection->getCollection()->insert(array('name' => 'Frank'));
+        $this->collection->getCollection()->insert(['name' => 'Frank']);
         $result = $this->collection->count($where);
         $this->assertEquals(1, $result);
     }
@@ -104,7 +104,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $result = $this->collection->drop();
         $this->assertFalse($result);
-        $this->collection->insert(array('name' => 'Frank'));
+        $this->collection->insert(['name' => 'Frank']);
         $result = $this->collection->drop();
         $this->assertTrue($result);
     }
@@ -117,18 +117,18 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $result = $this->collection->remove(array());
+        $result = $this->collection->remove([]);
         $this->assertTrue($result);
     }
 
     public function testRemoveWhere()
     {
-        $this->collection->getCollection()->insert(array('name' => 'Frank'));
+        $this->collection->getCollection()->insert(['name' => 'Frank']);
         $this->assertEquals(1, $this->collection->count());
-        $result = $this->collection->remove(array('name' => 'Bert'));
+        $result = $this->collection->remove(['name' => 'Bert']);
         $this->assertTrue($result);
         $this->assertEquals(1, $this->collection->count());
-        $result = $this->collection->remove(array('name' => 'Frank'));
+        $result = $this->collection->remove(['name' => 'Frank']);
         $this->assertTrue($result);
         $this->assertEquals(0, $this->collection->count());
     }
@@ -141,7 +141,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $closure2 = function ($query) {
             $query->where('name', 'Bert');
         };
-        $this->collection->getCollection()->insert(array('name' => 'Frank'));
+        $this->collection->getCollection()->insert(['name' => 'Frank']);
         $this->assertEquals(1, $this->collection->count());
         $result = $this->collection->remove($closure2);
         $this->assertTrue($result);
@@ -168,13 +168,13 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $collection = m::mock('MongoCollection');
         $collection->shouldReceive('distinct')
-            ->with('surname', array('age' => 25))
+            ->with('surname', ['age' => 25])
             ->once()
-            ->andReturn(array('randomstring'));
+            ->andReturn(['randomstring']);
 
-        $expected = array('randomstring');
+        $expected = ['randomstring'];
         $c = new Collection($collection);
-        $result = $c->distinct('surname', array('age' => 25));
+        $result = $c->distinct('surname', ['age' => 25]);
         $this->assertEquals($expected, $result);
     }
 
@@ -182,11 +182,11 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $collection = m::mock('MongoCollection');
         $collection->shouldReceive('distinct')
-            ->with('surname', array('age' => 25))
+            ->with('surname', ['age' => 25])
             ->once()
-            ->andReturn(array('randomstring'));
+            ->andReturn(['randomstring']);
 
-        $expected = array('randomstring');
+        $expected = ['randomstring'];
         $c = new Collection($collection);
         $result = $c->distinct('surname', function ($w) {
             $w->where('age', 25);
@@ -198,13 +198,13 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $collection = m::mock('MongoCollection');
         $collection->shouldReceive('aggregate')
-            ->with(array('randomstring'))
+            ->with(['randomstring'])
             ->once()
-            ->andReturn(array('randomstring'));
+            ->andReturn(['randomstring']);
 
-        $expected = array('randomstring');
+        $expected = ['randomstring'];
         $c = new Collection($collection);
-        $result = $c->aggregate(array('randomstring'));
+        $result = $c->aggregate(['randomstring']);
         $this->assertEquals($expected, $result);
     }
 
@@ -212,13 +212,13 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $collection = m::mock('MongoCollection');
         $collection->shouldReceive('aggregate')
-            ->with(array(
-                array('$limit' => 1),
-            ))
+            ->with([
+                ['$limit' => 1],
+            ])
             ->once()
-            ->andReturn(array('randomstring'));
+            ->andReturn(['randomstring']);
 
-        $expected = array('randomstring');
+        $expected = ['randomstring'];
         $c = new Collection($collection);
         $result = $c->aggregate(function ($a) {
             $a->limit(1);
@@ -251,7 +251,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
     public function testFindOneNotEmpty()
     {
-        $this->collection->insert(array('some' => 'value'));
+        $this->collection->insert(['some' => 'value']);
         $result = $this->collection->findOne();
         $this->assertInternalType('array', $result);
         $this->assertEquals('value', $result['some']);
@@ -271,7 +271,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
     public function testFindOneWithPostFindActionWithResult()
     {
-        $this->collection->insert(array('some' => 'value'));
+        $this->collection->insert(['some' => 'value']);
 
         $result = $this->collection->findOne(function ($query) {
             $query->where('some', 'value')
@@ -294,17 +294,17 @@ class CollectionTests extends PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $result = $this->collection->insert(array('new' => 'entry'));
+        $result = $this->collection->insert(['new' => 'entry']);
 
         $this->assertInstanceOf('MongoId', $result);
     }
 
     public function testInsertMultiple()
     {
-        $result = $this->collection->insert(array(
-            array('number' => 'one'),
-            array('number' => 'two'),
-        ));
+        $result = $this->collection->insert([
+            ['number' => 'one'],
+            ['number' => 'two'],
+        ]);
 
         $this->assertCount(2, $result);
         $this->assertContainsOnlyInstancesOf('MongoId', $result);
@@ -314,26 +314,26 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $collection = $this->getMockBuilder('MongoCollection')
             ->disableOriginalConstructor()
-            ->setMethods(array('insert'))
+            ->setMethods(['insert'])
             ->getMock();
         $collection->expects($this->once())
             ->method('insert')
-            ->with($this->equalTo(array('invalid')))
+            ->with($this->equalTo(['invalid']))
             ->will($this->returnValue(false));
 
         $this->collection->setCollection($collection);
-        $result = $this->collection->insert(array('invalid'));
+        $result = $this->collection->insert(['invalid']);
         $this->assertFalse($result);
     }
 
     public function testInsertMultipleInvalid()
     {
-        $input = array(
-            array(false), array(false),
-        );
+        $input = [
+            [false], [false],
+        ];
         $collection = $this->getMockBuilder('MongoCollection')
             ->disableOriginalConstructor()
-            ->setMethods(array('batchInsert'))
+            ->setMethods(['batchInsert'])
             ->getMock();
         $collection->expects($this->once())
             ->method('batchInsert')
@@ -341,23 +341,23 @@ class CollectionTests extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
 
         $this->collection->setCollection($collection);
-        $result = $this->collection->insert(array(
-            array(false), array(false),
-        ));
+        $result = $this->collection->insert([
+            [false], [false],
+        ]);
 
         $this->assertFalse($result);
     }
 
     public function testSave()
     {
-        $item = array('name' => 'Frank');
+        $item = ['name' => 'Frank'];
         $result = $this->collection->save($item);
         $this->assertTrue($result);
     }
 
     public function testUpdate()
     {
-        $result = $this->collection->update(array('name' => 'changed'));
+        $result = $this->collection->update(['name' => 'changed']);
         $this->assertTrue($result);
     }
 

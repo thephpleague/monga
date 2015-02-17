@@ -19,7 +19,7 @@ class Aggregation
     /**
      * @var  array  $pipeline  aggregation pipeline
      */
-    protected $pipeline = array();
+    protected $pipeline = [];
 
     /**
      * Project the results.
@@ -40,7 +40,7 @@ class Aggregation
             $projection = $projection->getProjection();
         }
 
-        $this->pipeline[] = array('$project' => $projection);
+        $this->pipeline[] = ['$project' => $projection];
 
         return $this;
     }
@@ -65,7 +65,7 @@ class Aggregation
             $group = $group->getGroup();
         }
 
-        $this->pipeline[] = array('$group' => $group);
+        $this->pipeline[] = ['$group' => $group];
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Aggregation
      */
     public function unwind($field)
     {
-        $this->pipeline[] = array('$unwind' => '$'.ltrim($field, '$'));
+        $this->pipeline[] = ['$unwind' => '$'.ltrim($field, '$')];
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Aggregation
      */
     public function skip($amount)
     {
-        $this->pipeline[] = array('$skip' => (int) $amount);
+        $this->pipeline[] = ['$skip' => (int) $amount];
 
         return $this;
     }
@@ -107,7 +107,7 @@ class Aggregation
      */
     public function limit($amount)
     {
-        $this->pipeline[] = array('$limit' => (int) $amount);
+        $this->pipeline[] = ['$limit' => (int) $amount];
 
         return $this;
     }
@@ -150,7 +150,7 @@ class Aggregation
             $filter = $filter->getWhere();
         }
 
-        $this->pipeline[] = array('$match' => $filter);
+        $this->pipeline[] = ['$match' => $filter];
 
         return $this;
     }

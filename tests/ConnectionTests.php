@@ -9,9 +9,9 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (! $this->connection) {
-            $this->connection = new Connection(null, array(
+            $this->connection = new Connection(null, [
                 'connect' => true,
-            ));
+            ]);
         }
     }
 
@@ -58,7 +58,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
 
     public function testDatabaseConfig()
     {
-        $connection = new Connection(array('connect' => true));
+        $connection = new Connection(['connect' => true]);
         $host = (string) $connection->getConnection();
         $this->assertEquals('localhost:27017', $host);
     }
@@ -91,7 +91,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
     public function testDropKnownDatabase()
     {
         $mongo = $this->connection->getConnection();
-        $mongo->demo->users->insert(array('test' => true));
+        $mongo->demo->users->insert(['test' => true]);
 
         $result = $this->connection->dropDatabase('demo');
 

@@ -39,7 +39,7 @@ class Filesystem extends Collection
      *
      * @return object MongoId object
      */
-    public function store($filename, $metadata = array())
+    public function store($filename, $metadata = [])
     {
         return $this->collection->put($filename, $metadata);
     }
@@ -53,7 +53,7 @@ class Filesystem extends Collection
      *
      * @return object MongoId object
      */
-    public function storeBytes($bytes, $metadata = array(), $options = array())
+    public function storeBytes($bytes, $metadata = [], $options = [])
     {
         return $this->collection->storeBytes($bytes, $metadata, $options);
     }
@@ -67,7 +67,7 @@ class Filesystem extends Collection
      *
      * @return object MongoId object
      */
-    public function storeFile($filename, $metadata = array(), $options = array())
+    public function storeFile($filename, $metadata = [], $options = [])
     {
         return $this->collection->storeFile($filename, $metadata, $options);
     }
@@ -80,7 +80,7 @@ class Filesystem extends Collection
      *
      * @return object MongoId object
      */
-    public function storeUpload($name, $metadata = array())
+    public function storeUpload($name, $metadata = [])
     {
         return $this->collection->storeUpload($name, $metadata);
     }
@@ -103,7 +103,7 @@ class Filesystem extends Collection
             return false;
         }
 
-        return (bool) $this->collection->remove(array('_id' => $file->file['_id']));
+        return (bool) $this->collection->remove(['_id' => $file->file['_id']]);
     }
 
     /**
@@ -114,10 +114,10 @@ class Filesystem extends Collection
      *
      * @return object|null MongoGridFSFile instance or null when not found.
      */
-    public function findOne($query = array(), $fields = array())
+    public function findOne($query = [], $fields = [])
     {
         if (is_string($query)) {
-            return $this->collection->findOne($query, $fields = array());
+            return $this->collection->findOne($query, $fields = []);
         }
 
         return parent::findOne($query, $fields);

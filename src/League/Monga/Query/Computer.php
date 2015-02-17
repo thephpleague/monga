@@ -17,7 +17,7 @@ abstract class Computer
     /**
      * @var  array  $fields  fields array
      */
-    protected $fields = array();
+    protected $fields = [];
 
     /**
      * Aggregate a sum from a field.
@@ -31,7 +31,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field);
 
-        $this->fields[$result] = array('$sum' => $field);
+        $this->fields[$result] = ['$sum' => $field];
 
         return $this;
     }
@@ -48,7 +48,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$addToSet' => $field);
+        $this->fields[$result] = ['$addToSet' => $field];
 
         return $this;
     }
@@ -65,7 +65,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$first' => $field);
+        $this->fields[$result] = ['$first' => $field];
 
         return $this;
     }
@@ -82,7 +82,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$last' => $field);
+        $this->fields[$result] = ['$last' => $field];
 
         return $this;
     }
@@ -99,7 +99,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$max' => $field);
+        $this->fields[$result] = ['$max' => $field];
 
         return $this;
     }
@@ -116,7 +116,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$min' => $field);
+        $this->fields[$result] = ['$min' => $field];
 
         return $this;
     }
@@ -133,7 +133,7 @@ abstract class Computer
     {
         $field = $this->prepareField($field ?: $result);
 
-        $this->fields[$result] = array('$push' => $field);
+        $this->fields[$result] = ['$push' => $field];
 
         return $this;
     }

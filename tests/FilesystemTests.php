@@ -9,9 +9,9 @@ class FileMock
         $this->return = $return;
     }
 
-    public $file = array(
+    public $file = [
         '_id' => 'some_id',
-    );
+    ];
 
     public function write()
     {
@@ -27,17 +27,17 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('put'))
+            ->setMethods(['put'])
             ->getMock();
 
         $mock->expects($this->once())
             ->method('put')
-            ->with('filename.json', array('downloads' => 0))
+            ->with('filename.json', ['downloads' => 0])
             ->will($this->returnValue($id));
 
         $fs = new League\Monga\Filesystem($mock);
 
-        $result = $fs->store('filename.json', array('downloads' => 0));
+        $result = $fs->store('filename.json', ['downloads' => 0]);
         $this->assertEquals($id, $result);
     }
 
@@ -47,17 +47,17 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('storeBytes'))
+            ->setMethods(['storeBytes'])
             ->getMock();
 
         $mock->expects($this->once())
             ->method('storeBytes')
-            ->with('filename.json', array('downloads' => 0), array())
+            ->with('filename.json', ['downloads' => 0], [])
             ->will($this->returnValue($id));
 
         $fs = new League\Monga\Filesystem($mock);
 
-        $result = $fs->storeBytes('filename.json', array('downloads' => 0));
+        $result = $fs->storeBytes('filename.json', ['downloads' => 0]);
         $this->assertEquals($id, $result);
     }
 
@@ -67,17 +67,17 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('storeUpload'))
+            ->setMethods(['storeUpload'])
             ->getMock();
 
         $mock->expects($this->once())
             ->method('storeUpload')
-            ->with('filename.json', array('downloads' => 0))
+            ->with('filename.json', ['downloads' => 0])
             ->will($this->returnValue($id));
 
         $fs = new League\Monga\Filesystem($mock);
 
-        $result = $fs->storeUpload('filename.json', array('downloads' => 0));
+        $result = $fs->storeUpload('filename.json', ['downloads' => 0]);
         $this->assertEquals($id, $result);
     }
 
@@ -85,12 +85,12 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('extract', 'findOne', 'remove'))
+            ->setMethods(['extract', 'findOne', 'remove'])
             ->getMock();
 
         $fileMock = $this->getMockBuilder('MongoGridFile')
             ->disableOriginalConstructor()
-            ->setMethods(array('write'))
+            ->setMethods(['write'])
             ->getMock();
 
         $mock->expects($this->once())
@@ -107,12 +107,12 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('extract', 'findOne', 'remove'))
+            ->setMethods(['extract', 'findOne', 'remove'])
             ->getMock();
 
         $fileMock = $this->getMockBuilder('MongoGridFile')
             ->disableOriginalConstructor()
-            ->setMethods(array('write'))
+            ->setMethods(['write'])
             ->getMock();
 
         $mock->expects($this->once())
@@ -122,7 +122,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('remove')
-            ->with(array('_id' => 'some_id'))
+            ->with(['_id' => 'some_id'])
             ->will($this->returnValue(true));
 
         $fs = new League\Monga\Filesystem($mock);
@@ -136,17 +136,17 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('storeFile'))
+            ->setMethods(['storeFile'])
             ->getMock();
 
         $mock->expects($this->once())
             ->method('storeFile')
-            ->with('filename.json', array('downloads' => 0), array())
+            ->with('filename.json', ['downloads' => 0], [])
             ->will($this->returnValue($id));
 
         $fs = new League\Monga\Filesystem($mock);
 
-        $result = $fs->storeFile('filename.json', array('downloads' => 0));
+        $result = $fs->storeFile('filename.json', ['downloads' => 0]);
         $this->assertEquals($id, $result);
     }
 
@@ -154,17 +154,17 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         $mock = $this->getMockBuilder('MongoGridFS')
             ->disableOriginalConstructor()
-            ->setMethods(array('findOne'))
+            ->setMethods(['findOne'])
             ->getMock();
 
         $mock->expects($this->once())
             ->method('findOne')
-            ->with(array('key' => 'value'))
+            ->with(['key' => 'value'])
             ->will($this->returnValue('_dummy_'));
 
         $fs = new League\Monga\Filesystem($mock);
 
-        $result = $fs->findOne(array('key' => 'value'));
+        $result = $fs->findOne(['key' => 'value']);
         $this->assertEquals('_dummy_', $result);
     }
 }

@@ -95,7 +95,7 @@ class Collection
      *
      * @return int number of documents
      */
-    public function count($query = array())
+    public function count($query = [])
     {
         if ($query instanceof Closure) {
             $callback = $query;
@@ -122,7 +122,7 @@ class Collection
      *
      * @return array array of distinct values
      */
-    public function distinct($key, $query = array())
+    public function distinct($key, $query = [])
     {
         if ($query instanceof Closure) {
             // Store the callback
@@ -150,7 +150,7 @@ class Collection
      *
      * @return array aggregation result
      */
-    public function aggregate($aggregation = array())
+    public function aggregate($aggregation = [])
     {
         if ($aggregation instanceof Closure) {
             // Store the callback
@@ -179,7 +179,7 @@ class Collection
      */
     public function truncate()
     {
-        $result = $this->collection->remove(array());
+        $result = $this->collection->remove([]);
 
         return $result === true || (bool) $result['ok'];
     }
@@ -217,7 +217,7 @@ class Collection
      *
      * @return mixed false on failure, number of deleted items on success
      */
-    public function remove($criteria, $options = array())
+    public function remove($criteria, $options = [])
     {
         if ($criteria instanceof Closure) {
             // Create new Remove query
@@ -252,7 +252,7 @@ class Collection
                 // Retry "save" in case of rediscovery latency issues
                 // in replica set failover. Error codes 10107, 13435, and 10058
                 // are MongoCursorException's "not master" errors.
-                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                if (in_array($e->getCode(), [10107, 13435, 10058])) {
                     if ($tries === $maxRetries) {
                         throw $e;
                     } else {
@@ -277,7 +277,7 @@ class Collection
      *
      * @return mixed result Cursor for multiple, document array for one.
      */
-    public function find($query = array(), $fields = array(), $findOne = false)
+    public function find($query = [], $fields = [], $findOne = false)
     {
         $postFind = false;
 
@@ -300,15 +300,15 @@ class Collection
         }
 
         // Prepare the find arguments
-        $arguments = array();
+        $arguments = [];
         empty($query) || $arguments[] = $query;
         empty($fields) || $arguments[] = $fields;
 
         // Wrap the find function so it is callable
-        $function = array(
+        $function = [
             $this->getCollection(),
             ($findOne && ! $postFind) ? 'findOne' : 'find',
-        );
+        ];
 
         $result = call_user_func_array($function, $arguments);
 
@@ -317,7 +317,7 @@ class Collection
             foreach ($postFind as $arguments) {
                 $method = array_shift($arguments);
 
-                $result = call_user_func_array(array($result, $method), $arguments);
+                $result = call_user_func_array([$result, $method], $arguments);
             }
         }
 
@@ -339,7 +339,7 @@ class Collection
      *
      * @return array|null document array when found, null when not found
      */
-    public function findOne($query = array(), $fields = array())
+    public function findOne($query = [], $fields = [])
     {
         return $this->find($query, $fields, true);
     }
@@ -352,7 +352,7 @@ class Collection
      *
      * @return boolean success boolean
      */
-    public function insert(array $data, $options = array())
+    public function insert(array $data, $options = [])
     {
         $maxRetries = $this->maxRetries;
         $tries = 0;
@@ -368,7 +368,7 @@ class Collection
                     // Retry "save" in case of rediscovery latency issues
                     // in replica set failover. Error codes 10107, 13435, and 10058
                     // are MongoCursorException's "not master" errors.
-                    if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                    if (in_array($e->getCode(), [10107, 13435, 10058])) {
                         if ($tries === $maxRetries) {
                             throw $e;
                         } else {
@@ -385,7 +385,7 @@ class Collection
                 return false;
             }
 
-            $result = array();
+            $result = [];
 
             foreach ($data as $r) {
                 // Collect all the id's for the return value
@@ -404,7 +404,7 @@ class Collection
                 // Retry "save" in case of rediscovery latency issues
                 // in replica set failover. Error codes 10107, 13435, and 10058
                 // are MongoCursorException's "not master" errors.
-                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                if (in_array($e->getCode(), [10107, 13435, 10058])) {
                     if ($tries === $maxRetries) {
                         throw $e;
                     } else {
@@ -433,7 +433,7 @@ class Collection
      *
      * @return boolean query success
      */
-    public function update($values = array(), $query = null, $options = array())
+    public function update($values = [], $query = null, $options = [])
     {
         if ($values instanceof Closure) {
             $query = new Query\Update();
@@ -449,7 +449,7 @@ class Collection
             throw new \InvalidArgumentException('Update params $update and $options must be arrays.');
         }
 
-        isset($query) || $query = array();
+        isset($query) || $query = [];
 
         $maxRetries = $this->maxRetries;
         $tries = 0;
@@ -462,7 +462,7 @@ class Collection
                 // Retry "save" in case of rediscovery latency issues
                 // in replica set failover. Error codes 10107, 13435, and 10058
                 // are MongoCursorException's "not master" errors.
-                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                if (in_array($e->getCode(), [10107, 13435, 10058])) {
                     if ($tries === $maxRetries) {
                         throw $e;
                     } else {
@@ -486,7 +486,7 @@ class Collection
      *
      * @return boolean success boolean
      */
-    public function save(&$document, $options = array())
+    public function save(&$document, $options = [])
     {
         $maxRetries = $this->maxRetries;
         $tries = 0;
@@ -499,7 +499,7 @@ class Collection
                 // Retry "save" in case of rediscovery latency issues
                 // in replica set failover. Error codes 10107, 13435, and 10058
                 // are MongoCursorException's "not master" errors.
-                if (in_array($e->getCode(), array(10107, 13435, 10058))) {
+                if (in_array($e->getCode(), [10107, 13435, 10058])) {
                     if ($tries === $maxRetries) {
                         throw $e;
                     } else {

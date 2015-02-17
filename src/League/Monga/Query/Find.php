@@ -17,7 +17,7 @@ class Find extends Where
     /**
      *  @var  array  $orderBy  collection ordering
      */
-    protected $orderBy = array();
+    protected $orderBy = [];
 
     /**
      *  @var  int  $skip  query offset
@@ -37,7 +37,7 @@ class Find extends Where
     /**
      * @var  array  $fields  fields include exclude array
      */
-    protected $fields = array();
+    protected $fields = [];
 
     /**
      * Set the result limit
@@ -141,7 +141,7 @@ class Find extends Where
      */
     public function getFields()
     {
-        return empty($this->fields) ? array() : $this->fields;
+        return empty($this->fields) ? [] : $this->fields;
     }
 
     /**
@@ -179,11 +179,11 @@ class Find extends Where
      */
     public function getPostFindActions()
     {
-        $actions = array();
+        $actions = [];
 
-        empty($this->orderBy) || $actions[] = array('sort', $this->orderBy);
-        $this->skip === null || $actions[] = array('skip', $this->skip);
-        $this->limit === null || $actions[] = array('limit', $this->limit);
+        empty($this->orderBy) || $actions[] = ['sort', $this->orderBy];
+        $this->skip === null || $actions[] = ['skip', $this->skip];
+        $this->limit === null || $actions[] = ['limit', $this->limit];
 
         return $actions;
     }

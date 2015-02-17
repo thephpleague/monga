@@ -112,18 +112,18 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
     public function testListCollectionsWithCollections()
     {
         $database = $this->database->getDatabase();
-        $database->demo1->insert(array('some' => 'data'));
-        $database->demo2->insert(array('some' => 'data'));
-        $database->demo3->insert(array('some' => 'data'));
+        $database->demo1->insert(['some' => 'data']);
+        $database->demo2->insert(['some' => 'data']);
+        $database->demo3->insert(['some' => 'data']);
 
         $collections = $this->database->listCollections();
         $this->assertCount(3, $collections);
-        $this->assertEquals(array('demo1', 'demo2', 'demo3'), $collections);
+        $this->assertEquals(['demo1', 'demo2', 'demo3'], $collections);
     }
 
     public function testHasCollection()
     {
-        $this->database->getDatabase()->demo->insert(array('some' => 'data'));
+        $this->database->getDatabase()->demo->insert(['some' => 'data']);
 
         $this->assertTrue($this->database->hasCollection('demo'));
         $this->assertFalse($this->database->hasCollection('__unknown_collection__'));
@@ -135,9 +135,9 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
         $this->assertEmpty($all);
 
         $database = $this->database->getDatabase();
-        $database->demo1->insert(array('some' => 'data'));
-        $database->demo2->insert(array('some' => 'data'));
-        $database->demo3->insert(array('some' => 'data'));
+        $database->demo1->insert(['some' => 'data']);
+        $database->demo2->insert(['some' => 'data']);
+        $database->demo3->insert(['some' => 'data']);
 
         $all = $this->database->allCollections(true);
         $this->assertContainsOnlyInstancesOf('League\Monga\Collection', $all);
@@ -172,7 +172,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 
     public function testGetRef()
     {
-        $item = array('something' => 'something');
+        $item = ['something' => 'something'];
 
         $collection = $this->database->getDatabase()->{'demo'};
         $collection->insert($item);
@@ -193,7 +193,7 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
     public function testExecuteParams()
     {
         $name = 'Frank';
-        $result = $this->database->executeCode('function (name) { return name;}', array($name));
+        $result = $this->database->executeCode('function (name) { return name;}', [$name]);
         $this->assertInternalType('array', $result);
         $this->assertEquals($name, $result['retval']);
     }
@@ -207,8 +207,8 @@ class DatabaseTests extends PHPUnit_Framework_TestCase
 
     public function testCommand()
     {
-        $this->database->collection('demo')->insert(array('this' => 'that'));
-        $result = $this->database->command(array('count' => 'demo'));
+        $this->database->collection('demo')->insert(['this' => 'that']);
+        $result = $this->database->command(['count' => 'demo']);
         $this->assertInternalType('array', $result);
         $this->assertEquals(1, $result['ok']);
         $this->assertEquals(1, $result['n']);

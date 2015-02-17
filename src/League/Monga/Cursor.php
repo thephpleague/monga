@@ -124,7 +124,7 @@ class Cursor implements \Countable, \IteratorAggregate
         }
 
         // Trigger the method.
-        $function = array($this->result, $method);
+        $function = [$this->result, $method];
         $result = call_user_func_array($function, $arguments);
 
         // When the cursor is returned, return the current instance.

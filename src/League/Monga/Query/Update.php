@@ -32,7 +32,7 @@ class Update extends Where
     /**
      * @var  array  @update  update query
      */
-    protected $update = array();
+    protected $update = [];
 
     /**
      * Returns the query options
@@ -114,7 +114,7 @@ class Update extends Where
      */
     protected function update($type, $field, $value)
     {
-        $this->update[$field] = array($type, $value);
+        $this->update[$field] = [$type, $value];
 
         return $this;
     }
@@ -130,7 +130,7 @@ class Update extends Where
     public function set($field, $value = null)
     {
         if (! is_array($field)) {
-            $field = array($field => $value);
+            $field = [$field => $value];
         }
 
         foreach ($field as $f => $v) {
@@ -213,7 +213,7 @@ class Update extends Where
     public function pull($field, $value, $operator = null, $all = false)
     {
         if ($operator) {
-            $value = array($operator => $value);
+            $value = [$operator => $value];
         }
 
         return $this->update($all ? '$pullAll' : '$pull', $field, $value);
@@ -291,13 +291,13 @@ class Update extends Where
      */
     public function getUpdate()
     {
-        $update = array();
+        $update = [];
 
         foreach ($this->update as $field => $data) {
             list($type, $value) = $data;
 
             if (! isset($update[$type])) {
-                $update[$type] = array();
+                $update[$type] = [];
             }
 
             $update[$type][$field] = $value;

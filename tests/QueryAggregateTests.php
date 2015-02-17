@@ -7,17 +7,17 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     public function testProject()
     {
         $a = new Agr();
-        $a->project(array(
+        $a->project([
             'field' => 1,
             'other' => -1,
-        ));
+        ]);
 
-        $expected = array(
-            array('$project' => array(
+        $expected = [
+            ['$project' => [
                 'field' => 1,
                 'other' => -1,
-            )),
-        );
+            ]],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -31,13 +31,13 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
             $p->alias('actual', 'alias');
         });
 
-        $expected = array(
-            array('$project' => array(
+        $expected = [
+            ['$project' => [
                 'field' => 1,
                 'other' => -1,
                 'alias' => '$actual',
-            )),
-        );
+            ]],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -45,15 +45,15 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     public function testGroup()
     {
         $a = new Agr();
-        $a->group(array(
-            'num' => array('$sum' => '$num'),
-        ));
+        $a->group([
+            'num' => ['$sum' => '$num'],
+        ]);
 
-        $expected = array(
-            array('$group' => array(
-                'num' => array('$sum' => '$num'),
-            )),
-        );
+        $expected = [
+            ['$group' => [
+                'num' => ['$sum' => '$num'],
+            ]],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -65,11 +65,11 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
             $g->sum('num');
         });
 
-        $expected = array(
-            array('$group' => array(
-                'num' => array('$sum' => 1),
-            )),
-        );
+        $expected = [
+            ['$group' => [
+                'num' => ['$sum' => 1],
+            ]],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -78,9 +78,9 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     {
         $a = new Agr();
         $a->unwind('tags');
-        $expected = array(
-            array('$unwind' => '$tags'),
-        );
+        $expected = [
+            ['$unwind' => '$tags'],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -89,9 +89,9 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     {
         $a = new Agr();
         $a->skip(1);
-        $expected = array(
-            array('$skip' => 1),
-        );
+        $expected = [
+            ['$skip' => 1],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -100,9 +100,9 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     {
         $a = new Agr();
         $a->limit(1);
-        $expected = array(
-            array('$limit' => 1),
-        );
+        $expected = [
+            ['$limit' => 1],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -110,10 +110,10 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     public function testPipe()
     {
         $a = new Agr();
-        $a->pipe(array('$limit' => 1));
-        $expected = array(
-            array('$limit' => 1),
-        );
+        $a->pipe(['$limit' => 1]);
+        $expected = [
+            ['$limit' => 1],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -121,14 +121,14 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
     public function testMatch()
     {
         $a = new Agr();
-        $a->match(array('field' => 'value'));
-        $expected = array(
-            array(
-                '$match' => array(
+        $a->match(['field' => 'value']);
+        $expected = [
+            [
+                '$match' => [
                     'field' => 'value',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -139,13 +139,13 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
         $a->match(function ($w) {
             $w->where('field', 'value');
         });
-        $expected = array(
-            array(
-                '$match' => array(
+        $expected = [
+            [
+                '$match' => [
                     'field' => 'value',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $a->getPipeline());
     }
@@ -163,23 +163,23 @@ class QueryAggregateTests extends PHPUnit_Framework_TestCase
                 ->by('rank');
         });
 
-        $expected = array(
-            array('$group' => array(
-                'tags' => array('$addToSet' => '$tags'),
-                'first' => array('$first' => '$favs'),
-                'last' => array('$last' => '$favs'),
-                'max' => array('$max' => '$scores'),
-                'min' => array('$min' => '$scores'),
-                'names' => array('$push' => '$name'),
+        $expected = [
+            ['$group' => [
+                'tags' => ['$addToSet' => '$tags'],
+                'first' => ['$first' => '$favs'],
+                'last' => ['$last' => '$favs'],
+                'max' => ['$max' => '$scores'],
+                'min' => ['$min' => '$scores'],
+                'names' => ['$push' => '$name'],
                 '_id' => '$rank',
-            )),
-        );
+            ]],
+        ];
     }
 
     public function testSetPipeline()
     {
         $a = new Agr();
-        $expected = array('pipeline');
+        $expected = ['pipeline'];
         $a->setPipeline($expected);
         $this->assertEquals($expected, $a->getPipeline());
     }

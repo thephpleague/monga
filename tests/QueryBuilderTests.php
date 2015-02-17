@@ -47,18 +47,18 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
 
     public function testSetOption()
     {
-        $this->builder->setOptions(array(
+        $this->builder->setOptions([
             'fsync' => true,
             'safe' => true,
-        ));
+        ]);
 
         $this->assertTrue($this->getProperty('fsync'));
         $this->assertTrue($this->getProperty('safe'));
 
-        $this->builder->setOptions(array(
+        $this->builder->setOptions([
             'fsync' => false,
             'safe' => false,
-        ));
+        ]);
 
         $this->assertFalse($this->getProperty('fsync'));
         $this->assertFalse($this->getProperty('safe'));
@@ -68,18 +68,18 @@ class QueryBuilderTests extends PHPUnit_Framework_TestCase
     {
         $result = $this->builder->getOptions();
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'w' => 0,
             'fsync' => false,
             'connectTimeoutMS' => MongoCursor::$timeout,
-        ), $result);
+        ], $result);
 
         $result = $this->builder->timeout(100)->getOptions();
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'w' => 0,
             'fsync' => false,
             'connectTimeoutMS' => 100,
-        ), $result);
+        ], $result);
     }
 }

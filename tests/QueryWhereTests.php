@@ -22,44 +22,44 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     public function testSetWhere()
     {
         $this->assertNull($this->getProperty('where'));
-        $this->query->setWhere(array('name' => 'John'));
+        $this->query->setWhere(['name' => 'John']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => 'John'),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => 'John'],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
-        $this->query->setWhere(array());
+        $this->query->setWhere([]);
         $this->assertNull($this->getProperty('where'));
     }
 
     public function testWhere()
     {
         $this->query->where('name', 'John');
-        $this->query->where(array(
+        $this->query->where([
             'surname' => 'Doe',
             'age' => 25,
-        ));
+        ]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
                             'name' => 'John',
                             'surname' => 'Doe',
                             'age' => 25,
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -68,15 +68,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhere('name', 'John');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => 'John'),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => 'John'],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -85,32 +85,32 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->where('name', 'John')
             ->orWhere('name', 'Steve')
-            ->orWhere(array('name' => 'Jack', 'surname' => 'Johnes'));
+            ->orWhere(['name' => 'Jack', 'surname' => 'Johnes']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => 'John'),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => 'Steve'),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => 'Jack'),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('surname' => 'Johnes'),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => 'John'],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => 'Steve'],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => 'Jack'],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['surname' => 'Johnes'],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -119,15 +119,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereNot('name', 'John');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$ne' => 'John')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$ne' => 'John']],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -136,15 +136,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereNot('name', 'John');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$ne' => 'John')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$ne' => 'John']],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -154,20 +154,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereNot('name', 'John')
             ->orWhereNot('name', 'Steve');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$ne' => 'John')),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$ne' => 'Steve')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$ne' => 'John']],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$ne' => 'Steve']],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -178,25 +178,25 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             ->whereLike('field', 'value%')
             ->whereLike('other', 'value', 'imxs');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$and' => array(
-                                array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$and' => [
+                                [
                                     'field' => new MongoRegex('/value$/imxsu'),
-                                ),
-                                array(
+                                ],
+                                [
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -207,25 +207,25 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             ->andWhereLike('field', 'value%')
             ->andWhereLike('other', 'value', 'imxs');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$and' => array(
-                                array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$and' => [
+                                [
                                     'field' => new MongoRegex('/value$/imxsu'),
-                                ),
-                                array(
+                                ],
+                                [
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -237,32 +237,32 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             ->andWhereLike('other', 'value', 'imxs')
             ->orWhereLike('field', 'value');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$and' => array(
-                                array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$and' => [
+                                [
                                     'field' => new MongoRegex('/value$/imxsu'),
-                                ),
-                                array(
+                                ],
+                                [
                                     'field' => new MongoRegex('/^value/imxsu'),
                                     'other' => new MongoRegex('/^value$/imxs'),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array(
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        [
                             'field' => new MongoRegex('/^value$/imxsu'),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -271,15 +271,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereRegex('field', '/^value/imxsu');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('field' => new MongoRegex('/^value/imxsu')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['field' => new MongoRegex('/^value/imxsu')],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -289,20 +289,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereRegex('field', '/^value/imxsu')
             ->orWhereRegex('field', '/value$/imxsu');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('field' => new MongoRegex('/^value/imxsu')),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('field' => new MongoRegex('/value$/imxsu')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['field' => new MongoRegex('/^value/imxsu')],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['field' => new MongoRegex('/value$/imxsu')],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -312,18 +312,18 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereRegex('field', '/^value/imxsu')
             ->andWhereRegex('other', '/value$/imxsu');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
                             'field' => new MongoRegex('/^value/imxsu'),
                             'other' => new MongoRegex('/value$/imxsu'),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -332,15 +332,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => true)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => true]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -349,15 +349,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => true)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => true]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -367,20 +367,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereExists('name')
             ->orWhereExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => true)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => true)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => true]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => true]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -389,15 +389,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereNotExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => false)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => false]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -406,15 +406,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereNotExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => false)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => false]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -424,191 +424,191 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereNotExists('name')
             ->orWhereNotExists('name');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => false)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$exists' => false)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => false]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$exists' => false]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testWhereIn()
     {
-        $this->query->whereIn('name', array('key' => 1, 2, '3'));
+        $this->query->whereIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$in' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$in' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testAndWhereIn()
     {
-        $this->query->andWhereIn('name', array('key' => 1, 2, '3'));
+        $this->query->andWhereIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$in' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$in' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testOrWhereIn()
     {
-        $this->query->whereIn('name', array('key' => 1, 2, '3'))
-            ->orWhereIn('name', array('key' => 1, 2, '3'));
+        $this->query->whereIn('name', ['key' => 1, 2, '3'])
+            ->orWhereIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$in' => array(1, 2, '3'))),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$in' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$in' => [1, 2, '3']]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$in' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testWhereAll()
     {
-        $this->query->whereAll('name', array('key' => 1, 2, '3'));
+        $this->query->whereAll('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$all' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$all' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testAndWhereAll()
     {
-        $this->query->andWhereAll('name', array('key' => 1, 2, '3'));
+        $this->query->andWhereAll('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$all' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$all' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testOrWhereAll()
     {
-        $this->query->whereAll('name', array('key' => 1, 2, '3'))
-            ->orWhereAll('name', array('key' => 1, 2, '3'));
+        $this->query->whereAll('name', ['key' => 1, 2, '3'])
+            ->orWhereAll('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$all' => array(1, 2, '3'))),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$all' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$all' => [1, 2, '3']]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$all' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testWhereNotIn()
     {
-        $this->query->whereNotIn('name', array('key' => 1, 2, '3'));
+        $this->query->whereNotIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$nin' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$nin' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testAndWhereNotIn()
     {
-        $this->query->andWhereNotIn('name', array('key' => 1, 2, '3'));
+        $this->query->andWhereNotIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$nin' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$nin' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testOrWhereNotIn()
     {
-        $this->query->whereNotIn('name', array('key' => 1, 2, '3'))
-            ->orWhereNotIn('name', array('key' => 1, 2, '3'));
+        $this->query->whereNotIn('name', ['key' => 1, 2, '3'])
+            ->orWhereNotIn('name', ['key' => 1, 2, '3']);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$nin' => array(1, 2, '3'))),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$nin' => array(1, 2, '3'))),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$nin' => [1, 2, '3']]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$nin' => [1, 2, '3']]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -617,15 +617,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereSize('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$size' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$size' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -634,15 +634,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereSize('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$size' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$size' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -652,20 +652,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereSize('name', 10)
             ->orWhereSize('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$size' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$size' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$size' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$size' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -674,15 +674,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereType('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$type' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$type' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -694,15 +694,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereType('name', 'invalid');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$type' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$type' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -711,15 +711,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereType('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$type' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$type' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -729,20 +729,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereType('name', 10)
             ->orWhereType('name', 'string');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$type' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$type' => 2)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$type' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$type' => 2]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -751,15 +751,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereLt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -768,15 +768,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereLt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -786,20 +786,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereLt('name', 10)
             ->orWhereLt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -808,15 +808,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereLte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -825,15 +825,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereLte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -843,20 +843,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereLte('name', 10)
             ->orWhereLte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lte' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$lte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lte' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$lte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -865,15 +865,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereGt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -882,15 +882,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereGt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -900,20 +900,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereGt('name', 10)
             ->orWhereGt('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gt' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gt' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -922,15 +922,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereGte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -939,15 +939,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereGte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -957,134 +957,134 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereGte('name', 10)
             ->orWhereGte('name', 10);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$gte' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$gte' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$gte' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$gte' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testWhereNear()
     {
-        $this->query->whereNear('location', 10, 10, array('$maxDistance' => 5));
+        $this->query->whereNear('location', 10, 10, ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$near' => [10, 10], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testAndWhereNear()
     {
-        $this->query->andWhereNear('location', 10, 10, array('$maxDistance' => 5));
+        $this->query->andWhereNear('location', 10, 10, ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$near' => [10, 10], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testOrWhereNear()
     {
-        $this->query->whereNear('location', 10, 10, array('$maxDistance' => 5))
-            ->orWhereNear('location', 10, 10, array('$maxDistance' => 5));
+        $this->query->whereNear('location', 10, 10, ['$maxDistance' => 5])
+            ->orWhereNear('location', 10, 10, ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('location' => array('$near' => array(10, 10), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$near' => [10, 10], '$maxDistance' => 5]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['location' => ['$near' => [10, 10], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testWhereWithin()
     {
-        $this->query->whereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
+        $this->query->whereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testAndWhereWithin()
     {
-        $this->query->andWhereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
+        $this->query->andWhereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testOrWhereWithin()
     {
-        $this->query->whereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5))
-            ->orWhereWithin('location', array('$box' => array(array(0, 0), array(10, 10))), array('$maxDistance' => 5));
+        $this->query->whereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5])
+            ->orWhereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('location' => array('$within' => array('$box' => array(array(0,0),array(10,10))), '$maxDistance' => 5)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1093,15 +1093,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereBetween('name', 10, 15);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 15, '$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 15, '$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1110,15 +1110,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereBetween('name', 10, 15);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 15, '$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 15, '$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1128,20 +1128,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->whereBetween('name', 10, 15)
             ->orWhereBetween('name', 10, 15);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 15, '$gt' => 10)),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('name' => array('$lt' => 15, '$gt' => 10)),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 15, '$gt' => 10]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['name' => ['$lt' => 15, '$gt' => 10]],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1150,15 +1150,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->whereId('50a2cdf711fa67c551000001');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['_id' => new MongoId('50a2cdf711fa67c551000001')],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1167,15 +1167,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
     {
         $this->query->andWhereId('50a2cdf711fa67c551000001');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['_id' => new MongoId('50a2cdf711fa67c551000001')],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1185,20 +1185,20 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->query->orWhereId('50a2cdf711fa67c551000001')
             ->orWhereId(new MongoId('50a2cdf711fa67c551000001'), 'id');
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('_id' => new MongoId('50a2cdf711fa67c551000001')),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array('id' => new MongoId('50a2cdf711fa67c551000001')),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['_id' => new MongoId('50a2cdf711fa67c551000001')],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['id' => new MongoId('50a2cdf711fa67c551000001')],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1209,19 +1209,19 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$nor' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$nor' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1246,19 +1246,19 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$nor' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$nor' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1272,28 +1272,28 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$nor' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array(
-                            '$nor' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$nor' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        [
+                            '$nor' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1304,19 +1304,19 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$not' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$not' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1341,19 +1341,19 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$not' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$not' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
@@ -1367,53 +1367,53 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('field', 'value');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$not' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    '$and' => array(
-                        array(
-                            '$not' => array(
-                                array('field' => 'value'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$not' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        [
+                            '$not' => [
+                                ['field' => 'value'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
     public function testGetWhere()
     {
-        $this->assertEquals(array(), $this->query->getWhere());
+        $this->assertEquals([], $this->query->getWhere());
         $this->query->where('this', 'that');
-        $this->assertEquals(array('this' => 'that'), $this->query->getWhere());
+        $this->assertEquals(['this' => 'that'], $this->query->getWhere());
         $this->query->orWhere(function ($query) {
             $query->where('one', 1)
                 ->orWhere('two', 2);
         });
         $this->query->where(function () {});
-        $this->assertEquals(array(
-            '$or' => array(
-                array('this' => 'that'),
-                array(
-                    '$or' => array(
-                        array('one' => 1),
-                        array('two' => 2),
-                    ),
-                ),
-            ),
-        ), $this->query->getWhere());
+        $this->assertEquals([
+            '$or' => [
+                ['this' => 'that'],
+                [
+                    '$or' => [
+                        ['one' => 1],
+                        ['two' => 2],
+                    ],
+                ],
+            ],
+        ], $this->query->getWhere());
 
         $this->query = new League\Monga\Query\Where();
 
@@ -1422,28 +1422,28 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 ->orWhere('two', 2);
         });
 
-        $this->assertEquals(array(
-            '$or' => array(
-                array('one' => 1),
-                array('two' => 2),
-            ),
-        ), $this->query->getWhere());
+        $this->assertEquals([
+            '$or' => [
+                ['one' => 1],
+                ['two' => 2],
+            ],
+        ], $this->query->getWhere());
 
         $this->query = new League\Monga\Query\Where();
 
-        $this->query->setWhere(array(
-            '$or' => array(
-                array('$and' => array(
-                    array('$or' => array(
-                        array('this' => 'that'),
-                    )),
-                )),
-            ),
-        ));
+        $this->query->setWhere([
+            '$or' => [
+                ['$and' => [
+                    ['$or' => [
+                        ['this' => 'that'],
+                    ]],
+                ]],
+            ],
+        ]);
 
-        $this->assertEquals(array('this' => 'that'), $this->query->getWhere());
+        $this->assertEquals(['this' => 'that'], $this->query->getWhere());
 
-        $this->query->setWhere(array());
+        $this->query->setWhere([]);
 
         $this->query->norWhere(function ($query) {
             $query->where('one', 1)
@@ -1453,13 +1453,13 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                 ->where('four', 2);
         });
 
-        $this->assertEquals(array(
-            '$nor' => array(
-                array('one' => 1, 'two' => 2),
-                array('three' => 1, 'four' => 2),
-        ), ), $this->query->getWhere());
+        $this->assertEquals([
+            '$nor' => [
+                ['one' => 1, 'two' => 2],
+                ['three' => 1, 'four' => 2],
+        ], ], $this->query->getWhere());
 
-        $this->query->setWhere(array());
+        $this->query->setWhere([]);
         $this->query->where('name', 'john')
             ->where('name', 'jim')
             ->where(function ($query) {
@@ -1467,57 +1467,57 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
                     ->where('is', 'tricky');
             });
 
-        $this->assertEquals(array(
-            '$and' => array(
-                array(
-                    '$and' => array(
-                        array('name' => 'john'),
-                        array('name' => 'jim'),
-                    ),
-                ),
-                array(
+        $this->assertEquals([
+            '$and' => [
+                [
+                    '$and' => [
+                        ['name' => 'john'],
+                        ['name' => 'jim'],
+                    ],
+                ],
+                [
                     'this' => 'one',
                     'is' => 'tricky',
-                ),
-            ),
-        ), $this->query->getWhere());
+                ],
+            ],
+        ], $this->query->getWhere());
 
-        $this->query->setWhere(array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$and' => array(
-                                array(
+        $this->query->setWhere([
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$and' => [
+                                [
                                     'name' => 'Frank',
                                     'surname' => 'de Jonge',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ));
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$and' => array(
-                                array(
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        [
+                            '$and' => [
+                                [
                                     'name' => 'Frank',
                                     'surname' => 'de Jonge',
-                                ),
-                                array(
+                                ],
+                                [
                                     'name' => 'Billy',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->query->where('name', 'Billy');
     }
@@ -1528,15 +1528,15 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
             $query->where('something', 'broken');
         });
 
-        $expected = array(
-            '$or' => array(
-                array(
-                    '$and' => array(
-                        array('something' => 'broken'),
-                    ),
-                ),
-            ),
-        );
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['something' => 'broken'],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $this->getProperty('where'));
     }
