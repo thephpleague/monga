@@ -8,7 +8,7 @@ title: Installation
 
 ## Requirements
 
-* PHP >= 5.3.3
+* PHP >= 5.4
 * [PECL Mongo extension](http://pecl.php.net/package/mongo)
 
 ## Composer
