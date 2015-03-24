@@ -20,10 +20,10 @@ $connection = Monga::connection();
 $connection = Monga::connection('mongodb://beakman:p4ssw0rd@localhost:1337');
 
 // Optionally set some driver options
-$connection = Monga::connection('mongodb://localhost:27017', array(
+$connection = Monga::connection('mongodb://localhost:27017', [
 	'username' => 'beak:man',
 	'password' => 'p@ssword'
-));
+]);
 ~~~
 
 You can find more details around `MongoClient`'s constructor [here](http://php.net/manual/en/mongoclient.construct.php).
