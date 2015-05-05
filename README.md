@@ -55,21 +55,21 @@ $collection->drop();
 $collection->truncate();
 
 // Insert some values into the collection
-$insertIds = $collection->insert(array(
-	array(
+$insertIds = $collection->insert([
+	[
 		'name' => 'John',
 		'surname' => 'Doe',
 		'nick' => 'The Unknown Man',
 		'age' => 20,
-	),
-	array(
+	],
+	[
 		'name' => 'Frank',
 		'surname' => 'de Jonge',
 		'nick' => 'Unknown',
 		'nik' => 'No Man',
 		'age' => 23,
-	),
-));
+	],
+]);
 
 // Update a collection
 $collection->update(function ($query) {
@@ -85,7 +85,10 @@ $frank = $collection->findOne(function ($query) {
 });
 
 // Or find him using normal array syntax
-$frank = $collection->find(array('name' => 'Frank', 'surname' => new MongoRegex('/e Jo/imxsu')));
+$frank = $collection->find([
+	'name' => 'Frank',
+	'surname' => new MongoRegex('/e Jo/imxsu')
+]);
 
 $frank['age']++;
 
@@ -112,11 +115,11 @@ A big part of the newly released MongoDB pecl package is aggregation support. Wh
 
 ```php
 $collection->aggregate(function ($a) {
-	$a->project(array(
+	$a->project([
 		'name' => 1,
 		'surname' => -1,
 		'tags' => 1,
-	))->unwind('tags');
+	])->unwind('tags');
 
 	// But also more advanced groups/projections
 	$a->project(function ($p) {
@@ -124,7 +127,7 @@ $collection->aggregate(function ($a) {
 			->select('scores')
 			->exclude('other_field');
 	})->group(function ($g) {
-		$g->by(array('$name', '$surname'))
+		$g->by(['$name', '$surname'])
 			->sum('scores');
 	});
 });
