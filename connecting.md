@@ -8,7 +8,7 @@ title: Connecting
 
 First, we will want to connect to MongoDB. `Monga::connection()` is a simple
 wrapper around the `MongoClient` constructor. Its first parameter can accept
-either a `MongoClient` object or an DNS string.
+either a `MongoClient` object or a DNS string.
 
 ~~~ php
 use League\Monga;
