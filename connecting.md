@@ -34,3 +34,7 @@ Now that we've connected to MongoDB, we'll want to specify our database:
 // Get the database
 $database = $connection->database('db_name');
 ~~~
+
+Now that we've succesfully connected to Mongo and have chosen a database to work
+on, we can move on to performing CRUD operations with collections in the
+[CRUD Operations](/crud) section.
