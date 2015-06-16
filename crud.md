@@ -42,6 +42,11 @@ $collection->insert([
         'email => 'info@frenky.net',
         'age' => 26
     ],
+    [
+        'name' => 'Palmer',
+        'email' => 'palmer@example.com',
+        'age' => 20
+    ]
 ]);
 ~~~
 
@@ -73,7 +78,7 @@ $frank = $collection->find([
 ]);
 
 $collection->find(function ($query) {
-    $query->where('age, '26)
+    $query->where('age', 26)
 });
 ~~~
 
