@@ -106,7 +106,7 @@ $person = $collection->findOne(function ($query) {
     $query->where('name', 'Palmer');
 });
 
-// Increment the age by modifiying the key's value
+// Increment the age by modifying the key's value
 $person['age']++;
 
 // Save the document
