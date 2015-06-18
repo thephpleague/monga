@@ -86,4 +86,31 @@ These two finds are also equivalent.
 
 ## Update
 
+Updating documents can be done using the `update()` method, or by finding a
+document, then using the `save()` method after modifying it.
+
+~~~ php
+// Increment everyone's age
+$collection->update(function ($query) {
+    $query->increment('age');
+});
+~~~
+
+The previous example would increment everyone's age by one. If we only wanted to
+increment a single person's age, we could look up the particular document,
+increment the age in PHP, then `save()` the document:
+
+~~~ php
+// Find the first person with the name "Palmer"
+$person = $collection->findOne(function ($query) {
+    $query->where('name', 'Palmer');
+});
+
+// Increment the age by modifiying the key's value
+$person['age']++;
+
+// Save the document
+$collection->save($person);
+~~~
+
 ## Delete
