@@ -12,7 +12,7 @@ variable that we've set. Now we are ready to run some CRUD operations on
 collections. First, we will want to choose a collection to operate on:
 
 ~~~ php
-$collection = $database->collection('collection_name');
+$collection = $database->collection('people');
 ~~~
 
 ## Insert (Create)
