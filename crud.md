@@ -60,11 +60,11 @@ person's name is Bryan -- once with the array syntax and once using an anonymous
 function and the `Query` object:
 
 ~~~ php
-$frank = $collection->findOne([
+$person = $collection->findOne([
     'name' => 'Bryan'
 ]);
 
-$collection->findOne(function ($query) {
+$person = $collection->findOne(function ($query) {
     $query->where('name', 'Bryan')
 });
 ~~~
@@ -73,11 +73,11 @@ The two finds above are equivalent to one another. Next, we'll do search with
 `find()` method that yields multiple results:
 
 ~~~ php
-$frank = $collection->find([
+$person = $collection->find([
     'age' => 26
 ]);
 
-$collection->find(function ($query) {
+$person = $collection->find(function ($query) {
     $query->where('age', 26)
 });
 ~~~
