@@ -114,3 +114,17 @@ $collection->save($person);
 ~~~
 
 ## Delete
+
+Deleting documents works similar to finding and updating documents. In which,
+the `remove()` method also can take an array of conditions or a closure using
+the `Query` option to remove documents which match. For example:
+
+~~~ php
+$collection->remove([
+    'age' => 26
+]);
+
+$collection->remove(function ($query) {
+    $query->where('age', 26);
+});
+~~~
