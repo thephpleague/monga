@@ -84,6 +84,23 @@ $person = $collection->find(function ($query) {
 
 These two finds are also equivalent.
 
+### Nested Queries
+
+Monga also supports nesting queries. The following is an example of nesting
+queries to find people named Bryan or Palmer, or anyone who has an age greater
+than 21:
+
+~~~ php
+$people = $collection->find(function ($query) {
+    $query->where(function ($query) {
+        $query->where('name', 'Bryan')
+            ->orWhere('name', 'Palmer');
+    })->orWhere(function () {
+        $query->whereGte('age', 21);
+    });
+});
+~~~
+
 ## Update
 
 Updating documents can be done using the `update()` method, or by finding a
