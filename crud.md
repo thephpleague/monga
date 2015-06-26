@@ -15,6 +15,16 @@ collections. First, we will want to choose a collection to operate on:
 $collection = $database->collection('people');
 ~~~
 
+**Note:**  By default, `Collection` operations will retry an operation one extra
+time, in the case of a MongoCursorException being thrown with the 10107, 13435,
+10058 error codes. These 3 codes are "not master" errors caused by latency with
+rediscovery. If you wish to change this behavior, you can set the maximum amount
+of retries with the `setMaxRetries()` method:
+
+~~~ php
+$collection->setMaxRetries(0);
+~~~
+
 ## Insert (Create)
 
 Monga makes inserting documents into a collection a snap. `Collection::insert()`
