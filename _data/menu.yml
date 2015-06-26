@@ -4,4 +4,5 @@ Getting Started:
 Usage:
     Connecting: '/connecting/'
     CRUD Operations: '/crud/'
-    Operators: '/operators'
+    Operators: '/operators/'
+    Aggregation: '/aggregation/'
