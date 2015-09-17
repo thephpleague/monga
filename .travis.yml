@@ -1,5 +1,10 @@
 language: php
 
+env:
+  global:
+    - PHPCS=0
+    - RUN_TESTS=1
+
 services:
   - mongodb
 
@@ -10,9 +15,16 @@ php:
 
 sudo: false
 
+matrix:
+  include:
+    - php: 5.6
+      env: PHPCS=1 RUN_TESTS=0
+
 before_script:
   - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer self-update
   - composer install --dev -o
 
-script: phpunit --coverage-text
+script:
+  - sh -c "if [ '$RUN_TESTS' = '1' ]; then phpunit --coverage-text; fi"
+  - sh -c "if [ '$PHPCS' = '1' ]; then vendor/bin/phpcs -p -n --extensions=php --standard=psr2 ./src; fi"
