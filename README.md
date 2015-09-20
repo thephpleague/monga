@@ -1,9 +1,11 @@
 # Monga
 
-[![Latest Version](https://img.shields.io/github/release/thephpleague/monga.svg?style=flat-square)](https://github.com/thephpleague/monga/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
-[![Total Downloads](https://img.shields.io/packagist/dt/league/monga.svg?style=flat-square)](https://packagist.org/packages/league/monga)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
 
 A simple and swift MongoDB abstraction layer for PHP 5.4+
 
@@ -141,3 +143,14 @@ If you discover any security related issues, please email bryan@bryan-crowe.com 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/thephpleague/monga.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/thephpleague/monga.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/thephpleague/monga
+[link-travis]: https://travis-ci.org/thephpleague/monga
+[link-downloads]: https://packagist.org/packages/thephpleague/monga
+[link-author]: https://github.com/frankdejonge
+[link-contributors]: ../../contributors
