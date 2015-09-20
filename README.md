@@ -141,13 +141,13 @@ If you discover any security related issues, please email bryan@bryan-crowe.com 
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/thephpleague/monga.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/league/monga.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/thephpleague/monga.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/league/monga.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/thephpleague/monga
+[link-packagist]: https://packagist.org/packages/league/monga
 [link-travis]: https://travis-ci.org/thephpleague/monga
-[link-downloads]: https://packagist.org/packages/thephpleague/monga
+[link-downloads]: https://packagist.org/packages/league/monga
 [link-author]: https://github.com/frankdejonge
 [link-contributors]: ../../contributors
