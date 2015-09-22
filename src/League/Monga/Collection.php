@@ -301,8 +301,8 @@ class Collection
 
         // Prepare the find arguments
         $arguments = [];
-        empty($query) || $arguments[] = $query;
-        empty($fields) || $arguments[] = $fields;
+        $arguments[] = $query;
+        $arguments[] = $fields;
 
         // Wrap the find function so it is callable
         $function = [
