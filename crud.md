@@ -75,7 +75,7 @@ $person = $collection->findOne([
 ]);
 
 $person = $collection->findOne(function ($query) {
-    $query->where('name', 'Bryan')
+    $query->where('name', 'Bryan');
 });
 ~~~
 
@@ -88,7 +88,7 @@ $person = $collection->find([
 ]);
 
 $person = $collection->find(function ($query) {
-    $query->where('age', 26)
+    $query->where('age', 26);
 });
 ~~~
 
