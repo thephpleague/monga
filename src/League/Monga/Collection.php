@@ -220,21 +220,25 @@ class Collection
     public function remove($criteria, $options = [])
     {
         if ($criteria instanceof Closure) {
+            $callback = $criteria;
+
             // Create new Remove query
-            $query = new Query\Remove();
+            $criteria = new Query\Remove();
 
             // Set the given options
-            $query->setOptions($options);
+            $criteria->setOptions($options);
 
             // Execute the callback
-            $criteria($query);
+            $callback($criteria);
+        }
 
-            // Retrieve the where filter
-            $criteria = $query->getWhere();
-
+        if ($criteria instanceof Query\Remove) {
             // Retrieve the options, these might
             // have been altered in the closure.
-            $options = $query->getOptions();
+            $options = $criteria->getOptions();
+
+            // Retrieve the where filter
+            $criteria = $criteria->getWhere();
         }
 
         if (! is_array($criteria)) {
@@ -271,7 +275,7 @@ class Collection
     /**
      * Finds documents.
      *
-     * @param mixed   $query   configuration closure, raw mongo conditions array
+     * @param mixed   $query   find query, configuration closure, raw mongo conditions array
      * @param array   $fields  associative array for field exclusion/inclusion
      * @param boolean $findOne whether to find one or multiple
      *
@@ -282,17 +286,21 @@ class Collection
         $postFind = false;
 
         if ($query instanceof Closure) {
-            $find = new Query\Find();
+            $callback = $query;
+
+            $query = new Query\Find();
 
             // set the fields to select
-            $find->fields($fields);
-            $find->one($findOne);
-            $query($find);
+            $query->fields($fields);
+            $query->one($findOne);
+            $callback($query);
+        }
 
-            $findOne = $find->getFindOne();
-            $fields = $find->getFields();
-            $query = $find->getWhere();
-            $postFind = $find->getPostFindActions();
+        if ($query instanceof Query\Find) {
+            $findOne = $query->getFindOne();
+            $fields = $query->getFields();
+            $postFind = $query->getPostFindActions();
+            $query = $query->getWhere();
         }
 
         if (! is_array($query) || ! is_array($fields)) {
@@ -334,7 +342,7 @@ class Collection
     /**
      * Finds a single documents.
      *
-     * @param mixed $query  configuration closure, raw mongo conditions array
+     * @param mixed $query  find query, configuration closure, raw mongo conditions array
      * @param array $fields associative array for field exclusion/inclusion
      *
      * @return array|null document array when found, null when not found
@@ -427,7 +435,7 @@ class Collection
     /**
      * Updates a collection
      *
-     * @param mixed $values  update array or callback
+     * @param mixed $values  update query, array or callback
      * @param mixed $query   update filter
      * @param array $options update options
      *
@@ -436,13 +444,17 @@ class Collection
     public function update($values = [], $query = null, $options = [])
     {
         if ($values instanceof Closure) {
-            $query = new Query\Update();
-            $query->setOptions($options);
-            $values($query);
+            $callback = $values;
 
-            $options = $query->getOptions();
-            $values = $query->getUpdate();
-            $query = $query->getWhere();
+            $values = new Query\Update();
+            $values->setOptions($options);
+            $callback($values);
+        }
+
+        if ($values instanceof Query\Update) {
+            $options = $values->getOptions();
+            $query = $values->getWhere();
+            $values = $values->getUpdate();
         }
 
         if (! is_array($values) || ! is_array($options)) {
