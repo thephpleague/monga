@@ -7,7 +7,7 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2015 Frank de Jonge
- * @link       http://github.com/thephpleague/monga
+ * @see        http://github.com/thephpleague/monga
  */
 
 namespace League;
@@ -15,20 +15,23 @@ namespace League;
 use League\Monga\Connection;
 use MongoBinData;
 use MongoCode;
+use MongoConnectionException;
 use MongoDate;
-use MongoDB;
 use MongoId;
 use MongoRegex;
 
+/**
+ * Class Monga
+ */
 class Monga
 {
     /**
      * Returns a MongoBinData object
      *
      * @param string $data data
-     * @param int    $type data type
+     * @param int $type data type
      *
-     * @return object MongoBinData
+     * @return MongoBinData
      */
     public static function data($data, $type = null)
     {
@@ -42,7 +45,7 @@ class Monga
      *
      * @param string $id id string
      *
-     * @return object MongoId
+     * @return MongoId
      */
     public static function id($id)
     {
@@ -52,12 +55,12 @@ class Monga
     /**
      * Create a MongoCode object
      *
-     * @param string $code  javascript string
-     * @param array  $scope function scope
+     * @param string $code javascript string
+     * @param array $scope function scope
      *
-     * @return object MongoCode
+     * @return MongoCode
      */
-    public static function code($code, $scope = [])
+    public static function code($code, array $scope = [])
     {
         return new MongoCode($code, $scope);
     }
@@ -65,10 +68,10 @@ class Monga
     /**
      * Create a MongoDate object
      *
-     * @param int $sec  timestamp
+     * @param int $sec timestamp
      * @param int $usec
      *
-     * @return object MongoDate
+     * @return MongoDate
      */
     public static function date($sec = null, $usec = 0)
     {
@@ -82,7 +85,7 @@ class Monga
      *
      * @param string $regex regex
      *
-     * @return object MongoRegex
+     * @return MongoRegex
      */
     public static function regex($regex)
     {
@@ -92,13 +95,14 @@ class Monga
     /**
      * Create a Monga\Connection object
      *
-     * @param string $server  server dns
-     * @param array  $options connection options
-     *
-     * @return object Monga\Connection
+     * @param string $server server dns
+     * @param array $options connection options
+     * @param array $driverOptions [optional] driver options
+     * @throws MongoConnectionException
+     * @return Connection
      */
-    public static function connection($server = null, array $options = [])
+    public static function connection($server = null, array $options = [], array $driverOptions = [])
     {
-        return new Connection($server, $options);
+        return new Connection($server, $options, $driverOptions);
     }
 }

@@ -7,17 +7,19 @@
  * @author     Frank de Jonge
  * @license    MIT License
  * @copyright  2011 - 2015 Frank de Jonge
- * @link       http://github.com/thephpleague/monga
+ * @see        http://github.com/thephpleague/monga
  */
 
 namespace League\Monga;
 
 use MongoClient;
+use MongoConnectionException;
+use MongoDB;
 
 class Connection
 {
     /**
-     * @var  Mongo  $connection  MongoDB Connection instance
+     * @var MongoDB $connection MongoDB Connection instance
      */
     protected $connection;
 
@@ -29,10 +31,12 @@ class Connection
     /**
      * Establishes a MongoDB connection
      *
-     * @param string $server  mongo dns
-     * @param array  $options connection options
+     * @param string $server mongo dns
+     * @param array $options [optional] connection options
+     * @param array $driverOptions [optional] driver options
+     * @throws MongoConnectionException
      */
-    public function __construct($server = null, array $options = [])
+    public function __construct($server = null, array $options = [], array $driverOptions = [])
     {
         if ($server instanceof MongoClient) {
             $this->connection = $server;
@@ -43,20 +47,20 @@ class Connection
             }
 
             // Mimic the default mongo connect settings.
-            if (! isset($options['connect'])) {
+            if (!isset($options['connect'])) {
                 $options['connect'] = true;
             }
 
-            $this->connection = new MongoClient($server ?: 'mongodb://localhost:27017', $options);
+            $this->connection = new MongoClient($server ?: 'mongodb://localhost:27017', $options, $driverOptions);
         }
     }
 
     /**
      * Connection injector
      *
-     * @param object $connection MongoClient instance
+     * @param MongoClient $connection MongoClient instance
      *
-     * @return object $this
+     * @return $this
      */
     public function setConnection(MongoClient $connection)
     {
@@ -68,7 +72,7 @@ class Connection
     /**
      * Retrieve the MongoConnection.
      *
-     * @return object Mongo instance
+     * @return MongoClient
      */
     public function getConnection()
     {
@@ -79,6 +83,7 @@ class Connection
      * Connect to the database.
      *
      * @return boolean connection result
+     * @throws MongoConnectionException
      */
     public function connect()
     {
@@ -128,16 +133,16 @@ class Connection
     {
         $result = $this->connection->{$database}->command(['dropDatabase' => 1]);
 
-        return (bool) $result['ok'];
+        return (bool)$result['ok'];
     }
 
     /**
      * Retrieve a database object from a connection
      *
-     * @param string  $database database name
-     * @param boolean $wrap     whether to wrap in a Database object
+     * @param string $database database name
+     * @param boolean $wrap whether to wrap in a Database object
      *
-     * @return object MongoDB or Monga\Database instance
+     * @return Database|MongoDB
      */
     public function database($database, $wrap = true)
     {
@@ -155,7 +160,7 @@ class Connection
      */
     public function hasDatabase($name)
     {
-        return in_array($name, $this->listDatabases(false));
+        return in_array($name, $this->listDatabases(false), true);
     }
 
     /**
