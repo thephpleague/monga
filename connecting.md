@@ -19,14 +19,21 @@ $connection = Monga::connection();
 // Connect with a username/password and different port:
 $connection = Monga::connection('mongodb://beakman:p4ssw0rd@localhost:1337');
 
-// Optionally set some driver options
-$connection = Monga::connection('mongodb://localhost:27017', [
+// Optionally set some connection and driver options
+$connectionOptions = [
 	'username' => 'beak:man',
-	'password' => 'p@ssword'
-]);
+	'password' => 'p@ssword',
+	'ssl' => true
+];
+
+$driverOptions = []; // Context options for SSL
+
+$connection = Monga::connection('mongodb://localhost:27017', $connectionOptions, $driverOptions);
 ~~~
 
 You can find more details around `MongoClient`'s constructor [here](http://php.net/manual/en/mongoclient.construct.php).
+For more details about setting context options for the `$driverOptions` variable
+above, see [Connecting over SSL](http://php.net/manual/en/mongo.connecting.ssl.php#mongo.connecting.context.ssl).
 
 Now that we've connected to MongoDB, we'll want to specify our database:
 
