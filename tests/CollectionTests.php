@@ -151,6 +151,19 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->collection->count());
     }
 
+    public function testRemoveWithQuery()
+    {
+        $where = new League\Monga\Query\Remove();
+
+        $where->where('name', 'Frank');
+
+        $this->collection->getCollection()->insert(['name' => 'Frank']);
+        $this->assertEquals(1, $this->collection->count());
+        $result = $this->collection->remove($where);
+        $this->assertTrue($result);
+        $this->assertEquals(0, $this->collection->count());
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */
@@ -240,6 +253,14 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     public function testFind()
     {
         $result = $this->collection->find();
+        $this->assertInstanceOf('League\Monga\Cursor', $result);
+    }
+
+    public function testFindWithQuery()
+    {
+        $query = new League\Monga\Query\Find();
+        $result = $this->collection->find($query);
+        
         $this->assertInstanceOf('League\Monga\Cursor', $result);
     }
 
@@ -368,6 +389,16 @@ class CollectionTests extends PHPUnit_Framework_TestCase
                 ->increment('viewcount', 2);
         });
 
+        $this->assertTrue($result);
+    }
+
+    public function testUpdateWithQuery()
+    {
+        $query = new League\Monga\Query\Update();
+
+        $query->set('name', 'changed');
+
+        $result = $this->collection->update($query);
         $this->assertTrue($result);
     }
 
