@@ -138,6 +138,11 @@ $person['age']++;
 
 // Save the document
 $collection->save($person);
+
+// Using an Update object
+$update = new League\Monga\Query\Update();
+$update->set('name', 'Frank');
+$collection->update($update);
 ~~~
 
 ## Delete
@@ -154,4 +159,9 @@ $collection->remove([
 $collection->remove(function ($query) {
     $query->where('age', 26);
 });
+
+// Using a Remove object
+$remove = new League\Monga\Query\Remove();
+$remove->where('name', 'Frank');
+$collection->remove($remove);
 ~~~
