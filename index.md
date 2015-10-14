@@ -11,7 +11,14 @@ title: Introduction
 [![Build Status](https://img.shields.io/travis/thephpleague/monga/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/monga)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/monga.svg?style=flat-square)](https://packagist.org/packages/league/monga)
 
-Monga was created with the acknowledgment of the MongoDB PHP package already being pretty awesome. That's why in a lot of cases Monga is just a simple wrapper around the MongoDB classes. It provides some helpers and helps you set up queries using a query builder. Which you can also choose not to use! Everything will still work accordingly. During the development, a lot of planning has gone into creating a nice streamlined API that closely follows the MongoDB base classes, while complementing existing query builders for SQL-like databases.
+Monga was created with the acknowledgment of the MongoDB PHP package already
+being pretty awesome. That's why in a lot of cases Monga is just a simple
+wrapper around the MongoDB classes. It provides some helpers and helps you set
+up queries using a query builder. Which you can also choose not to use!
+Everything will still work accordingly. During the development, a lot of
+planning has gone into creating a nice streamlined API that closely follows the
+MongoDB base classes, while complementing existing query builders for SQL-like
+databases.
 
 ## Highlights
 
@@ -24,4 +31,5 @@ Monga was created with the acknowledgment of the MongoDB PHP package already bei
 
 ## Questions?
 
-Monga is being maintained by Bryan Crowe. Find him on Twitter at [@_beakman](https://twitter.com/_beakman).
+Monga is being maintained by Bryan Crowe. Find him on Twitter at
+[@_beakman](https://twitter.com/_beakman).
