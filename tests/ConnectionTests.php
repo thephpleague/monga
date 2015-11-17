@@ -46,7 +46,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
     public function testHasDatabase()
     {
         $this->assertFalse($this->connection->hasDatabase('__unknown__database__'));
-        $this->assertTrue($this->connection->hasDatabase('admin'));
+        $this->assertTrue($this->connection->hasDatabase('local'));
     }
 
     public function testDatabaseDefaultServer()
@@ -68,7 +68,7 @@ class ConnectionTests extends PHPUnit_Framework_TestCase
         $list = $this->connection->listDatabases();
 
         $this->assertInternalType('array', $list);
-        $this->assertContains('admin', $list);
+        $this->assertContains('local', $list);
 
         $list = $this->connection->listDatabases(true);
         $this->assertInternalType('array', $list);
