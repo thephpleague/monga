@@ -2,6 +2,11 @@
 
 All notable changes to `monga` will be documented in this file.
 
+## 1.2.2 - 2015-11-19
+- Fixed database existence tests for Mongo 3.
+- Removed old Mockery fix.
+- Updated CONDUCT.md to 1.3 version.
+
 ## 1.2.1 - 2015-10-10
 - Added CONDUCT.md
 - Added the ability to pass in SSL context options to connections.
