@@ -16,7 +16,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"squizlabs/php_codesniffer": "2.3.*"
+		"squizlabs/php_codesniffer": "2.3.*",
+		"phpunit/phpunit": "4.*"
 	},
 	"autoload": {
 		"psr-0": { "League\\Monga": "src/" }
