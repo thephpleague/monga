@@ -262,7 +262,7 @@ class Where extends Builder
      */
     public function andWhereNot($field, $value)
     {
-        return call_user_func_array([$this, 'whereNot'], func_get_args());
+        return $this->whereNot($field, $value);
     }
 
     /**
