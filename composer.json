@@ -1,28 +1,28 @@
 {
-	"name": "league/monga",
-	"type": "library",
-	"description": "MongoDB Abstraction Layer",
-	"keywords": ["MongoDB"],
-	"homepage": "https://github.com/thephpleague/monga",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Frank de Jonge",
-			"email": "frank@ku.nl"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0"
-	},
-	"require-dev": {
-		"mockery/mockery": "0.9.*",
-		"squizlabs/php_codesniffer": "2.3.*",
-		"phpunit/phpunit": "4.*"
-	},
-	"autoload": {
-		"psr-0": { "League\\Monga": "src/" }
-	},
-	"replace": {
-		"php-loep/monga": "self.version"
-	}
+    "name": "league/monga",
+    "type": "library",
+    "description": "MongoDB Abstraction Layer",
+    "keywords": ["MongoDB"],
+    "homepage": "https://github.com/thephpleague/monga",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank de Jonge",
+            "email": "frank@ku.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "squizlabs/php_codesniffer": "2.3.*",
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-0": { "League\\Monga": "src/" }
+    },
+    "replace": {
+        "php-loep/monga": "self.version"
+    }
 }
