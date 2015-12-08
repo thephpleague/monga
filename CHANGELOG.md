@@ -2,6 +2,12 @@
 
 All notable changes to `monga` will be documented in this file.
 
+## 1.2.3 - 2015-12-08
+
+- Added phpunit in require-dev in composer config.
+- Fixed indentation issues.
+- Updates query to use direct call to whereNot().
+
 ## 1.2.2 - 2015-11-19
 - Fixed database existence tests for Mongo 3.
 - Removed old Mockery fix.
