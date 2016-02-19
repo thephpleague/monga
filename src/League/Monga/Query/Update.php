@@ -234,17 +234,17 @@ class Update extends Where
     }
 
     /**
-     * Adds the values of an array to the set only
-     * when the array doesn't contain them already
+     * Adds the values to the set or upsert
+     * when the dataset doesn't contain them already
      *
      * @param string  $field field name
-     * @param integer $value value to increment by
+     * @param mixed   $value value to set/upsert with
      *
      * @return object $this
      */
     public function addToSet($field, $value)
     {
-        return $this->update('$addToSet', $field, (array) $value);
+        return $this->update('$addToSet', $field, $value);
     }
 
     /**
