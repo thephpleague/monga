@@ -5,7 +5,7 @@ All notable changes to `monga` will be documented in this file.
 ## 1.2.4 - 2015-02-29
 
 - Updated license year.
-- Updatd Update::addToSet to take mixed values.
+- Updatd Update::addToSet() to take mixed values.
 
 ## 1.2.3 - 2015-12-08
 
