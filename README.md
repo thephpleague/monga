@@ -99,7 +99,7 @@ $users = $collection->find(function ($query) {
 	$query->where(function ($query) {
 		$query->where('name', 'Josh')
 			->orWhere('surname', 'Doe');
-	})->orWhere(function () {
+	})->orWhere(function ($query) {
 		$query->where('name', 'Frank')
 			->where('surname', 'de Jonge');
 	});
