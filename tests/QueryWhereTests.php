@@ -1049,6 +1049,23 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
+    public function testWhereGeoWithin()
+    {
+        $this->query->whereGeoWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
+
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->getProperty('where'));
+    }
+
     public function testAndWhereWithin()
     {
         $this->query->andWhereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
@@ -1066,10 +1083,50 @@ class QueryWhereTests extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->getProperty('where'));
     }
 
+    public function testAndWhereGeoWithin()
+    {
+        $this->query->andWhereGeoWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
+
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->getProperty('where'));
+    }
+
     public function testOrWhereWithin()
     {
         $this->query->whereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5])
-            ->orWhereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
+                    ->orWhereWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
+
+        $expected = [
+            '$or' => [
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+                [
+                    '$and' => [
+                        ['location' => ['$within' => ['$box' => [[0,0],[10,10]]], '$maxDistance' => 5]],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->getProperty('where'));
+    }
+
+    public function testOrWhereGeoWithin()
+    {
+        $this->query->whereGeoWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5])
+                    ->orWhereGeoWithin('location', ['$box' => [[0, 0], [10, 10]]], ['$maxDistance' => 5]);
 
         $expected = [
             '$or' => [
