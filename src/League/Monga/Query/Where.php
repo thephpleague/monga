@@ -974,7 +974,7 @@ class Where extends Builder
      */
     public function orWhereWithin($field, $shape, $options = [])
     {
-        return $this->formatWhere('$or', $field, ['$geoWithin' => $shape] + $options);
+        return $this->formatWhere('$or', $field, ['$within' => $shape] + $options);
     }
 
     /**
@@ -1016,7 +1016,7 @@ class Where extends Builder
      */
     public function orWhereGeoWithin($field, $shape, $options = [])
     {
-        return $this->formatWhere('$or', $field, ['$within' => $shape] + $options);
+        return $this->formatWhere('$or', $field, ['$geoWithin' => $shape] + $options);
     }
 
     /**
