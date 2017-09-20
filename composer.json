@@ -1,5 +1,5 @@
 {
-    "name": "league/monga",
+    "name": "devitek/monga",
     "type": "library",
     "description": "MongoDB Abstraction Layer",
     "keywords": ["MongoDB"],
