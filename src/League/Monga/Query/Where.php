@@ -932,6 +932,8 @@ class Where extends Builder
     /**
      * Appends a and-where-within statement
      *
+     * @deprecated since Mongo 2.4, use whereGeoWithin
+     *
      * @param string $field   _id field
      * @param string $shape   shape
      * @param array  $options options
@@ -946,6 +948,8 @@ class Where extends Builder
     /**
      * Appends a and-where-within statement
      *
+     * @deprecated since Mongo 2.4, use whereGeoWithin
+     *
      * @param string $field   _id field
      * @param string $shape   shape
      * @param array  $options options
@@ -958,7 +962,9 @@ class Where extends Builder
     }
 
     /**
-     * Appends a and-where-near statement
+     * Appends a and-where-within statement
+     *
+     * @deprecated since Mongo 2.4, use whereGeoWithin
      *
      * @param string $field   _id field
      * @param string $shape   shape
@@ -972,10 +978,52 @@ class Where extends Builder
     }
 
     /**
+     * Appends a and-where-geoWithin statement
+     *
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
+     * @return object $this
+     */
+    public function whereGeoWithin($field, $shape, $options = [])
+    {
+        return $this->formatWhere('$and', $field, ['$geoWithin' => $shape] + $options);
+    }
+
+    /**
+     * Appends a and-where-geoWithin statement
+     *
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
+     * @return object $this
+     */
+    public function andWhereGeoWithin($field, $shape, $options = [])
+    {
+        return call_user_func_array([$this, 'whereGeoWithin'], [$field, $shape, $options]);
+    }
+
+    /**
+     * Appends a and-where-geoWithin statement
+     *
+     * @param string $field   _id field
+     * @param string $shape   shape
+     * @param array  $options options
+     *
+     * @return object $this
+     */
+    public function orWhereGeoWithin($field, $shape, $options = [])
+    {
+        return $this->formatWhere('$or', $field, ['$geoWithin' => $shape] + $options);
+    }
+
+    /**
      * Appends a and-nor-where-clause
      *
      * @param array|closure $clause nor where clause
-     * @param integer       $type   chain type
+     * @param string        $type   chain type
      *
      * @return object $this
      */

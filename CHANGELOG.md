@@ -2,6 +2,17 @@
 
 All notable changes to `monga` will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- *WhereGeoWithin (and+or) $geoWithin (Mongo > 2.4)
+- PHPUnit test cover for *WhereGeoWithin
+
+### Deprecated
+
+- *whereWithin, deprected after Mongo 2.4, use $geoWithin instead
+
 ## 1.2.4 - 2015-02-29
 
 - Updated license year.
