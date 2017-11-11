@@ -1,8 +1,9 @@
 <?php
 
 use League\Monga;
+use PHPUnit\Framework\TestCase;
 
-class CursorTests extends PHPUnit_Framework_TestCase
+class CursorTests extends TestCase
 {
     public function testCursor()
     {

@@ -1,8 +1,9 @@
 <?php
 
 use League\Monga;
+use PHPUnit\Framework\TestCase;
 
-class MongaTests extends PHPUnit_Framework_TestCase
+class MongaTests extends TestCase
 {
     public function testMongaId()
     {

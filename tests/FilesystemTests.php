@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 class FileMock
 {
     protected $return = true;
@@ -19,7 +21,7 @@ class FileMock
     }
 }
 
-class FilesystemTests extends PHPUnit_Framework_TestCase
+class FilesystemTests extends TestCase
 {
     public function testStore()
     {

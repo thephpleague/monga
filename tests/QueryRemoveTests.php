@@ -1,6 +1,8 @@
 <?php
 
-class QueryRemoveTests extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class QueryRemoveTests extends TestCase
 {
     protected $remove;
 

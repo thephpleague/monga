@@ -1,7 +1,8 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 
-class QueryWhereTests extends PHPUnit_Framework_TestCase
+class QueryWhereTests extends TestCase
 {
     protected $query;
 

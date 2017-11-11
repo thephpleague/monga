@@ -1,8 +1,9 @@
 <?php
 
 use League\Monga\Query\Aggregation as Agr;
+use PHPUnit\Framework\TestCase;
 
-class QueryAggregateTests extends PHPUnit_Framework_TestCase
+class QueryAggregateTests extends TestCase
 {
     public function testProject()
     {

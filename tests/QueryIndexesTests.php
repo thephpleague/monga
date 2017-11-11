@@ -2,8 +2,9 @@
 
 use League\Monga\Query\Indexes as i;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class QueryIndexesTests extends PHPUnit_Framework_TestCase
+class QueryIndexesTests extends TestCase
 {
     protected $indexes;
 
