@@ -1,8 +1,9 @@
 <?php
 
 use League\Monga\Connection;
+use PHPUnit\Framework\TestCase;
 
-class ConnectionTests extends PHPUnit_Framework_TestCase
+class ConnectionTests extends TestCase
 {
     protected $connection;
 

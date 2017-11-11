@@ -4,8 +4,9 @@ use League\Monga;
 use League\Monga\Collection;
 use League\Monga\Database;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class CollectionTests extends PHPUnit_Framework_TestCase
+class CollectionTests extends TestCase
 {
     protected $database;
     protected $connection;
@@ -260,7 +261,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     {
         $query = new League\Monga\Query\Find();
         $result = $this->collection->find($query);
-        
+
         $this->assertInstanceOf('League\Monga\Cursor', $result);
     }
 

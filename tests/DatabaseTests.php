@@ -3,8 +3,9 @@
 use League\Monga;
 use League\Monga\Connection;
 use League\Monga\Database;
+use PHPUnit\Framework\TestCase;
 
-class DatabaseTests extends PHPUnit_Framework_TestCase
+class DatabaseTests extends TestCase
 {
     protected $database;
 

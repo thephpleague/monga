@@ -1,10 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 class BuilderMock extends League\Monga\Query\Builder
 {
 }
 
-class QueryBuilderTests extends PHPUnit_Framework_TestCase
+class QueryBuilderTests extends TestCase
 {
     protected $builder;
 
